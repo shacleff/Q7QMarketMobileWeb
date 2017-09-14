@@ -17,7 +17,7 @@ export class FeedButtonDirective{
     this.feed('1');
   }
 
-  @HostListener('touchcancel') onMouseLeave() {
+  @HostListener('touchcancel') onMouseOut() {
     this.feed('1');
   }
 

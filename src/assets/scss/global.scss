@@ -1,0 +1,257 @@
+//rem转换
+@function rem($n) {
+  @return ($n/64)+rem;
+}
+
+//公共变量
+$keyColor:#01ddb6;//主色调
+$whiteColor:#fff;//白色
+$borderColor:#d8d8d8;//边框颜色
+
+/*共用类*/
+//3px圆角
+.borRau5{
+  border-radius: 5px;
+}
+//内容区域
+.conWrap{
+  width: rem( 580);
+  margin: 0 auto;
+}
+/*公用css组件*/
+//头部
+.header{
+  z-index: 9;
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: rem(80);
+  background: $whiteColor;
+  font-size: rem(32);
+  text-align: center;
+  line-height: rem(80);
+  color: #000;
+  i.leftSwordIcon{
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: rem(80);
+    width: rem(80);
+    float: left;
+    background: url("../images/left_sword_icon.png") no-repeat center;
+    background-size: rem(19) auto;
+  }
+  .headerTitle{
+    width: 100%;
+    height: rem(80);
+  }
+}
+//按钮
+.btn{
+  height: rem(68);
+  width: 100%;
+  @extend .borRau5;
+  color: #fff;
+  text-align: center;
+  font-size: rem(30);
+  line-height: rem(68);
+  background: $keyColor;
+  .keyBtn{
+    background: $keyColor;
+  }
+}
+//输入框
+.inputCtr{
+  width: 100%;
+  height: rem(68);
+  line-height: rem(68);
+  position: relative;
+  border-color: #d8d8d8;
+  &.radiu{//圆角-5
+    @extend .borRau5;
+  }
+  .leftIcon{//左边的icon
+    display: block;
+    width: rem(68);
+    height: rem(68);
+    position: absolute;
+    top:0;
+    left: 0;
+    background: red;
+  }
+  .input{//输入框
+    display: block;
+    background: none;
+    border: none;
+    height: rem(68);
+    line-height: rem(68);
+    font-size: rem(26);
+    text-align: left;
+    color: #444;
+    &.right{//靠右边
+      position: absolute;
+      left: rem(80);
+      top: 0;
+      width: rem(456);
+      float: right;
+    }
+  }
+  &.border{//带边框
+    border: 1px solid #d8d8d8;
+  }
+  &.borderBot{//底边框
+    &:before{
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 1px;
+      border-top: 1px solid #d8d8d8;
+      color: #e5e5e5;
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;
+      -webkit-transform: scaleY(0.5);
+      transform: scaleY(0.5);
+      z-index: 2;
+    }
+  }
+}
+
+/*页面*/
+//注册页
+.registBox{
+  .regBanner{
+    margin-top: rem(80);
+    width: 100%;
+    height: rem(250);
+    background: url(../images/regist_bg.jpg) no-repeat center;
+    background-size: 100% 100%;
+  }
+  .regForm{
+    background: #f7f7f7;
+    width: 100%;
+    .inputCtr{
+      .leftIcon{
+        &.reg_mobile{
+          background: url(../images/regist_mobile.png) no-repeat left;
+          background-size: 50%;
+        }
+        &.reg_name{
+          background: url(../images/regist_name.png) no-repeat left;
+          background-size: 50%;
+        }
+        &.reg_idcard{
+          background: url(../images/regist_idcard.png) no-repeat left;
+          background-size: 50%;
+        }
+        &.reg_vercode{
+          background: url(../images/regist_vercode.png) no-repeat left;
+          background-size: 50%;
+        }
+        &.reg_pwd{
+          background: url(../images/regist_pwd.png) no-repeat left;
+          background-size: 50%;
+        }
+        &.reg_pwdagain{
+          background: url(../images/regist_pwdagain.png) no-repeat left;
+          background-size: 50%;
+        }
+        &.reg_prtcode{
+          background: url(../images/regist_prtode.png) no-repeat left;
+          background-size: 50%;
+        }
+      }
+    }
+    .regBtn{
+      margin-top: rem(106);
+    }
+  }
+}
+//注册成功提示页
+.regSuccess{
+  display: none;
+  &.active{
+    display: block;
+  }
+  background: #fff;
+  width: 100%;
+  .tipsImg{
+    width: rem(317);
+    height: rem(395);
+    margin: rem(137) auto rem(73) auto;
+    background: url(../images/regist_success_tip.jpg) no-repeat center;
+    background-size: 100% auto;
+  }
+  .nowLoadBtb{
+    width: rem(582);
+    height: rem(68);
+    line-height: rem(68);
+    text-align: center;
+    color: $keyColor;
+    font-size: rem(30);
+    border-radius: rem(68);
+    border: 1px solid $keyColor;
+    margin: 0 auto;
+  }
+}
+
+//登陆页面
+.loadBox{
+  width: 100%;
+  background: $whiteColor;
+  .loadLogo{
+    margin: rem(122) auto rem(67) auto;
+    width: 100%;
+    height: rem(167);
+    background: url(../images/load_logo.jpg) no-repeat center;
+    background-size: rem(295) auto;
+  }
+  .loadForm{
+    width: 100%;
+    .inputCtr{
+      margin-bottom: rem(20);
+      .load_account{
+        background: url("../images/load_account.png") no-repeat center;
+        background-size: 50% auto;
+      }
+      .load_pwd{
+        background: url("../images/load_pwd.png") no-repeat center;
+        background-size: 50% auto;
+      }
+    }
+    .loadBtn{
+      margin: rem(66) auto rem(100) auto;
+    }
+    .quickLoadText{
+      width: 100%;
+      height: rem(22);
+      background: url("../images/qiuck_load_text.png") no-repeat center;
+      background-size: auto 100%;
+      margin-bottom: rem(23);
+    }
+    .quickLoadBox{
+      width: rem(240);
+      overflow: hidden;
+      margin: 0 auto;
+      height: rem(77);
+      .quickLoadItem{
+        display: inline-block;
+        width: rem(77);
+        height: rem(77);
+        &.WX{
+          background: url("../images/wx_quick_load.png") no-repeat center;
+          background-size: 100%;
+        }
+        &.QQ{
+          float: right;
+          background: url("../images/q_quick_load.png") no-repeat center;
+          background-size: 100%;
+        }
+      }
+    }
+  }
+}

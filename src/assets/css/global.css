@@ -1,0 +1,195 @@
+@charset "UTF-8";
+/*共用类*/
+.borRau5, .btn, .inputCtr.radiu {
+  border-radius: 5px; }
+
+.conWrap {
+  width: 9.0625rem;
+  margin: 0 auto; }
+
+/*公用css组件*/
+.header {
+  z-index: 9;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1.25rem;
+  background: #fff;
+  font-size: 0.5rem;
+  text-align: center;
+  line-height: 1.25rem;
+  color: #000; }
+  .header i.leftSwordIcon {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    float: left;
+    background: url("../images/left_sword_icon.png") no-repeat center;
+    background-size: 0.29688rem auto; }
+  .header .headerTitle {
+    width: 100%;
+    height: 1.25rem; }
+
+.btn {
+  height: 1.0625rem;
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  font-size: 0.46875rem;
+  line-height: 1.0625rem;
+  background: #01ddb6; }
+  .btn .keyBtn {
+    background: #01ddb6; }
+
+.inputCtr {
+  width: 100%;
+  height: 1.0625rem;
+  line-height: 1.0625rem;
+  position: relative;
+  border-color: #d8d8d8; }
+  .inputCtr .leftIcon {
+    display: block;
+    width: 1.0625rem;
+    height: 1.0625rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: red; }
+  .inputCtr .input {
+    display: block;
+    background: none;
+    border: none;
+    height: 1.0625rem;
+    line-height: 1.0625rem;
+    font-size: 0.40625rem;
+    text-align: left;
+    color: #444; }
+    .inputCtr .input.right {
+      position: absolute;
+      left: 1.25rem;
+      top: 0;
+      width: 7.125rem;
+      float: right; }
+  .inputCtr.border {
+    border: 1px solid #d8d8d8; }
+  .inputCtr.borderBot:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 1px;
+    border-top: 1px solid #d8d8d8;
+    color: #e5e5e5;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+    z-index: 2; }
+
+/*页面*/
+.registBox .regBanner {
+  margin-top: 1.25rem;
+  width: 100%;
+  height: 3.90625rem;
+  background: url(../images/regist_bg.jpg) no-repeat center;
+  background-size: 100% 100%; }
+
+.registBox .regForm {
+  background: #f7f7f7;
+  width: 100%; }
+  .registBox .regForm .inputCtr .leftIcon.reg_mobile {
+    background: url(../images/regist_mobile.png) no-repeat left;
+    background-size: 50%; }
+  .registBox .regForm .inputCtr .leftIcon.reg_name {
+    background: url(../images/regist_name.png) no-repeat left;
+    background-size: 50%; }
+  .registBox .regForm .inputCtr .leftIcon.reg_idcard {
+    background: url(../images/regist_idcard.png) no-repeat left;
+    background-size: 50%; }
+  .registBox .regForm .inputCtr .leftIcon.reg_vercode {
+    background: url(../images/regist_vercode.png) no-repeat left;
+    background-size: 50%; }
+  .registBox .regForm .inputCtr .leftIcon.reg_pwd {
+    background: url(../images/regist_pwd.png) no-repeat left;
+    background-size: 50%; }
+  .registBox .regForm .inputCtr .leftIcon.reg_pwdagain {
+    background: url(../images/regist_pwdagain.png) no-repeat left;
+    background-size: 50%; }
+  .registBox .regForm .inputCtr .leftIcon.reg_prtcode {
+    background: url(../images/regist_prtode.png) no-repeat left;
+    background-size: 50%; }
+  .registBox .regForm .regBtn {
+    margin-top: 1.65625rem; }
+
+.regSuccess {
+  display: none;
+  background: #fff;
+  width: 100%; }
+  .regSuccess.active {
+    display: block; }
+  .regSuccess .tipsImg {
+    width: 4.95313rem;
+    height: 6.17188rem;
+    margin: 2.14063rem auto 1.14063rem auto;
+    background: url(../images/regist_success_tip.jpg) no-repeat center;
+    background-size: 100% auto; }
+  .regSuccess .nowLoadBtb {
+    width: 9.09375rem;
+    height: 1.0625rem;
+    line-height: 1.0625rem;
+    text-align: center;
+    color: #01ddb6;
+    font-size: 0.46875rem;
+    border-radius: 1.0625rem;
+    border: 1px solid #01ddb6;
+    margin: 0 auto; }
+
+.loadBox {
+  width: 100%;
+  background: #fff; }
+  .loadBox .loadLogo {
+    margin: 1.90625rem auto 1.04688rem auto;
+    width: 100%;
+    height: 2.60938rem;
+    background: url(../images/load_logo.jpg) no-repeat center;
+    background-size: 4.60938rem auto; }
+  .loadBox .loadForm {
+    width: 100%; }
+    .loadBox .loadForm .inputCtr {
+      margin-bottom: 0.3125rem; }
+      .loadBox .loadForm .inputCtr .load_account {
+        background: url("../images/load_account.png") no-repeat center;
+        background-size: 50% auto; }
+      .loadBox .loadForm .inputCtr .load_pwd {
+        background: url("../images/load_pwd.png") no-repeat center;
+        background-size: 50% auto; }
+    .loadBox .loadForm .loadBtn {
+      margin: 1.03125rem auto 1.5625rem auto; }
+    .loadBox .loadForm .quickLoadText {
+      width: 100%;
+      height: 0.34375rem;
+      background: url("../images/qiuck_load_text.png") no-repeat center;
+      background-size: auto 100%;
+      margin-bottom: 0.35938rem; }
+    .loadBox .loadForm .quickLoadBox {
+      width: 3.75rem;
+      overflow: hidden;
+      margin: 0 auto;
+      height: 1.20313rem; }
+      .loadBox .loadForm .quickLoadBox .quickLoadItem {
+        display: inline-block;
+        width: 1.20313rem;
+        height: 1.20313rem; }
+        .loadBox .loadForm .quickLoadBox .quickLoadItem.WX {
+          background: url("../images/wx_quick_load.png") no-repeat center;
+          background-size: 100%; }
+        .loadBox .loadForm .quickLoadBox .quickLoadItem.QQ {
+          float: right;
+          background: url("../images/q_quick_load.png") no-repeat center;
+          background-size: 100%; }

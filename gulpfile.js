@@ -3,10 +3,10 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var watch = require('gulp-watch');
 
-var sassPath = './src/assets/sass';
+var sassPath = './src/assets/scss';
 var cssPath = './src/assets/css';
 
-gulp.task('tsass',function(){
+gulp.task('sass',function(){
   gulp.src(sassPath+'/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest(cssPath))

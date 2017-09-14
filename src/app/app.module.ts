@@ -1,17 +1,14 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HashLocationStrategy,LocationStrategy} from '@angular/common';
+
+import {CoreModule} from './core/core.module';
+import {SharedModule} from './shared/shared.module';
+
+import {HashLocationStrategy,LocationStrategy} from '@angular/common';//解决404错误
 
 import { Router } from '@angular/router';//路由模块
-import { FormsModule }    from '@angular/forms';//表单模块
 import {HttpClientModule} from '@angular/common/http';//http模块
-import { HttpModule }    from '@angular/http';
-
 //weui模块
-import {WeUiModule} from 'ngx-weui';//weui
 import {ActionSheetModule} from 'ngx-weui/actionsheet'//弹出菜单
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';//动画
 
 import {AppRoutingModule} from './app-routing.module';
 import {LoginRegistModule} from './loginRegist/login-regist.module'
@@ -23,13 +20,9 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [//用到的模块
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
+    CoreModule,
+    SharedModule,
     HttpClientModule,
-    HttpModule,
-    WeUiModule.forRoot(),
-    ActionSheetModule.forRoot(),
     LoginRegistModule,
     AppRoutingModule
   ],
