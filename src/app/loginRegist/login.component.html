@@ -13,13 +13,13 @@
     <form class="loadForm">
       <div class="inputCtr radiu border">
         <i class="leftIcon load_account"></i>
-        <input class="input right" placeholder="请输入您的帐号" type="text">
+        <input class="input right" [(ngModel)]="loginData.account" name="loginAccount"  (input)="filter()" placeholder="请输入您的帐号" type="text">
       </div>
       <div class="inputCtr radiu border">
         <i class="leftIcon load_pwd"></i>
-        <input class="input right" placeholder="请输入您的登录密码" type="password">
+        <input class="input right" placeholder="请输入您的登录密码" name="loginPassword" [(ngModel)]="loginData.password"  type="password">
       </div>
-      <div feedButton class="loadBtn btn keyBtn">
+      <div feedButton class="loadBtn btn keyBtn" (click)="logIn()">
         登录
       </div>
       <div class="quickLoadText">

@@ -1,3 +1,4 @@
+@import "./component";
 //rem转换
 @function rem($n) {
   @return ($n/64)+rem;
