@@ -4,7 +4,7 @@ import {Directive,ElementRef,HostListener,Input} from '@angular/core';
   selector:'[feedButton]'
 })
 
-export class FeedButtonDirective{
+export class FeedBtnDirective{
   constructor(public el:ElementRef){
 
   }

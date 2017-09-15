@@ -5,6 +5,10 @@ import { RouterModule } from '@angular/router';
 import { HttpModule, Http, JsonpModule } from '@angular/http';
 import { WeUiModule } from 'ngx-weui';//weui框架模块
 
+//指令
+//import {VerticalCenterDirective} from '../directive/vertical-align.directive'
+//import {FeedButtonDirective} from '../directive/feed-button.directive'
+
 @NgModule({
   imports: [
     CommonModule,
@@ -17,6 +21,8 @@ import { WeUiModule } from 'ngx-weui';//weui框架模块
     // { provide: ButtonConfig, useFactory: ()=> { return Object.assign(new ButtonConfig(), { type: 'warn' }); } }
   ],
   declarations: [
+    //VerticalCenterDirective,
+    //FeedButtonDirective
   ],
   exports: [
     CommonModule,

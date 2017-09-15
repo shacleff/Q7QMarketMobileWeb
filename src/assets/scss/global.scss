@@ -1,3 +1,4 @@
+//@import "./reset";
 @import "./component";
 //rem转换
 @function rem($n) {
@@ -8,16 +9,78 @@
 $keyColor:#01ddb6;//主色调
 $whiteColor:#fff;//白色
 $borderColor:#d8d8d8;//边框颜色
+$upBg:#fce5e6;//上涨背景
+$downBg:#e5fcf8;//下跌背景
+$upColor:#dd0125;//上涨颜色
 
+$dangerColor:#F18E00;//警告色
 /*共用类*/
 //3px圆角
+.w100{
+  width: 100%;
+}
+.tl{
+  text-align: left;
+}
+.tr{
+  text-align: right;
+}
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}
+.dangerColor{
+  color: $dangerColor !important;
+}
+.dangerBg{
+  background: $dangerColor !important;
+}
+.upColor{
+  color: $upColor !important;
+}
+.keyColor{
+  color: $keyColor !important;
+}
+.upColorBg{
+  background: $upColor !important;
+}
+.keyColorBg{
+  background: $keyColor !important;
+}
+.tc{
+  text-align: center;
+}
+.cl_w{
+  color: #fff !important;
+}
 .borRau5{
   border-radius: 5px;
+}
+.mt80Rem{
+  margin-top: rem(80);
+}
+.pb80Rem{
+  padding-bottom: rem(80);
 }
 //内容区域
 .conWrap{
   width: rem( 580);
   margin: 0 auto;
+}
+//弹框内容区域
+.alertCon{
+  width: rem(510);
+  margin: 0 auto;
+}
+.WrapB{
+  width: rem(602);
+  margin: 0 auto;
+}
+.borRau8{
+  border-radius: 8px;
+  overflow: hidden;
 }
 /*公用css组件*/
 //头部
@@ -48,6 +111,73 @@ $borderColor:#d8d8d8;//边框颜色
     width: 100%;
     height: rem(80);
   }
+  &.keyBgHeader{
+    background: $keyColor;
+    color: #fff;
+  }
+}
+//底部导航
+.footer{
+  z-index: 9;
+  width: 100%;
+  height: rem(98);
+  background: #f1f1f1;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  .navItem{
+    text-align: center;
+    color: #bbbbbb;
+    text-decoration: none;
+    flex: 1;
+    .navIcon{
+      margin: rem(16) auto 0 auto;
+      width: rem(50);
+      height: rem(40);
+      font-size: rem(20);
+      text-align: center;
+    }
+    &:nth-child(1){
+      .navIcon{
+        background: url("../images/kline_nav_icon.png") no-repeat center;
+        background-size:rem(40) rem(35);
+      }
+      &.active{
+        color: $keyColor;
+        .navIcon{
+          background: url("../images/kline_nav_icon2.png") no-repeat center;
+          background-size:rem(40) rem(35);
+        }
+      }
+    }
+    &:nth-child(2){
+      .navIcon{
+        background: url("../images/mark_nav_icon.png") no-repeat center;
+        background-size:rem(36) rem(35);
+      }
+      &.active{
+        color: $keyColor;
+        .navIcon{
+          background: url("../images/mark_nav_icon2.png") no-repeat center;
+          background-size:rem(36) rem(35);
+        }
+      }
+    }
+    &:nth-child(3){
+      .navIcon{
+        background: url("../images/nav_person_icon.png") no-repeat center;
+        background-size:rem(30) rem(34);
+      }
+      &.active{
+        color: $keyColor;
+        .navIcon{
+          background: url("../images/nav_person_icon2.png") no-repeat center;
+          background-size:rem(30) rem(34);
+        }
+      }
+    }
+  }
 }
 //按钮
 .btn{
@@ -62,6 +192,14 @@ $borderColor:#d8d8d8;//边框颜色
   .keyBtn{
     background: $keyColor;
   }
+  &.upBtn{
+    background: $upColor;
+  }
+  &.next{
+    background: #fdcd88;
+    box-sizing: border-box;
+    border: 1px solid $dangerColor;
+  }
 }
 //输入框
 .inputCtr{
@@ -72,6 +210,50 @@ $borderColor:#d8d8d8;//边框颜色
   border-color: #d8d8d8;
   &.radiu{//圆角-5
     @extend .borRau5;
+  }
+  &.withTitle{
+    position: relative;
+    .leftTitle{
+      font-size: rem(18);
+      text-align: center;
+      color: #444;
+      display: block;
+      width: rem(99);
+      height: rem(68);
+      position: absolute;
+      top:0;
+      left: 0;
+      background: #f5f5f5;
+      border-right: 1px solid #cbcbcb;
+      box-sizing: border-box;
+    }
+    .input{
+      display: block;
+      position: absolute;
+      top:0;
+      width: rem(346);
+      left: rem(99);
+      text-indent: rem(20);
+      &.wT{
+        width: rem(390);
+      }
+    }
+    .rightText{
+      display: block;
+      height: rem(68);
+      line-height: rem(68);
+      text-align: center;
+      width: rem(68);
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: #444;
+      font-size: rem(18);
+      &.lb{
+        box-sizing: border-box;
+        border-left: 1px solid #cbcbcb;
+      }
+    }
   }
   .leftIcon{//左边的icon
     display: block;
@@ -121,7 +303,67 @@ $borderColor:#d8d8d8;//边框颜色
     }
   }
 }
-
+//无背景
+.noBg{
+  background: none !important;
+}
+//提示区域
+.tipsArea{
+  text-align: left;
+  line-height: rem(24);
+  padding: rem(22);
+  font-size: rem(18);
+  color: #444;
+  &.bgGray{
+    background: #f4f4f4;
+  }
+  &.bgYellow{
+    background: #FEF3E5;
+  }
+  &.bgGreen{
+    background: #E7FFFB;
+  }
+}
+.borderBot{//底边框
+  &:after{
+      content: " ";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      height: 1px;
+      border-bottom: 1px solid #e5e5e5;
+      color: #e5e5e5;
+      -webkit-transform-origin: 0 100%;
+      transform-origin: 0 100%;
+      -webkit-transform: scaleY(0.5);
+      transform: scaleY(0.5);
+      z-index: 2;
+    }
+}
+.borderTop{//上边框
+  &:before{
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 1px;
+    border-bottom: 1px solid #e5e5e5;
+    color: #e5e5e5;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+    z-index: 2;
+  }
+}
+//灰色背景条
+.grayBgBar{
+  width: 100%;
+  height: rem(12);
+  background: #f4f4f4;
+}
 /*页面*/
 //注册页
 .registBox{
@@ -251,6 +493,496 @@ $borderColor:#d8d8d8;//边框颜色
           float: right;
           background: url("../images/q_quick_load.png") no-repeat center;
           background-size: 100%;
+        }
+      }
+    }
+  }
+}
+//行情页面
+.quotationBox{
+  background: #f5f5f5;
+  .quotationTable{
+    width: 100%;
+    tr{
+      width: 100%;
+      text-align: center;
+      &.tableTop{
+        height: rem(44);
+        color: #000;
+        font-size: rem(18);
+      }
+      &.tableCon{
+        &.up{
+          background: $upBg;
+        }
+        &.down{
+          background: $downBg;
+        }
+        img{
+          width: rem(45);
+          height: rem(30);
+        }
+        height: rem(68);
+        color: #4e4e4e;
+        td{
+          &.up{
+            color: $upColor;
+          }
+          &.down{
+            color: $keyColor;
+          }
+        }
+      }
+    }
+  }
+  .ChartBox{
+    background: #fff;
+    margin-top: rem(10);
+    width: 100%;
+    height: rem(420);
+    .chartChange{
+      height: rem(60);
+      line-height: rem(36);
+      font-size: rem(20);
+      color: #444;
+      .chartBtn{
+        margin-top: rem(10);
+        text-align: center;
+        display: inline-block;
+        height: rem(36);
+        &.seled{
+          color: $keyColor;
+          border-bottom: 1px solid $keyColor;
+        }
+        &.kLine{
+          margin-left: rem(10);
+        }
+      }
+    }
+    .chart{
+      height: rem(360);
+      width: 100%;
+      background: $downBg;
+    }
+  }
+}
+.marketDetailBox{
+  .marketBaseInfo{
+    overflow: hidden;
+    padding-top: rem(20);
+    width: 100%;
+    height: rem(148);
+    .infoLeft{
+      width: rem(270);
+      .upDwonIndex{
+        overflow: hidden;
+        color: $upColor;
+        position: relative;
+        width: 100%;
+        height: rem(70);
+        line-height: rem(70);
+        font-size: rem(48);
+        .indexNum,.indexPic{
+          height: rem(70);
+          display:inline-block;
+        }
+        .indexPic{
+          display: inline-block;
+          width: rem(30);
+          background: url("../images/up_sword.png") no-repeat center;
+          background-size: auto rem(40);
+        }
+      }
+      &.down{
+        .upDwonIndex{
+          color: $keyColor;
+          .indexPic{
+            display: inline-block;
+            width: rem(30);
+            background: url("../images/down_sword.png") no-repeat center;
+            background-size: auto rem(40);
+          }
+        }
+      }
+      .detailInfo{
+        width: 100%;
+        color: $upColor;
+        line-height: rem(40);
+        overflow: hidden;
+        .infoDetail{
+          margin-right: rem(20);
+        }
+      }
+    }
+    .infoRight{
+      text-align: center;
+      width: rem(164);
+      height: rem(114);
+      table{
+        font-size: rem(18);
+        color: #444;
+        width: rem(164);
+        height: rem(114);
+        .mostUp{
+          color: $upColor;
+        }
+        .mostDown{
+          color: $keyColor;
+        }
+      }
+    }
+  }
+  .dgtTableWrap{
+    &.close{
+      height: 1px;
+      .tableBox{
+        display: none;
+      }
+    }
+    position: relative;
+    width: 100%;
+    height: rem(144);
+    background: #f5f5f5;
+    overflow: visible;
+    .dgtOpenBtn{
+      position: absolute;
+      width: rem(65);
+      height: rem(65);
+      background: url("../images/pull_down_open.png") no-repeat center;
+      background-size: rem(65);
+      top: rem(-32);
+      left: rem(282);
+      transition: all linear 300ms;
+      &.close{
+        transform: rotate(180deg);
+      }
+    }
+    .tableBox{
+      color: #444;
+      height: rem(144);
+      font-size: rem(18);
+      overflow: auto;
+      table{
+        width: 48%;
+        &.fl{
+          text-align: center;
+        }
+        &.fr{
+          text-align: center;
+        }
+        .tableTop{
+          height: rem(32);
+        }
+        .tableCon{
+          height: rem(30);
+        }
+      }
+    }
+  }
+  .ChartBox{
+    padding-bottom: rem(200);
+    background: #fff;
+    margin-top: rem(5);
+    width: 100%;
+    height: rem(420);
+    .chartChange{
+      position: relative;
+      height: rem(60);
+      line-height: rem(36);
+      font-size: rem(20);
+      color: #444;
+      .appointInfo{
+        display: none;
+        color: #444;
+        position: absolute;
+        top:0;
+        left: 0;
+        width: 100%;
+        height: rem(60);
+        line-height: rem(60);
+        background: #fff;
+        &.active{
+          display: block;
+        }
+        span{
+          margin-right: rem(10);
+        }
+      }
+      .chartBtn{
+        margin-top: rem(10);
+        text-align: center;
+        display: inline-block;
+        height: rem(36);
+        &.seled{
+          color: $keyColor;
+          border-bottom: 1px solid $keyColor;
+        }
+        &.kLine{
+          margin-left: rem(10);
+        }
+      }
+    }
+    .chart{
+      height: rem(360);
+      width: 100%;
+      background: $downBg;
+    }
+  }
+  .oprBtnWrap{
+    height: rem(70);
+    width: 100%;
+    position: fixed;
+    overflow: visible;
+    left: 0;
+    bottom: rem(100);
+    .innerBox{
+      width: 100%;
+      position: relative;
+      overflow: visible;
+      .oprBtn{
+        display: inline-block;
+        text-align: center;
+        width: 50%;
+        font-size: rem(26);
+        height: rem(70);
+        line-height: rem(70);
+      }
+      .dgtOrderBtn{
+        position: absolute;
+        height: rem(84);
+        width: rem(84);
+        background: url(../images/delg_order_btn.png) no-repeat center;
+        background-size: 100%;
+        top: rem(-42);
+        left: rem(282);
+      }
+    }
+  }
+}
+.curPriseTradBox{
+  display: none;
+  &.active{
+    display: block;
+  }
+  left: rem(32);
+  background: #fff;
+  @extend .borRau8;
+  position: fixed;
+  z-index: 11;
+  height: rem(582);
+  .alertTop{
+    height: rem(60);
+    line-height: rem(60);
+    width: 100%;
+    color: #fff;
+    position: relative;
+    background: $upColor;
+    &.keyBg{
+      background: $keyColor;
+    }
+    font-size: rem(24);
+    text-align: left;
+    .alertCon{
+      height: rem(60);
+      .closeIcon{
+        position: absolute;
+        height: rem(60);
+        width: rem(60);
+        background: url(../images/close_icon.png) no-repeat center;
+        background-size: rem(16);
+        top: 0;
+        right: 0;
+      }
+    }
+  }
+  .alertCen{
+    .inputCtr{
+      margin-top: rem(20);
+    }
+    .accountInfo{
+      line-height: rem(36);
+      font-size: rem(20);
+      color: #444;
+    }
+  }
+}
+.dgtOrderBox{
+  width: 100%;
+  position: fixed;
+  z-index: 11;
+  bottom: -1px;
+  left: 0;
+  height: rem(505);
+  .closeBox{
+    width: 100%;
+    background: none;
+    height: rem(44);
+    .closeBtn{
+      width: rem(64);
+      height: rem(44);
+      float: right;
+      margin-right: rem(18);
+      background:$keyColor url(../images/close_icon.png) no-repeat center;
+      background-size: rem(16);
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+      overflow: hidden;
+    }
+  }
+  .boxCon{
+    width: 100%;
+    height: rem(459);
+    background: #fff;
+    overflow: auto;
+    table{
+      text-align: center;
+      width: 100%;
+      .tabTop{
+        height: rem(60);
+        font-size: rem(24);
+        font-weight: bold;
+        color: #444;
+      }
+      .tabCon{
+        position: relative;
+        height: rem(80);
+        color: #444;
+        font-size: rem(24);
+        border-bottom: 1px solid #eee;
+        .canelBtn{
+          width: rem(77);
+          height: rem(44);
+          line-height: rem(44);
+          border-radius: rem(5);
+          background: $keyColor;
+          color: #fff;
+          text-align: center;
+          font-size: rem(20);
+          margin: auto;
+        }
+        &.buy{//买
+          span{
+            color: $upColor;
+          }
+        }
+        &.sale{//卖
+          span{
+            color: $keyColor;
+          }
+        }
+        &.fure{//未确定
+          td:nth-child(3){
+            color: #d5b900;
+          }
+        }
+        &.ing{//进行中
+          td:nth-child(3){
+            color: $upColor;
+          }
+        }
+      }
+    }
+  }
+}
+//金币充值
+.goldRechargeBox{
+  .quickPayTitle{
+    background: #f4f4f4;
+    line-height: rem(60);
+    font-size: rem(24);
+    color: #000;
+    width: 100%;
+    text-align: left;
+    text-indent: rem(20);
+    &.rchNum{
+      background: #fdf6ed;
+    }
+  }
+  .quickPayBox{
+    width:100%;
+    position: relative;
+    .payItem{
+      &.active{
+        background: url("../images/sel_true_icon.png") no-repeat rem(590) center;
+        background-size: rem(29) rem(19);
+      }
+      position: relative;
+      text-indent: rem(20);
+      height: rem(80);
+      line-height: rem(80);
+      text-align: left;
+      font-size: rem(36);
+      color: #000;
+      &:after{
+        content: " ";
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 1px;
+        border-top: 1px solid #e5e5e5;
+        color: #e5e5e5;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transform: scaleY(0.5);
+        transform: scaleY(0.5);
+        left: rem(20);
+        z-index: 2;
+      }
+    }
+    @extend .borderTop;
+    @extend .borderBot;
+  }
+  .rchIpt{
+    position: relative;
+    margin-top: rem(60);
+    height: rem(100);
+    line-height: rem(100);
+    color: #000;
+    font-size: rem(42);
+    background: url("../images/rmb_icon.png") no-repeat left;
+    background-size: rem(39) auto;
+    @extend .borderBot;
+    .rchNum{
+      background: none;
+      display: block;
+      border: none;
+      width: 100%;
+      height: rem(100);
+      line-height: rem(100);
+      text-indent: rem(50);
+    }
+  }
+  .thirdPay{
+    display: flex;
+    margin: rem(20) auto rem(60) auto;
+    .thirdItem{
+      flex: 1;
+      text-align: center;
+      vertical-align: middle;
+      font-size: rem(24);
+      color: #000;
+      background: url(../images/check_uncheck.png) no-repeat rem(10) rem(12);
+      background-size: rem(20);
+      &.active{
+        background: url(../images/check_checked.png) no-repeat rem(10) rem(12);
+        background-size: rem(20);
+      }
+      &:nth-child(1){
+        img{
+          width: rem(28);
+          height: rem(24);
+        }
+      }
+      &:nth-child(2){
+        img{
+          width: rem(24);
+          height: rem(24);
+        }
+      }
+      &:nth-child(3){
+        img{
+          width: rem(33);
+          height: rem(19);
         }
       }
     }

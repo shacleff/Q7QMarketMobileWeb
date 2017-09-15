@@ -1,0 +1,362 @@
+<div class="marketDetailBox">
+  <Header
+    [title]="headerTitle"
+    (onVoted)="back($event)">
+  >
+  </Header>
+
+  <div class="marketBaseInfo mt80Rem">
+    <div class="conWrap">
+      <div class="infoLeft fl">
+        <div class="upDwonIndex">
+          <div class="indexNum">0.1251</div>
+          <div class="indexPic">
+            &nbsp;
+          </div>
+        </div>
+        <div class="detailInfo">
+          <div class="infoDetail fl">0.1256</div>
+          <div class="infoDetail fl">1.0250%</div>
+        </div>
+      </div>
+      <div class="infoRight fr">
+        <table>
+          <tr>
+            <td>
+              <p>今开</p>
+              <span>0.1325</span>
+            </td>
+            <td>
+              <p>昨收</p>
+              <span>0.1325</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>最高</p>
+              <span class="mostUp">0.1325</span>
+            </td>
+            <td>
+              <p>最低</p>
+              <span class="mostDown">0.1325</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="dgtTableWrap">
+    <div feedButton class="dgtOpenBtn close">
+
+    </div>
+    <div class="WrapB tableBox">
+      <table class="dgtTable fl">
+        <tr class="tableTop">
+          <td>买/卖</td>
+          <td>价格</td>
+          <td>委托量</td>
+        </tr>
+        <tr class="tableCon">
+          <td class="keyColor">卖一</td>
+          <td class="upColor">0.0122</td>
+          <td>16352</td>
+        </tr>
+        <tr class="tableCon">
+          <td class="keyColor">卖一</td>
+          <td class="upColor">0.0122</td>
+          <td>16352</td>
+        </tr>
+        <tr class="tableCon">
+          <td class="keyColor">卖一</td>
+          <td class="upColor">0.0122</td>
+          <td>16352</td>
+        </tr>
+      </table>
+      <table class="dgtTable fr">
+        <tr class="tableTop">
+          <td>买/卖</td>
+          <td>价格</td>
+          <td>委托量</td>
+        </tr>
+        <tr class="tableCon">
+          <td class="upColor">买一</td>
+          <td class="upColor">0.0122</td>
+          <td>16352</td>
+        </tr>
+        <tr class="tableCon">
+          <td class="upColor">买一</td>
+          <td class="upColor">0.0122</td>
+          <td>16352</td>
+        </tr>
+        <tr class="tableCon">
+          <td class="upColor">买一</td>
+          <td class="upColor">0.0122</td>
+          <td>16352</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="ChartBox">
+    <div class="WrapB">
+      <div class="chartChange">
+        <div class="appointInfo active">
+          <span>开0.0132</span>
+          <span>收0.0132</span>
+          <span>高0.0132</span>
+          <span>低0.0132</span>
+          <span>涨跌 <i class="upColor">+0.0132</i></span>
+        </div>
+        <div class="chartBtn fLine">分时</div>
+        <div class="chartBtn kLine seled">k线</div>
+      </div>
+      <div class="chart">
+
+      </div>
+    </div>
+  </div>
+  <div class="oprBtnWrap">
+    <div class="innerBox">
+      <div feedButton class="dgtOrderBtn">
+
+      </div>
+      <div feedButton class="oprBtn buyBtn cl_w keyColorBg fl">
+        现价卖出
+      </div>
+      <div feedButton class="oprBtn saleBtn cl_w upColorBg fr">
+        现价购买
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <a feedButton class="navItem">
+      <div class="navIcon">
+
+      </div>
+      <p>行情</p>
+    </a>
+    <a feedButton class="navItem active">
+      <div class="navIcon">
+
+      </div>
+      <p>市场</p>
+    </a>
+    <a feedButton class="navItem">
+      <div class="navIcon">
+
+      </div>
+      <p>个人</p>
+    </a>
+  </div>
+  <!--现价购买弹框-->
+  <div vertical class="curPriseTradBox conWrap">
+    <div class="alertTop">
+      <div class="alertCon">
+        <span>购买</span>
+        <i feedButton class="closeIcon">
+
+        </i>
+      </div>
+      <div class="alertCen alertCon">
+        <div class="inputCtr radiu border withTitle">
+          <i class="leftTitle">买入价格</i>
+          <input type="text" class="input" name="buyPrice"/>
+          <i class="rightText lb">金币</i>
+        </div>
+        <div class="inputCtr radiu border withTitle">
+          <i class="leftTitle">买入价格</i>
+          <select name="saleType" class="input wT" id="saleType">
+            <option value="0">%</option>
+            <option value="1">金币</option>
+          </select>
+        </div>
+        <div class="inputCtr radiu border withTitle">
+          <i class="leftTitle">总计金币</i>
+          <input type="text" class="input" name="buyPrice"/>
+          <i class="rightText lb">金币</i>
+        </div>
+        <div class="accountInfo w100">
+          <div class="gold fl tl">可用金币
+            <i class="upColor">2202</i>
+            金币
+          </div>
+          <div class="fee fr tr">手续费
+            <i class="upColor">无</i>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div feedButton class="btn upBtn">
+          限价购买
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--现价卖出弹框-->
+  <div vertical class="curPriseTradBox conWrap">
+    <div class="alertTop keyBg">
+      <div class="alertCon">
+        <span>卖出</span>
+        <i feedButton class="closeIcon">
+
+        </i>
+      </div>
+      <div class="alertCen alertCon">
+        <div class="inputCtr radiu border withTitle">
+          <i class="leftTitle">买入价格</i>
+          <input type="text" class="input" name="buyPrice"/>
+          <i class="rightText lb">金币</i>
+        </div>
+        <div class="inputCtr radiu border withTitle">
+          <i class="leftTitle">买入价格</i>
+          <select name="buyType" class="input wT" id="buyType">
+            <option value="0">%</option>
+            <option value="1">金币</option>
+          </select>
+        </div>
+        <div class="inputCtr radiu border withTitle">
+          <i class="leftTitle">总计金币</i>
+          <input type="text" class="input" name="buyPrice"/>
+          <i class="rightText lb">金币</i>
+        </div>
+        <div class="accountInfo w100">
+          <div class="gold fl tl">持有量
+            <i class="upColor">2202</i>
+          </div>
+          <div class="fee fr tr">手续费
+            <i class="upColor">无</i>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div feedButton class="btn">
+          限价卖出
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--委托订单弹框-->
+  <div class="dgtOrderBox">
+    <div class="closeBox">
+      <div feedButton class="closeBtn">
+
+      </div>
+    </div>
+    <div class="boxCon">
+      <table class="w100">
+        <tr class="tabTop">
+          <td>产品</td>
+          <td>价格</td>
+          <td>已成交/委托量</td>
+          <td>操作</td>
+        </tr>
+        <tr class="tabCon sale ing">
+          <td>
+            梧桐木
+            <span>卖</span>
+          </td>
+          <td>
+            0.015
+          </td>
+          <td>0/100</td>
+          <td>
+            <div feedButton class="canelBtn">
+              撤销
+            </div>
+          </td>
+        </tr>
+        <tr class="tabCon buy ing">
+          <td>
+            梧桐木
+            <span>买</span>
+          </td>
+          <td>
+            0.015
+          </td>
+          <td>0/100</td>
+          <td>
+            <div feedButton class="canelBtn">
+              撤销
+            </div>
+          </td>
+        </tr>
+        <tr class="tabCon sale fure">
+          <td>
+            梧桐木
+            <span>卖</span>
+          </td>
+          <td>
+            0.015
+          </td>
+          <td>0/100</td>
+          <td>
+            <div feedButton class="canelBtn">
+              撤销
+            </div>
+          </td>
+        </tr>
+        <tr class="tabCon buy fure">
+          <td>
+            梧桐木
+            <span>买</span>
+          </td>
+          <td>
+            0.015
+          </td>
+          <td>0/100</td>
+          <td>
+            <div feedButton class="canelBtn">
+              撤销
+            </div>
+          </td>
+        </tr>
+        <tr class="tabCon buy fure">
+          <td>
+            梧桐木
+            <span>买</span>
+          </td>
+          <td>
+            0.015
+          </td>
+          <td>0/100</td>
+          <td>
+            <div feedButton class="canelBtn">
+              撤销
+            </div>
+          </td>
+        </tr>
+        <tr class="tabCon buy fure">
+          <td>
+            梧桐木
+            <span>买</span>
+          </td>
+          <td>
+            0.015
+          </td>
+          <td>0/100</td>
+          <td>
+            <div feedButton class="canelBtn">
+              撤销
+            </div>
+          </td>
+        </tr>
+        <tr class="tabCon buy fure">
+          <td>
+            梧桐木
+            <span>买</span>
+          </td>
+          <td>
+            0.015
+          </td>
+          <td>0/100</td>
+          <td>
+            <div feedButton class="canelBtn">
+              撤销
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

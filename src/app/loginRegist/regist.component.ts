@@ -1,5 +1,4 @@
 import {Component} from '@angular/core'
-import {HeaderComponent} from '../component/header/header.component'
 
 @Component({
   selector:'regist-el',

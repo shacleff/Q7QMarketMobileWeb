@@ -6,11 +6,17 @@ const appRoutes:Routes = [
     path:'auth',
     loadChildren: './loginRegist/login-regist.module#LoginRegistModule',
   },
+  //市场模块
+  {
+    path:'market',
+    loadChildren:'./market/market.module#MarketModule',
+    //data: { preload: true }
+  },
   {
     path:'', //空
     redirectTo: '/login',
     pathMatch: 'full'
-  },
+  }
 ];
 @NgModule({
   imports:[

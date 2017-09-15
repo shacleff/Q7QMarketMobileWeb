@@ -11,8 +11,9 @@ import {HttpClientModule} from '@angular/common/http';//http模块
 import {ActionSheetModule} from 'ngx-weui/actionsheet'//弹出菜单
 
 import {AppRoutingModule} from './app-routing.module';
-import {LoginRegistModule} from './loginRegist/login-regist.module'
+import {LoginRegistModule} from './loginRegist/login-regist.module'//登录注册模块
 
+import {MarketModule} from './market/market.module';//市场模块
 
 import { AppComponent } from './app.component';
 
@@ -21,8 +22,11 @@ import {AuthService} from './service/auth.service'
 import {TipsService} from "./service/tips.service";
 import {UtilService} from "./service/util.service";
 
+//import {FeedButtonDirective} from './directive/feed-button.directive'
+
 @NgModule({
   declarations: [//组件申明
+    //FeedButtonDirective,
     AppComponent,
   ],
   imports: [//用到的模块
@@ -30,7 +34,8 @@ import {UtilService} from "./service/util.service";
     SharedModule,
     HttpClientModule,
     LoginRegistModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MarketModule
   ],
   providers: [//服务
     {

@@ -1,0 +1,50 @@
+<div class="goldRechargeBox">
+  <Header
+    [title]="headerTitle"
+    (onVoted)="back($event)">
+    >
+  </Header>
+
+  <div class="tipsArea bgGray mt80Rem">
+    <p class="dangerColor">温馨提示:</p>
+    <p class="dangerColor">1. 最低充值10金币，且单笔低于20000金币。</p>
+    <p class="dangerColor">2. 充值比例：1元=1金币。</p>
+  </div>
+  <h3 class="quickPayTitle">
+    快捷支付
+  </h3>
+  <div class="quickPayBox">
+    <div class="payItem active">￥50.00</div>
+    <div class="payItem">￥200.00</div>
+    <div class="payItem">￥1000.00</div>
+  </div>
+  <div class="grayBgBar"></div>
+  <h3 class="quickPayTitle rchNum">
+    充值金额
+  </h3>
+  <div class="WrapB rchIpt">
+    <input class="rchNum" placeholder="请输入充值金额" type="number" name="rchNum">
+  </div>
+  <h3 class="quickPayTitle noBg">
+    第三方支付
+  </h3>
+  <div class="thirdPay WrapB">
+    <div class="thirdItem active">
+      <img src="../../../assets/images/wx_pay_icon.png" alt="">
+      微&nbsp;&nbsp;信
+    </div>
+    <div class="thirdItem">
+      <img src="../../../assets/images/ali_pay_icon.png" alt="">
+      支付宝
+    </div>
+    <div class="thirdItem">
+      <img src="../../../assets/images/bank_pay_icon.png" alt="">
+      银&nbsp;&nbsp;联
+    </div>
+  </div>
+  <div class="WrapB">
+    <div feedButton class="btn next">
+      下一步
+    </div>
+  </div>
+</div>
