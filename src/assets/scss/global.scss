@@ -988,3 +988,165 @@ $dangerColor:#F18E00;//警告色
     }
   }
 }
+//充值成功页面
+.rechargeSuccessBox{
+  .keyColor{
+    .header{
+      background: $keyColor;
+      i.leftSwordIcon{
+        background-image: url("../images/left_sword_w_icon.png");
+      }
+      h3{
+        color: #fff;
+      }
+    }
+
+  }
+  .rchSusPic{
+    width: rem(265);
+    height: rem(306);
+    margin: rem(144) auto rem(42) auto;
+    background: url("../images/recharge_success_tips.png") no-repeat center;
+    background-size: 100%;
+  }
+  .payInfoWrap{
+    width: 100%;
+    background: #e5fcf8;
+    .payInfo{
+      tr{
+        width: 100%;
+        height: rem(54);
+        line-height: rem(54);
+        font-size: rem(24);
+        td:nth-child(1){
+          color: #7b7b7b;
+          text-align: left;
+        }
+        td:nth-child(2){
+          text-align: right;
+          color: #000;
+        }
+      }
+    }
+  }
+}
+//充值记录页面
+.rechargeRecord{
+  .rchRecList{
+    background: #fff;
+    width: 100%;
+    .rchRecItem{
+      position: relative;
+      height: rem(98);
+      background: #fff url("../images/right_sword_icon.png") no-repeat right;
+      background-size: rem(12) auto;
+      @extend .borderBot;
+      overflow: hidden;
+      .recLeft{
+        .rchType{
+          float: left;
+          margin-top: rem(14);
+          display: inline-block;
+          height: rem(69);
+          width: rem(69);
+          border-radius: 50%;
+          overflow: hidden;
+        }
+        .payStr{
+          float: left;
+          margin-top: rem(14);
+          margin-left: rem(20);
+          display: inline-block;
+          .rchTypeText{
+            text-align: left;
+            color: #000;
+            font-size: rem(24);
+          }
+          .rchTime{
+            text-align: left;
+            font-size: rem(18);
+            color: #979797;
+          }
+        }
+      }
+      .recRight{
+        height: rem(98);
+        line-height: rem(98);
+        color: #f6b32e;
+        font-size: rem(32);
+        margin-right: rem(40);
+      }
+      &.wx{
+        .rchType{
+          background: url("../images/rch_recorde_list_wx.png") no-repeat center;
+          background-size: 100%;
+        }
+      }
+      &.ali{
+        .rchType{
+          background: url("../images/rch_recorde_list_ali.png") no-repeat center;
+          background-size: 100%;
+        }
+      }
+      &.bank{
+        .rchType{
+          background: url("../images/rch_recorde_list_bank.png") no-repeat center;
+          background-size: 100%;
+        }
+      }
+    }
+  }
+}
+//充值记录详情
+.rechargeRecordDetail{
+  .rchRecBase{
+    overflow: hidden;
+    .rchType{
+      margin-top: rem(36);
+      vertical-align: middle;
+      img{
+        vertical-align: middle;
+        width: rem(42);
+        height: rem(42);
+        border-radius: 50%;
+        line-height: rem(42);
+      }
+      font-size: rem(24);
+      color: #000;
+    }
+    .rchNum{
+      font-size: rem(94);
+      color: #f6b32e;
+      line-height: rem(120);
+    }
+    .rchSratus{
+      font-size: rem(24);
+      color: #929292;
+    }
+  }
+  .rchInfoTable{
+    margin-top: rem(64);
+    .tableT{
+      position: relative;
+      @extend .borderBot;
+    }
+    table{
+      tr{
+        width: 100%;
+        font-size: rem(24);
+        height: rem(48);
+        td{
+          &:nth-child(1){
+            color: #979797;
+            text-align: left;
+          }
+          &:nth-child(2){
+            color: #000;
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+
+}

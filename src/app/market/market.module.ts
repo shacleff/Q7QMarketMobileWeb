@@ -14,6 +14,10 @@ import {HeaderComponent} from '../component/header/header.component'
 import {QuotationComponent} from './quotation/quotation.component'
 import {MarketDetailtComponent} from './market-detail/market-detail.component'
 import {GoldRechargeComponent} from './recharge/gold-recharge.component'
+import {RechargeSuccessComponent} from './recharge/recharge-success.component'
+import {RechargeRecordComponent} from "./recharge/recharge-record.component";
+import {RechargeRecordDetailComponent} from "./recharge/recharge-record-detail.component";
+import {RechargeService} from "./recharge/recharge.service";
 
 @NgModule({
   declarations:[
@@ -22,7 +26,10 @@ import {GoldRechargeComponent} from './recharge/gold-recharge.component'
     VerticalCenterDirective,
     QuotationComponent,
     MarketDetailtComponent,
-    GoldRechargeComponent
+    GoldRechargeComponent,
+    RechargeSuccessComponent,
+    RechargeRecordComponent,
+    RechargeRecordDetailComponent
   ],
   imports:[
     SharedModule,
@@ -30,7 +37,7 @@ import {GoldRechargeComponent} from './recharge/gold-recharge.component'
     EchartsNg2Module
   ],
   providers:[
-
+    RechargeService
   ]
 })
 export class MarketModule{
