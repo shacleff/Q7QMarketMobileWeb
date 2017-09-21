@@ -1,0 +1,28 @@
+<div class="alterMobile">
+  <Header
+    [title]="headerTitle"
+    (onVoted)="back($event)">
+    >
+  </Header>
+  <div class="grayBgBar mt80Rem"></div>
+  <div class="alterMobileForm WrapB">
+    <div class="formIpt">
+      <div class="title">新手机号码</div>
+      <input class="input" placeholder="请输入新手机号码" name="originMobile" type="text">
+    </div>
+    <div class="formIpt">
+      <div class="title">短信验证码</div>
+      <input class="input" name="originMobile" name="verCode" type="text">
+      <div feedButton class="rightOpr">
+        获取验证码
+      </div>
+    </div>
+    <div feedButton class="nextStepBtn btn">完成</div>
+  </div>
+  <div class="tipsArea bgGreen">
+    <p>温馨提示</p>
+    <p>1、登录密码不能和您的支付密码一致</p>
+    <p>2、请勿将支付密码告诉他人</p>
+    <p>3、请勿在其他平台、软件中输入支付密码</p>
+  </div>
+</div>

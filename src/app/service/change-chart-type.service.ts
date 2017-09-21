@@ -13,11 +13,29 @@ export class ChangeChartTypeService{
         type: 'category',
         boundaryGap: false,
         data: date,
+        splitLine:{//分割线
+          show:true,
+          lineStyle:{
+            color: ['#f4f4f4'],
+            width: 1,
+            type: 'solid'
+          }
+        },
+        axisLine: { lineStyle: { color: '#bbb' } },
       },
       yAxis: {
-        show:false,
+        show:true,
         type: 'value',
-        boundaryGap: [0, '100%']
+        boundaryGap: [0, '100%'],
+        splitLine:{//分割线
+          show:true,
+          lineStyle:{
+            color: ['#f4f4f4'],
+            width: 1,
+            type: 'solid'
+          }
+        },
+        axisLine: { lineStyle: { color: '#bbb' } },
       },
       grid:{
         //show:true,
@@ -46,7 +64,7 @@ export class ChangeChartTypeService{
 
   public kOption(dates,data){//k线图配置
     return{
-      backgroundColor: '#FFF6D8',//图表背景色
+      backgroundColor: '#ffffff',//图表背景色
       tooltip: {
         show:false,
         trigger: 'axis',
@@ -78,15 +96,15 @@ export class ChangeChartTypeService{
             type: 'solid'
           }
         },
-        //axisLine: { lineStyle: { color: '#aaa' } },
+        axisLine: { lineStyle: { color: '#bbb' } },
         textStyle:{
           fontSize:10
         }
       },
       yAxis: {
-        show:false,
+        show:true,
         scale: true,
-        axisLine: { lineStyle: { color: '#aaa' } },
+        axisLine: { lineStyle: { color: '#bbb' } },
         axisTick:{
           inside:true,
         },
@@ -109,7 +127,7 @@ export class ChangeChartTypeService{
         y:5,
         x2:'8.25%',
         y2:26,
-        height:'auto'
+        height:'auto',
       },
       animation: true,
       series: [

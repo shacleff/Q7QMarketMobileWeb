@@ -69,6 +69,53 @@ $dangerColor:#F18E00;//警告色
   width: rem( 580);
   margin: 0 auto;
 }
+.noCon{
+  width: 100%;
+  text-align: center;
+  line-height: rem(80);
+  font-size: rem(18);
+  color: #bbb;
+  text-shadow: 0 0 1px 2px rgba(0,0,0,1);
+  &.hide{
+    display: none;
+  }
+}
+//section标题
+.secTitle{
+  width: 100%;
+  height: rem(74);
+  line-height: rem(74);
+  text-align: left;
+  color: $keyColor;
+  font-size: rem(24);
+  text-indent: rem(20);
+  background: #fff;
+  letter-spacing: 2px;
+  &.gold{
+    color: #e7bf04;
+  }
+}
+//listTable 列表表格
+.listTable{
+  width: 100%;
+  text-align: center;
+  .tableHeader{
+    text-align: center;
+    height: rem(62);
+    line-height: rem(62);
+    color: #4e4e4e;
+    font-size: rem(24);
+    background: $downBg;
+  }
+  .tableContent{
+    position: relative;
+    height: rem(100);
+    line-height: rem(100);
+    font-size: rem(24);
+    color: #4e4e4e;
+    border-bottom: 1px solid #ececec;
+  }
+}
 //弹框内容区域
 .alertCon{
   width: rem(510);
@@ -89,6 +136,7 @@ $dangerColor:#F18E00;//警告色
   position: fixed;
   top:0;
   left: 0;
+  letter-spacing: 2px;
   width: 100%;
   height: rem(80);
   background: $whiteColor;
@@ -186,11 +234,20 @@ $dangerColor:#F18E00;//警告色
   @extend .borRau5;
   color: #fff;
   text-align: center;
-  font-size: rem(30);
+  letter-spacing: 1px;
+  font-size: rem(26);
   line-height: rem(68);
   background: $keyColor;
+  &.small{
+    height: rem(50);
+    line-height: rem(50);
+    font-size: rem(24);
+  }
   .keyBtn{
     background: $keyColor;
+  }
+  &.dangerBtn{
+    background: #f18e00;
   }
   &.upBtn{
     background: $upColor;
@@ -210,6 +267,14 @@ $dangerColor:#F18E00;//警告色
   border-color: #d8d8d8;
   &.radiu{//圆角-5
     @extend .borRau5;
+  }
+  .rightOpr{
+    height:rem(68);
+    width: rem(160);
+    line-height: rem(68);
+    position: absolute;
+    top:0;
+    right: 0;
   }
   &.withTitle{
     position: relative;
@@ -303,6 +368,124 @@ $dangerColor:#F18E00;//警告色
     }
   }
 }
+//formInput
+.formIpt{
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  border: 1px solid #e2e2e2;
+  letter-spacing: 1px;
+  @extend .borRau5;
+  width: 100%;
+  height: rem(68);
+  line-height: rem(68);
+  font-size: rem(24);
+  .selAdon{
+    height: rem(68);
+    line-height: rem(68);
+    color: #fff;
+    width: rem(100);
+    position: absolute;
+    top:0;
+    right: 0;
+    text-align: center;
+    font-size: rem(24);
+    background: $keyColor;
+  }
+  .title{
+    position: absolute;
+    box-sizing: border-box;
+    border-right: 1px solid #e2e2e2;
+    text-indent: rem(18);
+    top:0;
+    left: 0;
+    width: rem(160);
+    color: #000;
+    text-align: left;
+    background: #f5f5f5;
+    font-size: rem(22);
+  }
+  .input{
+    &:disabled{
+      background: #fafafa;
+      color: #767676;
+    }
+    display: block;
+    border: none;
+    text-indent: rem(18);
+    position: absolute;
+    top:0;
+    left: rem(160);
+    font-size: rem(24);
+    width: rem(440);
+    height: rem(68);
+    line-height: rem(68);
+    &.short{
+      width: rem(280);
+    }
+  }
+  .rightOpr{
+    font-size: rem(22);
+    position: absolute;
+    box-sizing: border-box;
+    border-left: 1px solid #e2e2e2;
+    top:0;
+    right: 0;
+    width: rem(160);
+    color: #fff;
+    text-align: center;
+    background: #01ddb6;
+    img{
+      width: 100%;
+      height: 100%;
+    }
+    &.disable{
+      background: #999;
+    }
+  }
+  &.dangerIpt{
+    border: 1px solid $dangerColor;
+    .title{
+      background: $dangerColor;
+      color: #fff;
+    }
+    .input{
+      &:disabled{
+        background: #fff8ee;
+      }
+    }
+  }
+  &.keyIpt{
+    border: 1px solid $keyColor;
+    .title{
+      background: $keyColor;
+      color: #fff;
+    }
+    .input{
+      &:disabled{
+        background: #fbfbfb;
+      }
+    }
+  }
+  &.small{
+    height: rem(50);
+    line-height: rem(50);
+    .title{
+      height: rem(50);
+      line-height: rem(50);
+      width: rem(130);
+    }
+    .input{
+      height: rem(50);
+      line-height: rem(50);
+      left: rem(130);
+    }
+    .selAdon{
+      height: rem(50);
+      line-height: rem(50);
+    }
+  }
+}
 //无背景
 .noBg{
   background: none !important;
@@ -367,6 +550,9 @@ $dangerColor:#F18E00;//警告色
 /*页面*/
 //注册页
 .registBox{
+  &.hide{
+    display: none;
+  }
   .regBanner{
     margin-top: rem(80);
     width: 100%;
@@ -375,6 +561,24 @@ $dangerColor:#F18E00;//警告色
     background-size: 100% 100%;
   }
   .regForm{
+    .getMsgCode{
+      .getVerCode{
+        position: absolute;
+        right: 0;
+        top:rem(5);
+        height: rem(50);
+        line-height: rem(50);
+        width: rem(140);
+        color: #fff;
+        text-align: center;
+        background: $keyColor;
+        border-radius: 5px;
+        font-size: rem(20);
+        &.disable{
+          background: #ccc;
+        }
+      }
+    }
     background: #f7f7f7;
     width: 100%;
     .inputCtr{
@@ -497,6 +701,14 @@ $dangerColor:#F18E00;//警告色
       }
     }
   }
+  .toRegistPage{
+    position: fixed;
+    bottom: rem(40);
+    width: 100%;
+    text-align: center;
+    color: $keyColor;
+    font-size: rem(22);
+  }
 }
 //行情页面
 .quotationBox{
@@ -567,6 +779,23 @@ $dangerColor:#F18E00;//警告色
   }
 }
 .marketDetailBox{
+  .toAssignTrade{
+    position: fixed;
+    top:rem(20);
+    z-index: 10;
+    right: rem(0);
+    width: rem(110);
+    letter-spacing: 1px;
+    height: rem(40);
+    line-height: rem(40);
+    background: $keyColor;
+    color: #fff;
+    font-size: rem(18);
+    text-align: center;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    box-shadow: 0 0 4px 2px rgba(0,0,0,.1);
+  }
   .marketBaseInfo{
     overflow: hidden;
     padding-top: rem(20);
@@ -592,6 +821,15 @@ $dangerColor:#F18E00;//警告色
           background: url("../images/up_sword.png") no-repeat center;
           background-size: auto rem(40);
         }
+        &.down{
+          color: $keyColor;
+          .indexPic{
+            display: inline-block;
+            width: rem(30);
+            background: url("../images/down_sword.png") no-repeat center;
+            background-size: auto rem(40);
+          }
+        }
       }
       &.down{
         .upDwonIndex{
@@ -611,6 +849,9 @@ $dangerColor:#F18E00;//警告色
         overflow: hidden;
         .infoDetail{
           margin-right: rem(20);
+        }
+        &.down{
+          color: $keyColor;
         }
       }
     }
@@ -633,6 +874,7 @@ $dangerColor:#F18E00;//警告色
     }
   }
   .dgtTableWrap{
+    transition: all linear 300ms;
     &.close{
       height: 1px;
       .tableBox{
@@ -641,10 +883,11 @@ $dangerColor:#F18E00;//警告色
     }
     position: relative;
     width: 100%;
-    height: rem(144);
+    height: rem(186);
     background: #f5f5f5;
     overflow: visible;
     .dgtOpenBtn{
+      z-index: 2;
       position: absolute;
       width: rem(65);
       height: rem(65);
@@ -659,7 +902,7 @@ $dangerColor:#F18E00;//警告色
     }
     .tableBox{
       color: #444;
-      height: rem(144);
+      height: rem(186);
       font-size: rem(18);
       overflow: auto;
       table{
@@ -749,6 +992,7 @@ $dangerColor:#F18E00;//警告色
       }
       .dgtOrderBtn{
         position: absolute;
+        z-index: 8;
         height: rem(84);
         width: rem(84);
         background: url(../images/delg_order_btn.png) no-repeat center;
@@ -807,6 +1051,15 @@ $dangerColor:#F18E00;//警告色
   }
 }
 .dgtOrderBox{
+  display: none;
+  &.active{
+    display: block;
+  }
+  .entOrderTable{
+    &.hide{
+      display: none;
+    }
+  }
   width: 100%;
   position: fixed;
   z-index: 11;
@@ -1054,7 +1307,7 @@ $dangerColor:#F18E00;//警告色
         }
         .payStr{
           float: left;
-          margin-top: rem(14);
+          margin-top: rem(18);
           margin-left: rem(20);
           display: inline-block;
           .rchTypeText{
@@ -1148,5 +1401,819 @@ $dangerColor:#F18E00;//警告色
       }
     }
   }
+}
+//推广奖励
+.promoteAward{
+  .AwardList{
+    .rchRecItem{
+      background: none;
+      .userPic{
+        background: none !important;
+        img{
+         width: 100%;
+          height: 100%;
+        }
+      }
+      .awardRight{
+        margin-right: 0;
+        color: $upColor;
+        padding-top: rem(24);
+        line-height: rem(30);
+        p{
+          font-size: rem(18);
+          color: #979797;
+        }
+      }
+    }
+  }
+}
+//推广列表
+.promoteList{
+  .prtAllNum{
+    //height: rem(140);
+    width: 100%;
+    line-height: rem(140);
+    text-align: center;
+    font-size: rem(108);
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.1);
+    span{
+      font-size: rem(18);
+    }
+    background: #fff url("../images/prt_list_img.png") no-repeat right bottom;
+    background-size: rem(94) rem(37);
+  }
+}
+//推广链接
+.promoteLink{
+  .prtCodeText{
+    width: 100%;
+    height: rem(196);
+    background: #fff url(../images/prt_link_bg.png) no-repeat bottom;
+    background-size: 100% auto;
+    overflow: hidden;
+    .codeText{
+      text-indent: 3px;
+      text-align: center;
+      margin: rem(45) auto rem(0) auto;
+      font-size: rem(48);
+      color: #000;
+    }
+    .codeDesc{
+      margin-top: rem(-5);
+      text-align: center;
+      font-size: rem(18);
+      color: #4a4a4a;
+    }
+  }
+  .prtCodeCon{
+    width: rem(300);
+    height: rem(350);
+    margin: rem(36) auto rem(66) auto;
+    box-sizing: border-box;
+    border: 1px solid #4c726a;
+    border-radius: rem(6);
+    img.ewCode{
+      display: block;
+      width: rem(220);
+      height: rem(220);
+      margin: rem(20) auto;
+    }
+    .top,.bot{
+      height: rem(45);
+      line-height: rem(45);
+      background: #1c987f;
+      font-size: rem(18);
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .bot{
+      background: #828786;
+    }
+  }
+}
+//个人中心主页
+.userCenter{
+  .ucHeader{
+    overflow: hidden;
+    width: 100%;
+    height: rem(286);
+    background: url(../images/user-center_header_bg.jpg) no-repeat center;
+    background-size: 100% 100%;
+    position: relative;
+    .toVerify{
+      width: rem(142);
+      height:rem(50);
+      text-align: center;
+      background: #c8c6c7;
+      border-top-left-radius: rem(25);
+      border-bottom-left-radius: rem(25);
+      line-height: rem(50);
+      font-size: rem(18);
+      color: #383838;
+      position: absolute;
+      top:rem(20);
+      right:0;
+    }
+    .baseInfo{
+      margin-top: rem(40);
+      overflow: hidden;
+      height: rem(100);
+      .userPic{
+        box-sizing: border-box;
+        float: left;
+        height: rem(100);
+        border-radius: 50%;
+        border: 3px solid #ffffff;
+        overflow: hidden;
+        width: rem(100);
+        margin-right: rem(22);
+      }
+      .playerInfo{
+        float: left;
+        .infoTop{
+          margin-top: rem(8);
+          text-align: left;
+          .userName{
+            font-size: rem(24);
+            color: #fff;
+            font-weight: bold;
+          }
+          .userId{
+            margin-left: rem(10);
+            font-size: rem(18);
+            color: #fff;
+          }
+        }
+        .infoBot{
+          margin-top: rem(8);
+          .linkBtn{
+            width: rem(110);
+            height: rem(40);
+            box-sizing: border-box;
+            border-radius: rem(6);
+            text-align: center;
+            line-height: rem(40);
+            font-size: rem(18);
+            margin-right: rem(9);
+            display: inline-block;
+            &.btnRch{
+              color: #edd900;
+              border: 1px solid #edd900;
+            }
+            &.btnCash{
+              color: #ff8181;
+              border: 1px solid #ff8181;
+            }
+          }
+        }
+      }
+    }
+    .accountInfo{
+      height: rem(100);
+      background: rgba(0,0,0,.3);
+      margin-top: rem(56);
+      display: flex;
+      .infoItem{
+        text-align: center;
+        vertical-align: middle;
+        flex: 1;
+        height: rem(65);
+        margin-top: rem(13);
+        letter-spacing: 1px;
+        border-right: 1px solid #5e5e5e;
+        box-sizing: border-box;
+        color: #fff;
+        .itemTop{
+          margin-top: rem(4);
+          font-size: rem(18);
+          line-height: rem(18);
+        }
+        .itemBot{
+          font-size: rem(24);
+          line-height: rem(24);
+          margin-top: rem(19);
+        }
+      }
+    }
+  }
+  .orderArea{
+    overflow: hidden;
+    display: flex;
+    height: rem(122);
+    .orderItem{
+      text-align: center;
+      color: #3b3b3b;
+      font-size: rem(24);
+      line-height: rem(24);
+      flex: 1;
+      height: rem(40);
+      margin-top: rem(35);
+      box-sizing: border-box;
+      border-right: 1px solid #eaeaea;
+      img{
+        margin-top: rem(-23);
+        margin-bottom: rem(14);
+      }
+      &:nth-child(1){
+        img{
+          width: rem(45);
+          height: rem(55);
+        }
+      }
+      &:nth-child(2){
+        img{
+          width: rem(46);
+          height: rem(53);
+        }
+      }
+      &:nth-child(3){
+        img{
+          width: rem(48);
+          height: rem(54);
+        }
+      }
+    }
+  }
+  .accountRevise{
+    .reviseItem{
+      position: relative;
+      @extend .borderBot;
+      height: rem(60);
+      line-height: rem(60);
+      font-size: rem(24);
+      color: #000;
+      text-indent: rem(20);
+    }
+  }
+  .goldArea{
+    .prtCenter{
+      &:after{
+        content: " ";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        height: 1px;
+        border-bottom: 1px solid #fff;
+        color: #fff;
+        -webkit-transform-origin: 0 100%;
+        transform-origin: 0 100%;
+        -webkit-transform: scaleY(0.5);
+        transform: scaleY(0.5);
+        z-index: 3;
+      }
+      .staIcon{
+        position: absolute;
+        width: rem(21);
+        height: rem(11);
+        background: url("../images/bottom_sword_icon.png") no-repeat center;
+        background-size: 100%;
+        top: rem(24);
+        right: rem(24);
+      }
+      &.close{
+        .staIcon{
+          transform: rotate(90deg);
+        }
+      }
+    }
+    .prtOpen{
+      &.open{
+        display: flex;
+      }
+      background: #f9f9f9;
+      height: rem(84);
+      width: 100%;
+      color: #000;
+      font-size: rem(24);
+      line-height: rem(24);
+      .prtItem{
+        text-align: center;
+        flex: 1;
+        img{
+          margin: rem(9) auto rem(7) auto;
+        }
+        &:nth-child(1){
+          img{
+            width: rem(36);
+            height: rem(35);
+          }
+        }
+        &:nth-child(2){
+          img{
+            width: rem(31);
+            height: rem(27);
+          }
+        }
+        &:nth-child(3){
+          img{
+            width: rem(34);
+            height: rem(31);
+          }
+        }
+      }
+    }
+  }
+}
+//修改手机号码
+.alterMobile{
+  .alterMobileForm{
+    margin-top: rem(60);
+    .formIpt{
+      margin-bottom: rem(20);
+    }
+    .nextStepBtn{
+      margin-top: rem(290);
+    }
+  }
+  .tipsArea{
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+  }
+}
+//修改登录密码
+.alterLoginPwd{
+  .completeBtn{
+    margin-top: rem(150);
+  }
+}
+//充值支付密码
+.resetPayPwd{
+  .completeBtn{
+    margin-top: rem(120);
+  }
+}
+//管理账户
+.manageAccount{
+  .tipsArea{
+    position: static;
+  }
+  .alterAccountBtn{
+    margin-top: rem(100);
+  }
+  .formIpt{
+    margin-top: rem(20);
+  }
+}
+.selBankBox{
+  display: none;
+  &.active{
+    display: block;
+  }
+  position: fixed;
+  width: rem(510);
+  height: rem(646);
+  z-index: 11;
+  left: rem(64);
+  .selBankWrap{
+    background: #fff;
+    width: 100%;
+    overflow: hidden;
+    border-radius: rem(6);
+    height: rem(524);
+    .selBankList{
+      width: 100%;
+      height: rem(480);
+      overflow: auto;
+      margin-top: rem(20);
+      .bankListItem{
+        width: 100%;
+        overflow: hidden;
+        height: rem(76);
+        line-height: rem(76);
+        font-size: rem(24);
+        color: #000;
+        .bankPic{
+          margin-left: rem(20);
+          height: rem(76);
+          img{
+            height: rem(46);
+          }
+        }
+        .bankName{
+          letter-spacing: 2px;
+          text-align: right;
+          margin-right: rem(20);
+        }
+        &:nth-child(odd){
+          background: $downBg;
+        }
+      }
+    }
+  }
+  .closeThis{
+    margin-top: rem(38);
+    width: 100%;
+    text-align: center;
+    .closeBtn{
+      height: rem(80);
+      width: rem(80);
+    }
+  }
+}
+//金币提现
+.goldCash{
+  .formIpt{
+    margin-top: rem(20);
+  }
+  .subBtn{
+    margin-top: rem(60);
+  }
+}
+//提现记录
+.cashRecord{
+  .rchType{
+    background:#ffcc67 url('../images/person_white.png') no-repeat center !important;
+    background-size: rem(30) rem(34);
+  }
+  .recRight{
+    color: #fe2424 !important;
+  }
+}
+//提现记录详情
+.cashDetail{
 
+}
+//金币明细
+.goldDetail{
+  .keyColor{
+    .header{
+      background: $keyColor;
+      i.leftSwordIcon{
+        background-image: url("../images/left_sword_w_icon.png");
+      }
+      h3{
+        color: #fff;
+      }
+    }
+
+  }
+  .goldTotal{
+    background: #fff;
+    height: rem(158);
+    width: 100%;
+    display: flex;
+    .totalItem{
+      text-align: center;
+      span{
+        display: block;
+        font-size: rem(32);
+        line-height: rem(32);
+        margin-top: rem(40);
+        color: #e7bf04;
+      }
+      p{
+        font-size: rem(24);
+        color: #000;
+        line-height: rem(24);
+        margin-top: rem(25);
+      }
+      flex: 1;
+    }
+  }
+  .detailList{
+    .prtListHeader{
+      background: #fdf8e5;
+    }
+    .tableContent{
+      &.buy{
+        td:nth-child(1){
+          color: #eb0f0f;
+        }
+        td:nth-child(2){
+          color: #eb0f0f;
+        }
+      }
+      &.sale{
+        td:nth-child(1){
+          color:$keyColor
+        }
+        td:nth-child(2){
+          color:$keyColor
+        }
+      }
+    }
+  }
+}
+//指定交易
+.assignTrade{
+  .assginForm{
+    overflow: hidden;
+    .formIpt{
+      margin-top: rem(10);
+    }
+    .assignSubBtn{
+      margin-top: rem(20);
+      margin-bottom: rem(26);
+    }
+  }
+  .assginTradeTableWrap{
+    background: #fff;
+    padding-bottom: rem(120);
+    width: 100%;
+    overflow: hidden;
+    .assiginTable{
+     width: 100%;
+      text-align: center;
+      tr{
+        height: rem(60);
+      }
+      .tableTop{
+        font-size: rem(18);
+        color: #4e4e4e;
+        font-weight: bold;
+        background: #e5fcf8;
+      }
+      .tableCon{
+        border-bottom: 1px solid #ececec;
+        color: #4e4e4e;
+        font-size: rem(18);
+        td{
+          .cancelBtn{
+            width: rem(80);
+            height: rem(42);
+            background: $keyColor;
+            line-height: rem(42);
+            color: #fff;
+            text-align: center;
+            margin: auto;
+            border-radius: rem(6);
+          }
+        }
+        &.buy{
+          .type{
+            color: $upColor;
+          }
+        }
+        &.sale{
+          .type{
+            color: $keyColor;
+          }
+        }
+      }
+    }
+  }
+  .selWoodBox{
+    .selBankWrap .selBankList .bankListItem{
+      font-size: rem(20) !important;
+      span.num{
+        color: #ff8e27;
+      }
+    }
+  }
+  .assignTradeDetail{
+    display: none;
+    &.active{
+      display: block;
+    }
+    background: #fff;
+    position: fixed;
+    z-index: 11;
+    width: rem(574);
+    height: rem(510);
+    @extend .borRau8;
+    overflow: hidden;
+    left: rem(33);
+    .detailTop{
+      background: $keyColor;
+      position: relative;
+      width: 100%;
+      height: rem(58);
+      line-height: rem(58);
+      font-size: rem(24);
+      color: #fff;
+      text-indent: rem(30);
+      letter-spacing: 2px;
+      .closeIcon{
+        display: block;
+        position: absolute;
+        width: rem(58);
+        height: rem(58);
+        top: 0;
+        right: 0;
+        background: url("../images/close_icon.png") no-repeat center;
+        background-size: rem(16);
+      }
+    }
+    .detailBot{
+      height: rem(148);
+      background: #e5fcf8;
+      width: 100%;
+      overflow: hidden;
+      .keyBtn{
+        margin-top: rem(56);
+      }
+    }
+    .detailTable{
+      width: 90%;
+      margin: 0 auto rem(2) auto;
+      tr{
+        width: 100%;
+        height: rem(60);
+        font-size: rem(20);
+        color: #3c3c3c;
+        text-align: left;
+        .woodPic{
+          width: rem(40);
+          height: rem(29);
+        }
+        .woodName{
+          color: #000;
+        }
+        .redFont{
+          color: #f00000;
+        }
+      }
+    }
+  }
+}
+//指定交易订单
+.assignTradeOrder{
+  .changeTable{
+    width: 100%;
+    border-top: 1px solid #ececec;
+    height: rem(110);
+    display: flex;
+    .tableItem{
+      flex: 1;
+      text-align: center;
+      font-size: rem(24);
+      color: #b0b0b0;
+      line-height: rem(50);
+      span{
+        display: inline-block;
+        margin: rem(25) auto;
+        &.unResolve{
+          position: relative;
+          &:after{
+            content: '';
+            position: absolute;
+            display: block;
+            top:rem(8);
+            right: rem(-6);
+            width: rem(12);
+            height: rem(12);
+            border-radius: rem(6);
+            background: #ff0000;
+            overflow: hidden;
+          }
+        }
+      }
+      &.active{
+        color: #000000;
+        span{
+          border-bottom: 3px solid #ffcc67;
+        }
+      }
+    }
+  }
+  .allAssginTrdOdr{
+    display: none;
+    &.active{
+      display: block;
+    }
+    li{
+      &.add{//收入
+        .rchType{
+          background: $upColor url("../images/person_white.png") no-repeat center;
+          background-size: rem(30) rem(34);
+        }
+        .recRight{
+          color: $upColor;
+        }
+      }
+      &.rdc{//支出
+        .rchType{
+          background: $keyColor url("../images/person_white.png") no-repeat center;
+          background-size: rem(30) rem(34);
+        }
+        .recRight{
+          color: $keyColor;
+        }
+      }
+    }
+  }
+  .unResolveOrder{
+    display: none;
+    &.active{
+      display: block;
+    }
+    li{
+      .rchType{
+        background: #ffcc67 url("../images/person_white.png") no-repeat center;
+        background-size: rem(30) rem(34);
+      }
+      .recRight{
+        color: #ffcc67;
+      }
+    }
+  }
+}
+//指定交易详情
+.assignTradeDetail{
+  letter-spacing: 1px;
+  .rchInfoTable{
+    margin-top: rem(30);
+    .tableT{
+      margin-top: rem(10);
+      &:after{
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -1000px;
+        right: 0;
+        width: 100%;
+        height: 3px;
+        border-top: 3px solid #fff;
+        color: red;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        //-webkit-transform: scaleY(0.5);
+        //transform: scaleY(0.5);
+        z-index: 4;
+      }
+    }
+  }
+}
+//待处理指定交易订单操作页面
+.assignTradeDetail{
+  .resolveBtn{
+    height: rem(68);
+    margin-top: rem(100);
+    .btnItem{
+      width: 50%;
+      height: rem(68);
+      float: left;
+      text-align: center;
+      font-size: rem(24);
+      line-height: rem(68);
+      color: #fff;
+      &.confirm{
+        background: #f6b32e;
+        border-bottom-left-radius: rem(8);
+        border-top-left-radius: rem(8);
+      }
+      &.cancel{
+        background: #f10600;
+        border-bottom-right-radius: rem(8);
+        border-top-right-radius: rem(8);
+      }
+    }
+  }
+}
+//交易明细
+.TradeRecordList{
+  &.hide{
+    display: none;
+  }
+  .AwardList{
+    .rchRecItem{
+      background: #fff url(../images/right_sword_icon.png) no-repeat right;
+      background-size: rem(12) rem(22);
+      &.sale{
+        .tradeType,.awardRight{
+          color: #fe2424;
+        }
+      }
+      &.buy{
+        .tradeType,.awardRight{
+          color: $keyColor;
+        }
+      }
+      .awardRight{
+        margin-right: rem(30);
+      }
+    }
+  }
+}
+//完善实名认证
+.nameAuth{
+  .upLoadPicBox{
+    .picItem{
+      width: rem(450);
+      height: rem(286);
+      margin: rem(36) auto;
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  .picUpBtn{
+    margin:rem(30) auto;
+    width: rem(450);
+  }
+}
+.curOdrDetail,.childCom{
+  display: none;
+  &.active{
+    display: block;
+  }
+}
+.TradeRecordList{
+  &.hide{
+    display: none;
+  }
 }

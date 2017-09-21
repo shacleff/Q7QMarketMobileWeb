@@ -25,15 +25,9 @@ export class LoginComponent implements OnInit,AfterViewChecked{
     this.tips.msg(msg);
   }
   public loginData = {
-    account:"",
-    password:""
+    account:"13855418476",
+    password:"123456"
   };
-  public filter(){
-    setTimeout(()=>{
-      var val = this.loginData.account;
-      this.loginData.account = val.replace(/[^\d]/g, "");
-    },100);
-  }
   public logIn(){
     if(!this.util.regExp().mobileNum.test(this.loginData.account)){
       this.showTips('请输入正确手机号');
@@ -45,20 +39,31 @@ export class LoginComponent implements OnInit,AfterViewChecked{
       this.showTips('密码长度为6-18位');
       return;
     }else{
-      this.showTips('登录成功');
 
-      //发布时打开
-      //this.toLogIn.logIn().then((data) => {
-      //    console.log(data)
-      //});
-
-      //以下为模拟登陆
-      this.authService.login().subscribe(() => {
-        if (this.authService.isLoggedIn) {
-          let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/main';
+      this.toLogin.logIn(
+        {
+          "clientId": "098f6bcd4621d373cade4e832627b4f6",
+          "loginChannel": " ",
+          "password": this.loginData.password,
+          "userName": this.loginData.account
+        }
+      ).then((res:any) => {
+        if(res){
+          this.showTips('登录成功');
+          console.log(res);
+          let token = res.token_type+' '+res.access_token;
+          localStorage.setItem('token',token);
+          let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/market';
           this.router.navigate([redirect]);
         }
       });
+      //以下为模拟登陆
+      //this.authService.login().subscribe(() => {
+      //  if (this.authService.isLoggedIn) {
+      //    let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/market';
+      //    this.router.navigate([redirect]);
+      //  }
+      //});
     }
   }
   ngOnInit(){

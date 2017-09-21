@@ -13,58 +13,48 @@
       <td>最低</td>
       <td>成交量</td>
     </tr>
-    <tr class="tableCon up">
+
+
+
+    <tr feedButton *ngFor="let item of proList;index as i" class="tableCon up" [ngClass]="{up:item.changePrice>=0,down:item.changePrice<0}" (click)="toDetail(item.proId)">
       <td>
-        <img src="../../../assets/images/wood_little_icon.png" alt="">
-        <p>梧桐木</p>
+        <img  [src]="item.imgUrl" alt="">
+        <p>{{item.proName}}</p>
       </td>
-      <td class="up">0.0122</td>
-      <td class="up">+0.069</td>
-      <td class="up">0.0218</td>
-      <td>0.0211</td>
-      <td class="up">0.0521</td>
-      <td class="down">0.0121</td>
-      <td>373895</td>
-    </tr>
-    <tr class="tableCon down">
-      <td>
-        <img src="../../../assets/images/wood_little_icon.png" alt="">
-        <p>梧桐木</p>
-      </td>
-      <td class="up">0.0122</td>
-      <td class="up">+0.069</td>
-      <td class="up">0.0218</td>
-      <td>0.0211</td>
-      <td class="up">0.0521</td>
-      <td class="down">0.0121</td>
-      <td>373895</td>
+      <td class="up">{{item.nowPrice}}</td>
+      <td class="up" [ngClass]="{up:item.changePrice>=0,down:item.changePrice<0}">{{item.changeRate}}%</td>
+      <td class="up" [ngClass]="{up:item.changePrice>=0,down:item.changePrice<0}">{{item.changePrice}}</td>
+      <td>{{item.toOpenPrice}}</td>
+      <td class="up">{{item.heightPrice}}</td>
+      <td class="down">{{item.lowPrice}}</td>
+      <td>{{item.tranVolume}}</td>
     </tr>
   </table>
   <div class="ChartBox pb80Rem">
     <div class="WrapB">
       <div class="chartChange">
-        <div class="chartBtn fLine">分时</div>
-        <div class="chartBtn kLine seled">k线</div>
+        <div feebButton (click)="changeToFLine()" class="chartBtn fLine" [ngClass]="{seled:chartType==2}">分时</div>
+        <div feebButton (click)="changeToKLine()" class="chartBtn kLine" [ngClass]="{seled:chartType==1}">k线</div>
       </div>
       <div class="chart">
-
+        <echarts-ng2 #myEcharts></echarts-ng2>
       </div>
     </div>
   </div>
   <div class="footer">
-    <a feedButton class="navItem active">
+    <a feedButton routerLink="/market" class="navItem active">
       <div class="navIcon">
 
       </div>
       <p>行情</p>
     </a>
-    <a class="navItem">
+    <a feedButton routerLink="/market/1" class="navItem">
       <div class="navIcon">
 
       </div>
       <p>市场</p>
     </a>
-    <a class="navItem">
+    <a feedButton routerLink="/userCenter" class="navItem">
       <div class="navIcon">
 
       </div>

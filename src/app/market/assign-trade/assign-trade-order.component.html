@@ -1,0 +1,111 @@
+<div class="rechargeRecord assignTradeOrder">
+  <Header
+    [title]="headerTitle"
+    (onVoted)="back($event)">
+    >
+  </Header>
+  <div class="changeTable mt80Rem">
+    <div feedButton class="tableItem active"
+      [ngClass]="{active:showAllOrder}"
+      (click)="changeOrder(true)"
+    >
+      <span>
+        历史
+      </span>
+    </div>
+    <div feedButton class="tableItem"
+       [ngClass]="{active:!showAllOrder}"
+       (click)="changeOrder(false)"
+    >
+      <span  [ngClass]="{unResolve:hasunResolve}">
+        待处理(103)
+      </span>
+    </div>
+  </div>
+  <!--全部订单-->
+  <ul class="rchRecList allAssginTrdOdr active"
+      [ngClass]="{active:showAllOrder}"
+  >
+    <li feedButton class="rchRecItem WrapB add"
+      *ngFor = "let item of allList"
+      [ngClass]="{
+        add:item.amt>=0,
+        rdc:item.amt<0
+      }"
+    >
+      <div class="recLeft fl">
+        <div class="rchType">
+        </div>
+        <div class="payStr">
+          <div class="rchTypeText">
+            {{item.tuName}}&nbsp;138****5154
+          </div>
+          <div class="rchTime">
+            {{item.createTime|date:"yyyy/M/d h:m:s"}}
+          </div>
+        </div>
+      </div>
+      <div class="recRight fr">
+        {{item.amt}}
+      </div>
+    </li>
+    <!--<li feedButton class="rchRecItem WrapB add">
+      <div class="recLeft fl">
+        <div class="rchType">
+        </div>
+        <div class="payStr">
+          <div class="rchTypeText">
+            玩家123&nbsp;138****5154
+          </div>
+          <div class="rchTime">
+            2017-9-11 15:52:22
+          </div>
+        </div>
+      </div>
+      <div class="recRight fr">
+        +1000
+      </div>
+    </li>
+    <li feedButton class="rchRecItem WrapB rdc">
+      <div class="recLeft fl">
+        <div class="rchType">
+        </div>
+        <div class="payStr">
+          <div class="rchTypeText">
+            玩家123&nbsp;138****5154
+          </div>
+          <div class="rchTime">
+            2017-9-11 15:52:22
+          </div>
+        </div>
+      </div>
+      <div class="recRight fr">
+        -1000
+      </div>
+    </li>-->
+  </ul>
+  <!--待处理指定交易订单-->
+  <ul class="rchRecList unResolveOrder"
+      [ngClass]="{active:!showAllOrder}"
+  >
+    <li feedButton class="rchRecItem WrapB"
+        *ngFor = "let item of uresList"
+    >
+      <div class="recLeft fl">
+        <div class="rchType">
+        </div>
+        <div class="payStr">
+          <div class="rchTypeText">
+            {{item.tuName}}&nbsp;138****5154
+          </div>
+          <div class="rchTime">
+            {{item.createTime|date:"yyyy/M/d h:m:s"}}
+          </div>
+        </div>
+      </div>
+      <div class="recRight fr">
+        {{item.amt}}
+      </div>
+    </li>
+  </ul>
+</div>

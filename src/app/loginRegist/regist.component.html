@@ -1,4 +1,4 @@
-<div class="registBox">
+<div class="registBox" [ngClass]="{hide:registSuccess}">
   <Header
     [title]="headerTitile"
     (onVoted)="back($event)">
@@ -10,43 +10,47 @@
     <div class="conWrap">
       <div class="inputCtr borderBot">
         <i class="leftIcon reg_mobile"></i>
-        <input class="input right" placeholder="请输入手机号码" type="text">
+        <input class="input right" autocomplete="off" [(ngModel)]="reg.mobile" name="mobile" placeholder="请输入手机号码" type="text">
       </div>
       <div class="inputCtr borderBot">
         <i class="leftIcon reg_name"></i>
-        <input class="input right" placeholder="请输入您的真实姓名" type="text">
+        <input class="input right" name="realName" [(ngModel)]="reg.name" placeholder="请输入您的真实姓名" type="text">
       </div>
       <div class="inputCtr borderBot">
         <i class="leftIcon reg_idcard"></i>
-        <input class="input right" placeholder="请输入您的身份证号码" type="text">
+        <input class="input right" name="idCard" [(ngModel)]="reg.cardId" placeholder="请输入您的身份证号码" type="text">
       </div>
-      <div class="inputCtr borderBot">
+      <div class="inputCtr borderBot getMsgCode">
         <i class="leftIcon reg_vercode"></i>
-        <input class="input right" placeholder="请输入验证码" type="text">
+        <input class="input right" name="msgCode" [(ngModel)]="reg.code" placeholder="请输入验证码" type="number">
+        <div feedButton class="getVerCode" (click)="getMsgCode()" [ngClass]="{disable:!canGetVcode}">
+          {{getCodeText}}
+        </div>
       </div>
+
       <div class="inputCtr borderBot">
         <i class="leftIcon reg_pwd"></i>
-        <input class="input right" placeholder="请输入密码" type="text">
+        <input class="input right" name="pwd" [(ngModel)]="reg.password" placeholder="请输入密码" type="password">
       </div>
       <div class="inputCtr borderBot">
         <i class="leftIcon reg_pwdagain"></i>
-        <input class="input right" placeholder="请再次输入密码" type="text">
+        <input class="input right" name="pwdAgain" [(ngModel)]="passwordAgain" placeholder="请再次输入密码" type="password">
       </div>
       <div class="inputCtr borderBot">
         <i class="leftIcon reg_prtcode"></i>
-        <input class="input right" placeholder="请填写您的推荐码(非必填)" type="text">
+        <input class="input right" name="superId" [(ngModel)]="reg.superiorId"  placeholder="请填写您的推荐码(非必填)" type="text">
       </div>
-      <div feedButton class="regBtn btn keyBtn">
+      <div feedButton (click)="regist()" class="regBtn btn keyBtn">
         注册
       </div>
     </div>
   </form>
 </div>
-<div class="regSuccess">
+<div class="regSuccess" [ngClass]="{active:registSuccess}">
   <div class="tipsImg">
 
   </div>
-  <div feedButton class="nowLoadBtb">
+  <div feedButton routerLink="/login" class="nowLoadBtb">
     立即登陆
   </div>
 </div>

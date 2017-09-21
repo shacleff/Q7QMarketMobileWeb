@@ -1,21 +1,16 @@
 import {Injectable} from '@angular/core';
-import {Headers,Http} from '@angular/http';
-import 'rxjs/add/operator/toPromise';
+import {HttpService} from "../service/http.service";
 
 @Injectable()
 
 export class LoginService{
     constructor(
-       private http:Http
+       private xhr:HttpService
     ){}
 
-    private headers = new Headers({
-        'Content-type':'application/json'
-    });
-    private loginUrl = '/';
-    logIn(){
-        return this.http.get(this.loginUrl)
-            .toPromise()
-            .then(res=>res);
+    private loginUrl = '/oauth/token';
+
+    logIn(options){
+        return this.xhr.post(this.loginUrl,1,options);
     }
 }

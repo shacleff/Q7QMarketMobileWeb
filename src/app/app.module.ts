@@ -7,6 +7,7 @@ import {HashLocationStrategy,LocationStrategy} from '@angular/common';//解决40
 
 import { Router } from '@angular/router';//路由模块
 import {HttpClientModule} from '@angular/common/http';//http模块
+import {HttpService} from './service/http.service';//http服务
 //weui模块
 import {ActionSheetModule} from 'ngx-weui/actionsheet'//弹出菜单
 
@@ -42,6 +43,7 @@ import {UtilService} from "./service/util.service";
       provide:LocationStrategy,
       useClass:HashLocationStrategy
     },
+    HttpService,
     AuthService,
     TipsService,
     UtilService

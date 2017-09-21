@@ -4,7 +4,7 @@ import {Component, Input,EventEmitter,Output, ViewEncapsulation} from '@angular/
   template:`
     <div class="header">
       <i feedButton class="leftSwordIcon" (click)='vote()'></i>
-      <h3 class="headerTitle" [innerHTML]="title"></h3>
+      <h3 class="headerTitle">{{title}}</h3>
     </div>
   `,
   host:{

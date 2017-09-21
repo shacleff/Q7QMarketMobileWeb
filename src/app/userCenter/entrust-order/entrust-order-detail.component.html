@@ -1,0 +1,44 @@
+<div class="rechargeRecordDetail cashDetail assignTradeDetail">
+  <!--<Header-->
+    <!--[title]="headerTitle"-->
+    <!--(onVoted)="back($event)">-->
+    <!--&gt;-->
+  <!--</Header>-->
+  <div class="header">
+    <i feedButton class="leftSwordIcon" (click)='close()'></i>
+    <h3 class="headerTitle">委托订单详情</h3>
+  </div>
+  <div class="rchRecBase mt80Rem">
+    <div class="rchType tc">
+      <img src="../../../assets/images/trade_detial_wood_icon.png" alt="">
+      &nbsp;{{orderDetail.proName}}（{{orderDetail.enType=='0'?'买':'卖'}}）
+    </div>
+    <p class="rchNum tc">
+      {{orderDetail.enCnt}}
+    </p>
+    <p class="rchSratus tc">
+      {{orderDetail.trStatus}}
+    </p>
+  </div>
+  <div class="rchInfoTable">
+    <div class="grayBgBar"></div>
+    <table class="WrapB tableT">
+      <tr>
+        <td>委托价格</td>
+        <td>{{orderDetail.enPrice}}</td>
+      </tr>
+      <tr>
+        <td>委托量</td>
+        <td>{{orderDetail.trCnt}}</td>
+      </tr>
+      <tr>
+        <td>已成交</td>
+        <td>{{orderDetail.trCnt}}</td>
+      </tr>
+      <tr>
+        <td>委托时间</td>
+        <td>{{orderDetail.enTime|date:"yyyy/M/d h:m:s"}}</td>
+      </tr>
+    </table>
+  </div>
+</div>

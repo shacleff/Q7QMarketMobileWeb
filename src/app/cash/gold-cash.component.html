@@ -1,0 +1,34 @@
+<div class="goldCash">
+  <Header
+    [title]="headerTitle"
+    (onVoted)="back($event)">
+    >
+  </Header>
+  <div class="grayBgBar mt80Rem"></div>
+  <div class="tipsArea bgYellow">
+    <p>温馨提示：</p>
+    <p>1. 最低限额100金币，且为整数，提现100~200(不含)金币手续费3%，200~500(不含)金币手续费2.9%，500~1000(不含)金币手续费2.5%，1000金币及以上手续费2%。</p>
+    <p>2. 为了您的帐户安全，每次金币提现的最高限额为50000金币、如果您有更高的需求，请与客服联系。</p>
+    <p>3. 提交申请后，我们会在2个工作日（不含节假日）审核，审核通过后交由银行转账，实际到帐时间根据提现银行可能会有所延时。</p>
+    <p class="dangerColor">4. 请确保您的银行开户名与银行卡号是否对应,如不对应,请重新绑定您的提现账户!</p>
+  </div>
+  <div class="alterMobileForm WrapB">
+    <div class="formIpt dangerIpt">
+      <div class="title">可用金币</div>
+      <input class="input" disabled value="1550.8211" name="useableGold" type="text">
+    </div>
+    <div class="formIpt dangerIpt">
+      <div class="title">提现账户</div>
+      <input class="input" disabled value="中国邮政储蓄银行-张三-4521" name="cashBank" type="text">
+    </div>
+    <div class="formIpt dangerIpt">
+      <div class="title">提现金币</div>
+      <input class="input" placeholder="请输入提现金币" name="cashGold" type="number">
+    </div>
+    <div class="formIpt dangerIpt">
+      <div class="title">支付密码</div>
+      <input class="input" placeholder="请输入支付密码" name="payPwd" type="password">
+    </div>
+    <div feedButton class="subBtn btn dangerBtn">提交</div>
+  </div>
+</div>

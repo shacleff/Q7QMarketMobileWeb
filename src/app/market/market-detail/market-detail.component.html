@@ -1,4 +1,5 @@
 <div class="marketDetailBox">
+  <div feedButton routerLink="/assignTrade" class="toAssignTrade">指定交易</div>
   <Header
     [title]="headerTitle"
     (onVoted)="back($event)">
@@ -8,15 +9,15 @@
   <div class="marketBaseInfo mt80Rem">
     <div class="conWrap">
       <div class="infoLeft fl">
-        <div class="upDwonIndex">
-          <div class="indexNum">0.1251</div>
+        <div class="upDwonIndex" [ngClass]="{down:proDetail.changePrice<0}">
+          <div class="indexNum">{{proDetail.nowPrice}}</div>
           <div class="indexPic">
             &nbsp;
           </div>
         </div>
-        <div class="detailInfo">
-          <div class="infoDetail fl">0.1256</div>
-          <div class="infoDetail fl">1.0250%</div>
+        <div class="detailInfo" [ngClass]="{down:proDetail.changePrice<0}">
+          <div class="infoDetail fl">{{proDetail.changePrice}}</div>
+          <div class="infoDetail fl">{{proDetail.changeRate}}</div>
         </div>
       </div>
       <div class="infoRight fr">
@@ -24,29 +25,29 @@
           <tr>
             <td>
               <p>今开</p>
-              <span>0.1325</span>
+              <span>{{proDetail.toOpenPrice}}</span>
             </td>
             <td>
-              <p>昨收</p>
-              <span>0.1325</span>
+              <p>成交</p>
+              <span>{{proDetail.tranVolume}}</span>
             </td>
           </tr>
           <tr>
             <td>
               <p>最高</p>
-              <span class="mostUp">0.1325</span>
+              <span class="mostUp">{{proDetail.heightPrice}}</span>
             </td>
             <td>
               <p>最低</p>
-              <span class="mostDown">0.1325</span>
+              <span class="mostDown">{{proDetail.lowPrice}}</span>
             </td>
           </tr>
         </table>
       </div>
     </div>
   </div>
-  <div class="dgtTableWrap">
-    <div feedButton class="dgtOpenBtn close">
+  <div class="dgtTableWrap" [ngClass]="{close:!isShowBuySale}">
+    <div feedButton class="dgtOpenBtn" [ngClass]="{close:!isShowBuySale}" (click)="showBuySaleBox()">
 
     </div>
     <div class="WrapB tableBox">
@@ -56,20 +57,10 @@
           <td>价格</td>
           <td>委托量</td>
         </tr>
-        <tr class="tableCon">
-          <td class="keyColor">卖一</td>
-          <td class="upColor">0.0122</td>
-          <td>16352</td>
-        </tr>
-        <tr class="tableCon">
-          <td class="keyColor">卖一</td>
-          <td class="upColor">0.0122</td>
-          <td>16352</td>
-        </tr>
-        <tr class="tableCon">
-          <td class="keyColor">卖一</td>
-          <td class="upColor">0.0122</td>
-          <td>16352</td>
+        <tr class="tableCon" *ngFor="let item of saleFive;index as i" >
+          <td class="keyColor">卖{{numArr[i]}}</td>
+          <td class="upColor">{{item.price}}</td>
+          <td>{{item.cnt}}</td>
         </tr>
       </table>
       <table class="dgtTable fr">
@@ -78,20 +69,10 @@
           <td>价格</td>
           <td>委托量</td>
         </tr>
-        <tr class="tableCon">
-          <td class="upColor">买一</td>
-          <td class="upColor">0.0122</td>
-          <td>16352</td>
-        </tr>
-        <tr class="tableCon">
-          <td class="upColor">买一</td>
-          <td class="upColor">0.0122</td>
-          <td>16352</td>
-        </tr>
-        <tr class="tableCon">
-          <td class="upColor">买一</td>
-          <td class="upColor">0.0122</td>
-          <td>16352</td>
+        <tr class="tableCon" *ngFor="let item of buyFive;index as i" >
+          <td class="upColor">买{{numArr[i]}}</td>
+          <td class="upColor">{{item.price}}</td>
+          <td>{{item.cnt}}</td>
         </tr>
       </table>
     </div>
@@ -99,15 +80,15 @@
   <div class="ChartBox">
     <div class="WrapB">
       <div class="chartChange">
-        <div class="appointInfo active">
+        <div class="appointInfo">
           <span>开0.0132</span>
           <span>收0.0132</span>
           <span>高0.0132</span>
           <span>低0.0132</span>
           <span>涨跌 <i class="upColor">+0.0132</i></span>
         </div>
-        <div class="chartBtn fLine">分时</div>
-        <div class="chartBtn kLine seled">k线</div>
+        <div feedButton class="chartBtn fLine">分时</div>
+        <div feedButton class="chartBtn kLine seled">k线</div>
       </div>
       <div class="chart">
 
@@ -116,19 +97,19 @@
   </div>
   <div class="oprBtnWrap">
     <div class="innerBox">
-      <div feedButton class="dgtOrderBtn">
+      <div feedButton class="dgtOrderBtn" (click)="showOdrBox(true)">
 
       </div>
-      <div feedButton class="oprBtn buyBtn cl_w keyColorBg fl">
+      <div feedButton class="oprBtn buyBtn cl_w keyColorBg fl" (click)="showSaleBox(true)">
         现价卖出
       </div>
-      <div feedButton class="oprBtn saleBtn cl_w upColorBg fr">
+      <div feedButton class="oprBtn saleBtn cl_w upColorBg fr" (click)="showBuyBox(true)">
         现价购买
       </div>
     </div>
   </div>
   <div class="footer">
-    <a feedButton class="navItem">
+    <a feedButton routerLink="/market" class="navItem">
       <div class="navIcon">
 
       </div>
@@ -140,7 +121,7 @@
       </div>
       <p>市场</p>
     </a>
-    <a feedButton class="navItem">
+    <a feedButton routerLink="/userCenter" class="navItem">
       <div class="navIcon">
 
       </div>
@@ -148,11 +129,11 @@
     </a>
   </div>
   <!--现价购买弹框-->
-  <div vertical class="curPriseTradBox conWrap">
+  <div vertical class="curPriseTradBox conWrap" [ngClass]="{active:isShowBuyBox}">
     <div class="alertTop">
       <div class="alertCon">
         <span>购买</span>
-        <i feedButton class="closeIcon">
+        <i feedButton class="closeIcon" (click)="showBuyBox(false)">
 
         </i>
       </div>
@@ -193,11 +174,11 @@
   </div>
 
   <!--现价卖出弹框-->
-  <div vertical class="curPriseTradBox conWrap">
+  <div vertical class="curPriseTradBox conWrap" [ngClass]="{active:isShowSaleBox}">
     <div class="alertTop keyBg">
       <div class="alertCon">
         <span>卖出</span>
-        <i feedButton class="closeIcon">
+        <i feedButton class="closeIcon" (click)="showSaleBox(false)">
 
         </i>
       </div>
@@ -237,21 +218,52 @@
   </div>
 
   <!--委托订单弹框-->
-  <div class="dgtOrderBox">
+  <div class="dgtOrderBox" [ngClass]="{active:isShowOdrBox}">
     <div class="closeBox">
-      <div feedButton class="closeBtn">
+      <div feedButton class="closeBtn" (click)="showOdrBox(false)">
 
       </div>
     </div>
     <div class="boxCon">
-      <table class="w100">
+      <div class="noCon" [ngClass]="{hide:isHasOdrList}">
+        没有任何订单
+      </div>
+      <table class="w100 entOrderTable" [ngClass]="{hide:!isHasOdrList}">
         <tr class="tabTop">
           <td>产品</td>
           <td>价格</td>
           <td>已成交/委托量</td>
           <td>操作</td>
         </tr>
-        <tr class="tabCon sale ing">
+
+        <tr class="tabCon" *ngFor="let item of etuOdrList;index as i"
+          [ngClass]="{
+            sale:item.enType!='0',
+            buy:item.enType=='0',
+            ing:item.trStatus!='1',
+            fure:item.trStatus=='1'
+          }"
+        >
+          <td>
+            {{item.proName}}
+            <span>
+              {{
+                item.enType=='0'?'买':'卖'
+              }}
+            </span>
+          </td>
+          <td>
+            {{item.enPrice}}
+          </td>
+          <td>{{item.trCnt}}/{{item.enCnt}}</td>
+          <td>
+            <div feedButton class="canelBtn" (click)="cancelEtuOrder(item.id)">
+              撤销
+            </div>
+          </td>
+        </tr>
+
+        <!--<tr class="tabCon sale ing">
           <td>
             梧桐木
             <span>卖</span>
@@ -355,7 +367,7 @@
               撤销
             </div>
           </td>
-        </tr>
+        </tr>-->
       </table>
     </div>
   </div>
