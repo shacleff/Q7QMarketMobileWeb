@@ -78,16 +78,16 @@ export class MarketDetailtComponent implements OnInit,OnDestroy{
     proId:'',
     'type': '0'//委托类型 0:买 1:卖
   };
-  buyAllPrice = (this.buyPara.price*this.buyPara.cnt).toFixed(5);//买入总计价格
-  myGold = ''|0;//可用金币
-  buyChr = (buyAllPrice*0.03).toFixed(5)|'无';//买入手续费
+  buyAllPrice:any = (this.buyPara.price*this.buyPara.cnt).toFixed(5);//买入总计价格
+  myGold:any = '';//可用金币
+  buyChr:any = (this.buyAllPrice*0.03).toFixed(5);//买入手续费
 
   //获取玩家信息（给玩家可用金币赋值）
   getUserMoney(){
     this.mrkSer.getUserMoney()
     .then((res:any)=>{
       if(res){
-        this.myGold = (res.usableBalance).toFixed(intFormatFloat);
+        this.myGold = (res.usableBalance).toFixed(5);
       }
     })
   }
@@ -99,9 +99,9 @@ export class MarketDetailtComponent implements OnInit,OnDestroy{
     proId:'',
     'type': '1'//委托类型 0:买 1:卖
   };
-  saleAllPrice = (this.salePara.price*this.salePara.cnt).toFixed(5);//卖出总计价格
-  myWood = ''|0;
-  saleChr = (buyAllPrice*0.05).toFixed(5)|'无';//买入手续费
+  saleAllPrice:any = (this.salePara.price*this.salePara.cnt).toFixed(5);//卖出总计价格
+  myWood:any = '';
+  saleChr:any = (this.saleAllPrice*0.05).toFixed(5);//买入手续费
   //买入卖出
   /**
   * @type type->0买入 1卖出
