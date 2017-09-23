@@ -1,4 +1,4 @@
-import {Component,OnInit} from '@angular/core';
+import {Component,OnInit,Input,EventEmitter,Output} from '@angular/core';
 import {TipsService} from "../../service/tips.service";
 import { Title } from '@angular/platform-browser';
 
@@ -11,11 +11,16 @@ export class AssignTradeDetailComponent implements OnInit{
     private tips:TipsService,
     private title:Title
   ){}
-  public headerTitle = '指定交易详情';
+  @Input() item:any;
+  @Output() onClose = new EventEmitter<any>();
+  hide(){//关闭
+    this.onClose.emit();
+  }
+  public topTitle = '指定交易详情';
   back(arm:any){
     window.history.go(-1);
   }
   ngOnInit(){
-    this.title.setTitle('指定交易详情');
+    this.title.setTitle('指定交易');
   }
 }

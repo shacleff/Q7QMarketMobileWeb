@@ -17,26 +17,26 @@
   <form class="assginForm WrapB">
     <div class="formIpt keyIpt small">
       <div class="title">赠送木材</div>
-      <input class="input" type="text" disabled name="woodType" placeholder="请选择">
+      <input class="input" type="text" disabled [(ngModel)]="para.pName" name="woodType" placeholder="请选择">
       <i feedButton (click)="openAlertBox()" class="selAdon">选择▼</i>
     </div>
     <div class="formIpt keyIpt small">
       <div class="title">接收对象</div>
-      <input class="input" type="number" name="receivePlayer" placeholder="接收对象">
+      <input class="input" type="number" [(ngModel)]="para.receMobile" name="receivePlayer" placeholder="接收对象">
     </div>
     <div class="formIpt keyIpt small">
       <div class="title">赠送数量</div>
-      <input class="input" type="number" name="giveNum" placeholder="请输入赠送数量">
+      <input class="input" [(ngModel)]="para.cnt" type="number" name="giveNum" placeholder="请输入赠送数量">
     </div>
     <div class="formIpt keyIpt small">
       <div class="title">索取金币</div>
-      <input class="input" type="number" name="getGold" placeholder="请输入索取金币数量">
+      <input class="input" type="number" [(ngModel)]="para.amt" name="getGold" placeholder="请输入索取金币数量">
     </div>
     <div class="formIpt keyIpt small">
       <div class="title">支付密码</div>
-      <input class="input" type="password" name="payPwd" placeholder="请输入支付密码">
+      <input class="input" type="password" [(ngModel)]="para.payPwd" name="payPwd" placeholder="请输入支付密码">
     </div>
-    <div feedButton class="assignSubBtn btn small keyBtn">
+    <div feedButton class="assignSubBtn btn small keyBtn" (click)="specifyTran()">
       提交
     </div>
   </form>
@@ -50,44 +50,90 @@
         <td>金币</td>
         <td>操作</td>
       </tr>
-      <tr class="tableCon buy">
+      <tr class="tableCon buy" *ngFor="let item of orderList" (click)="openDetailBox(item)"
+        [ngClass]="{
+          buy:item.tradeDirection=='0',
+          sale:item.tradeDirection!='0'
+        }"
+      >
         <td>
-          梧桐木 <span class="type">(买)</span>
+          {{item.proName}} <span class="type">({{item.tradeDirection=='0'?'买':'卖'}})</span>
         </td>
         <td>
-          138****5456
+          {{item.tradeDirection=='0'?item.suName:item.tuName}}
         </td>
         <td class="type">
-          1000
+          {{item.cnt}}
         </td>
         <td class="type">
-          100
+          {{item.amt}}
         </td>
         <td>
-          <div feedButton class="cancelBtn">
+          <div feedButton class="cancelBtn" [ngClass]="{active:item.tradeDirection=='0'}"
+             (click)="confirmAssignTrade($event,item.id)"
+          >
+            确定
+          </div>
+          <div feedButton class="cancelBtn refuse"
+            [ngClass]="{
+              active:item.tradeDirection=='0'
+            }"
+            (click)="refuseAssignTrade($event,item.id)"
+          >
+            拒绝
+          </div>
+          <div feedButton class="cancelBtn cancel"
+            [ngClass]="{
+              active:item.tradeDirection!='0'
+            }"
+            (click)="cancelAssignTrade($event,item.id)"
+          >
             撤销
           </div>
         </td>
       </tr>
-      <tr class="tableCon sale">
-        <td>
-          梧桐木 <span class="type">(卖)</span>
-        </td>
-        <td>
-          138****5456
-        </td>
-        <td class="type">
-          1000
-        </td>
-        <td class="type">
-          100
-        </td>
-        <td>
-          <div feedButton class="cancelBtn">
-            撤销
-          </div>
-        </td>
-      </tr>
+
+      <!--<tr class="tableCon buy">-->
+        <!--<td>-->
+          <!--梧桐木 <span class="type">(买)</span>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--138****5456-->
+        <!--</td>-->
+        <!--<td class="type">-->
+          <!--1000-->
+        <!--</td>-->
+        <!--<td class="type">-->
+          <!--100-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<div feedButton class="cancelBtn">-->
+            <!--撤销-->
+          <!--</div>-->
+          <!--<div feedButton class="cancelBtn">-->
+            <!--撤销-->
+          <!--</div>-->
+        <!--</td>-->
+      <!--</tr>-->
+      <!--<tr class="tableCon sale">-->
+        <!--<td>-->
+          <!--梧桐木 <span class="type">(卖)</span>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--138****5456-->
+        <!--</td>-->
+        <!--<td class="type">-->
+          <!--1000-->
+        <!--</td>-->
+        <!--<td class="type">-->
+          <!--100-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<div feedButton class="cancelBtn">-->
+            <!--撤销-->
+          <!--</div>-->
+        <!--</td>-->
+      <!--</tr>-->
     </table>
   </div>
   <div class="footer">
@@ -97,7 +143,7 @@
       </div>
       <p>行情</p>
     </a>
-    <a feedButton routerLink="/market/1" class="navItem active">
+    <a feedButton routerLink="/market/1001" class="navItem active">
       <div class="navIcon">
 
       </div>
@@ -110,10 +156,20 @@
       <p>个人</p>
     </a>
   </div>
+  <!--指定交易木材选择框-->
   <div vertical class="selBankBox selWoodBox" [ngClass]="{active:isShowAlert}">
     <div class="selBankWrap">
       <div class="selBankList">
-        <div class="bankListItem">
+        <div class="bankListItem" *ngFor="let item of wooList" (click)="selWood(item.id,item.pName)">
+          <div class="bankPic fl">
+            <img src="../../../assets/images/wood_little_icon.png" alt="">
+          </div>
+          <div class="woodName fl">
+            &nbsp;{{item.pName}}&nbsp; ({{item.marketPrice}})
+          </div>
+          <div class="bankName fr">持有量 <span class="num">{{item.cnt}}</span>个</div>
+        </div>
+        <!--<div class="bankListItem">
           <div class="bankPic fl">
             <img src="../../../assets/images/wood_little_icon.png" alt="">
           </div>
@@ -121,13 +177,14 @@
             &nbsp;梧桐木&nbsp; (0.1251)
           </div>
           <div class="bankName fr">持有量 <span class="num">18000</span>个</div>
-        </div>
+        </div>-->
       </div>
     </div>
     <div class="closeThis">
       <img (click)="closeAlertBox()" feedButton class="closeBtn" src="../../../assets/images/close_sel_bankcard.png" alt="">
     </div>
   </div>
+  <!--指定交易订单详情-->
   <div vertical class="assignTradeDetail" [ngClass]="{active:isShowDetail}">
     <div class="detailTop">
       指定交易详情
@@ -140,24 +197,24 @@
         <td>
           名称： &nbsp;
           <img class="woodPic" src="../../../assets/images/wood_little_icon.png" alt="">
-          &nbsp;<span class="woodName">梧桐木</span>
+          &nbsp;<span class="woodName">{{detail.proName}}</span>
         </td>
         <td>
           数量：&nbsp;
-          <span class="woodName">1000</span>
+          <span class="woodName">{{detail.cnt}}</span>
         </td>
       </tr>
       <tr>
         <td>
           索取金币：&nbsp;
           <span class="redFont">
-            100
+            {{detail.amt}}
           </span>
         </td>
         <td>
           手续费：&nbsp;
           <span class="redFont">
-            100
+            {{detail.charge}}
           </span>
         </td>
       </tr>
@@ -165,7 +222,7 @@
         <td>
           赠送人：&nbsp;
           <span class="woodName">
-            13855418476
+            {{detail.suName}}
           </span>
         </td>
         <td>
@@ -179,7 +236,7 @@
         <td colspan="2">
           接收人：&nbsp;
           <span class="woodName">
-            13855418476
+            {{detail.tuName}}
           </span>
         </td>
       </tr>
@@ -187,13 +244,13 @@
         <td colspan="2">
           赠送时间：&nbsp;
           <span class="woodName">
-            2017-9-7 18:25:11
+            {{detail.createTime|date:"yyyy/M/d hh:mm:ss"}}
           </span>
         </td>
       </tr>
     </table>
     <div class="detailBot">
-      <div feedButton class="btn keyBtn">确定</div>
+      <div feedButton class="btn keyBtn" (click)="closeDetailBox()">确定</div>
     </div>
   </div>
 </div>

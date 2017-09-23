@@ -23,11 +23,11 @@ export class RechargeRecordDetailComponent implements OnInit{
   }
   public recordDetail:any;
   ngOnInit(){
-    this.route.paramMap
-    .switchMap((params:ParamMap)=>
-      this.service.getDetail(params.get('id'))
-    ).subscribe((detail:any)=>{
-      this.recordDetail=detail;
-    })
+    //this.route.paramMap
+    //.switchMap((params:ParamMap)=>
+    //  this.service.getDetail(params.get('id'))
+    //).subscribe((detail:any)=>{
+    //  this.recordDetail=detail;
+    //})
   }
 }

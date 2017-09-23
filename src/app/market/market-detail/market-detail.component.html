@@ -140,33 +140,35 @@
       <div class="alertCen alertCon">
         <div class="inputCtr radiu border withTitle">
           <i class="leftTitle">买入价格</i>
-          <input type="text" class="input" name="buyPrice"/>
+          <input type="number" [(ngModel)]="buyPara.price" class="input" name="buyPrice"/>
           <i class="rightText lb">金币</i>
         </div>
         <div class="inputCtr radiu border withTitle">
-          <i class="leftTitle">买入价格</i>
-          <select name="saleType" class="input wT" id="saleType">
-            <option value="0">%</option>
-            <option value="1">金币</option>
-          </select>
+          <i class="leftTitle">买入数量</i>
+          <input type="number" [(ngModel)]="buyPara.cnt" class="input" name="buyCnt"/>
+          <i class="rightText lb">数量</i>
+          <!--<select name="saleType" class="input wT" id="saleType">-->
+            <!--<option value="0">%</option>-->
+            <!--<option value="1">金币</option>-->
+          <!--</select>-->
         </div>
         <div class="inputCtr radiu border withTitle">
           <i class="leftTitle">总计金币</i>
-          <input type="text" class="input" name="buyPrice"/>
+          <input type="number" disabled class="input" [(ngModel)]="buyAllPrice" name="buyPrice"/>
           <i class="rightText lb">金币</i>
         </div>
         <div class="accountInfo w100">
           <div class="gold fl tl">可用金币
-            <i class="upColor">2202</i>
+            <i class="upColor">{{myGold}}</i>
             金币
           </div>
           <div class="fee fr tr">手续费
-            <i class="upColor">无</i>
+            <i class="upColor">{{buyChr}}</i>
           </div>
         </div>
         <br>
         <br>
-        <div feedButton class="btn upBtn">
+        <div feedButton class="btn upBtn" (click)="buySale(0)">
           限价购买
         </div>
       </div>
@@ -184,33 +186,31 @@
       </div>
       <div class="alertCen alertCon">
         <div class="inputCtr radiu border withTitle">
-          <i class="leftTitle">买入价格</i>
-          <input type="text" class="input" name="buyPrice"/>
+          <i class="leftTitle">卖出价格</i>
+          <input type="number" class="input" [(ngModel)]="salePara.price" name="buyPrice"/>
           <i class="rightText lb">金币</i>
         </div>
         <div class="inputCtr radiu border withTitle">
-          <i class="leftTitle">买入价格</i>
-          <select name="buyType" class="input wT" id="buyType">
-            <option value="0">%</option>
-            <option value="1">金币</option>
-          </select>
+          <i class="leftTitle">卖出数量</i>
+          <input type="number" class="input" [(ngModel)]="salePara.cnt" name="buyPrice"/>
+          <i class="rightText lb">数量</i>
         </div>
         <div class="inputCtr radiu border withTitle">
           <i class="leftTitle">总计金币</i>
-          <input type="text" class="input" name="buyPrice"/>
+          <input type="number" disabled [(ngModel)]="saleAllPrice" class="input" name="buyPrice"/>
           <i class="rightText lb">金币</i>
         </div>
         <div class="accountInfo w100">
           <div class="gold fl tl">持有量
-            <i class="upColor">2202</i>
+            <i class="upColor">{{myWood}}</i>
           </div>
           <div class="fee fr tr">手续费
-            <i class="upColor">无</i>
+            <i class="upColor">{{saleChr}}</i>
           </div>
         </div>
         <br>
         <br>
-        <div feedButton class="btn">
+        <div feedButton class="btn" (click)="buySale(1)">
           限价卖出
         </div>
       </div>

@@ -1,4 +1,6 @@
-<div class="rechargeRecord assignTradeOrder">
+<div class="rechargeRecord assignTradeOrder"
+  [ngClass]="{hide:!showList}"
+>
   <Header
     [title]="headerTitle"
     (onVoted)="back($event)">
@@ -10,7 +12,7 @@
       (click)="changeOrder(true)"
     >
       <span>
-        历史
+        全部
       </span>
     </div>
     <div feedButton class="tableItem"
@@ -32,6 +34,7 @@
         add:item.amt>=0,
         rdc:item.amt<0
       }"
+      (click)="showDetail(item)"
     >
       <div class="recLeft fl">
         <div class="rchType">
@@ -90,6 +93,7 @@
   >
     <li feedButton class="rchRecItem WrapB"
         *ngFor = "let item of uresList"
+        (click)="showDetail(item)"
     >
       <div class="recLeft fl">
         <div class="rchType">
@@ -108,4 +112,16 @@
       </div>
     </li>
   </ul>
+</div>
+<!--订单详情-->
+<div class="childCom" [ngClass]="{active:showHisDetail}">
+  <assign-trade-detail [item]="detail" (onClose)="closeDetail()">
+  </assign-trade-detail>
+</div>
+<div class="childCom" [ngClass]="{active:showUresDetail}">
+  <assign-trade-resolve
+    [item]="detail"
+    (onClose)="closeDetail()"
+  >
+  </assign-trade-resolve>
 </div>

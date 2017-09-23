@@ -10,7 +10,7 @@
   </h1>
   <div class="prtAllNum">
     <p class="allNumText keyColor">
-      187<span>人</span>
+      {{total}}<span>人</span>
     </p>
   </div>
   <div class="grayBgBar"></div>
@@ -23,7 +23,14 @@
       <td>用户名</td>
       <td>注册时间</td>
     </tr>
-    <tr class="tableContent prtListContent">
+    <tr class="tableContent prtListContent"
+      *ngFor = "let item of list"
+    >
+      <td>{{item.id}}</td>
+      <td>{{item.realName}}</td>
+      <td>{{item.createTime|date:"yyyy/M/d"}}</td>
+    </tr>
+    <!--<tr class="tableContent prtListContent">
       <td>888</td>
       <td>王晓涛</td>
       <td>2017/09/05</td>
@@ -32,11 +39,6 @@
       <td>888</td>
       <td>王晓涛</td>
       <td>2017/09/05</td>
-    </tr>
-    <tr class="tableContent prtListContent">
-      <td>888</td>
-      <td>王晓涛</td>
-      <td>2017/09/05</td>
-    </tr>
+    </tr>-->
   </table>
 </div>

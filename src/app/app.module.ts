@@ -22,6 +22,7 @@ import {AuthService} from './service/auth.service'
 
 import {TipsService} from "./service/tips.service";
 import {UtilService} from "./service/util.service";
+import {UserInfoService} from "./service/user-info.service";
 
 //import {FeedButtonDirective} from './directive/feed-button.directive'
 
@@ -46,7 +47,8 @@ import {UtilService} from "./service/util.service";
     HttpService,
     AuthService,
     TipsService,
-    UtilService
+    UtilService,
+    UserInfoService,//用户信息
   ],
   bootstrap: [AppComponent]
 })

@@ -1456,6 +1456,9 @@
 .goldCash .subBtn {
   margin-top: 0.9375rem; }
 
+.cashRecord.hide {
+  display: none; }
+
 .cashRecord .rchType {
   background: #ffcc67 url("../images/person_white.png") no-repeat center !important;
   background-size: 0.46875rem 0.53125rem; }
@@ -1533,6 +1536,7 @@
       color: #4e4e4e;
       font-size: 0.28125rem; }
       .assignTrade .assginTradeTableWrap .assiginTable .tableCon td .cancelBtn {
+        display: none;
         width: 1.25rem;
         height: 0.65625rem;
         background: #01ddb6;
@@ -1541,6 +1545,12 @@
         text-align: center;
         margin: auto;
         border-radius: 0.09375rem; }
+        .assignTrade .assginTradeTableWrap .assiginTable .tableCon td .cancelBtn.refuse {
+          background: #F18E00; }
+        .assignTrade .assginTradeTableWrap .assiginTable .tableCon td .cancelBtn.cancel {
+          background: #dd0125; }
+        .assignTrade .assginTradeTableWrap .assiginTable .tableCon td .cancelBtn.active {
+          display: inline-block; }
       .assignTrade .assginTradeTableWrap .assiginTable .tableCon.buy .type {
         color: #dd0125; }
       .assignTrade .assginTradeTableWrap .assiginTable .tableCon.sale .type {
@@ -1604,6 +1614,9 @@
         color: #000; }
       .assignTrade .assignTradeDetail .detailTable tr .redFont {
         color: #f00000; }
+
+.assignTradeOrder.hide {
+  display: none; }
 
 .assignTradeOrder .changeTable {
   width: 100%;

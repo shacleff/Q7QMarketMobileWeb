@@ -15,15 +15,15 @@
   <div class="alterMobileForm WrapB">
     <div class="formIpt">
       <div class="title">真实姓名</div>
-      <input class="input" disabled value="张三" name="realName" type="text">
+      <input class="input" disabled [(ngModel)]="uInfo.realName" value="张三" name="realName" type="text">
     </div>
     <div class="formIpt">
       <div class="title">收款银行</div>
-      <input class="input" disabled value="中国邮政储蓄银行" name="cashBank" type="text">
+      <input class="input" disabled [(ngModel)]="uInfo.bankName" name="cashBank" type="text">
     </div>
     <div class="formIpt">
       <div class="title">银行卡号</div>
-      <input class="input" disabled value="6110 1304 005952 2539" name="bankNum" type="text">
+      <input class="input" disabled [(ngModel)]="uInfo.cardNo" name="bankNum" type="text">
     </div>
     <div feedButton routerLink="/alterBankcard" class="alterAccountBtn btn">更改提现账户</div>
   </div>

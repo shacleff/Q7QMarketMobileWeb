@@ -87,7 +87,7 @@ const marketRoutes:Routes=[
     component:AlterMobileFirstComponent
   },
   {
-    path:'alterMobileSecond',
+    path:'alterMobileSecond/:uuid',
     component:AlterMobileSecondComponent
   },
   {

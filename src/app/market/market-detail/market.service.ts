@@ -18,5 +18,18 @@ export class MarketService{
   getEtuList(options){
     return this.xhr.get(this.etuListUrl,1,options);
   }
+
+  //限价买出卖出
+  buySale(options){
+    return this.xhr.post('/tran/entrustOrder',1,options);
+  }
+  //获取玩家物品数量
+  getUserItem(options){
+    return this.xhr.get('/user/getItem',1,options);
+  }
+  //获取玩家信息（给玩家可用金币赋值）
+  getUserMoney(){
+    return this.xhr.get('/user/getUser',1,null);
+  }
 }
 

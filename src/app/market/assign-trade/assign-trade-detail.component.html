@@ -1,19 +1,23 @@
 <div class="rechargeRecordDetail cashDetail assignTradeDetail">
-  <Header
+  <!--<Header
     [title]="headerTitle"
     (onVoted)="back($event)">
     >
-  </Header>
+  </Header>-->
+  <div class="header">
+    <i feedButton class="leftSwordIcon" (click)="hide()"></i>
+    <h3 class="headerTitle">{{topTitle}}</h3>
+  </div>
   <div class="rchRecBase mt80Rem">
     <div class="rchType tc">
       <img src="../../../assets/images/trade_detial_wood_icon.png" alt="">
-      &nbsp;梧桐木
+      &nbsp;{{item.proName}}
     </div>
     <p class="rchNum tc">
-      +1000
+      {{item.cnt}}
     </p>
     <p class="rchSratus tc">
-      完成
+      {{item.statusText}}
     </p>
   </div>
   <div class="rchInfoTable">
@@ -21,27 +25,27 @@
     <table class="WrapB tableT">
       <tr>
         <td>赠送人</td>
-        <td>13855418476</td>
+        <td>{{item.suName}}</td>
       </tr>
       <tr>
         <td>接收人</td>
-        <td>13855418476</td>
+        <td>{{item.tuName}}</td>
       </tr>
       <tr>
         <td>手续费</td>
-        <td>1.0211</td>
+        <td>{{item.charge}}</td>
       </tr>
       <tr>
         <td>索取金币</td>
-        <td>100</td>
+        <td>{{item.amt}}</td>
       </tr>
       <tr>
         <td>赠送时间</td>
-        <td>2017/09/04&nbsp;18:25:10</td>
+        <td>{{item.createTime|date:"yyyy/M/d h:m:s"}}</td>
       </tr>
       <tr>
         <td>成交时间</td>
-        <td>2017/09/04&nbsp;18:25:10</td>
+        <td>{{item.createTime|date:"yyyy/M/d h:m:s"}}</td>
       </tr>
     </table>
   </div>

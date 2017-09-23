@@ -15,30 +15,37 @@
   <div class="alterMobileForm WrapB">
     <div class="formIpt">
       <div class="title">开户姓名</div>
-      <input class="input" disabled value="张三" name="realName" type="text">
+      <input class="input" disabled [(ngModel)]="uInfo.realName" name="realName" type="text">
     </div>
     <div class="formIpt selBank">
       <div class="title">收款银行</div>
-      <input class="input" disabled value="中国邮政储蓄银行" name="cashBank" type="text">
+      <input class="input" disabled  [(ngModel)]="uInfo.bankName" name="cashBank" type="text">
       <div feedButton (click)="openAlertBox()" class="selCashBank selAdon">
         选择▼
       </div>
     </div>
     <div class="formIpt">
       <div class="title">收款账号</div>
-      <input class="input" disabled value="6110 1304 005952 2539" name="bankNum" type="text">
+      <input class="input" [(ngModel)]="uInfo.cardNo" name="bankNum" type="number">
     </div>
-    <div feedButton class="alterAccountBtn btn">提交</div>
+    <div feedButton class="alterAccountBtn btn" (click)="setCashAccount()">提交</div>
   </div>
   <div vertical class="selBankBox" [ngClass]="{active:isShowAlert}">
     <div class="selBankWrap">
       <div class="selBankList">
-        <div class="bankListItem">
+
+        <div feedButton class="bankListItem" *ngFor="let item of bankList" (click)="selBank(item.bankName)">
+          <div class="bankPic fl">
+            <img src="../../../../assets/images/bank_type_logo.png" alt="">
+          </div>
+          <div class="bankName fr">{{item.bankName}}</div>
+        </div>
+        <!--<div class="bankListItem">
           <div class="bankPic fl">
             <img src="../../../../assets/images/bank_type_logo.png" alt="">
           </div>
           <div class="bankName fr">中国银行</div>
-        </div>
+        </div>-->
       </div>
     </div>
     <div class="closeThis">

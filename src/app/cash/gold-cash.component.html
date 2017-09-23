@@ -23,12 +23,12 @@
     </div>
     <div class="formIpt dangerIpt">
       <div class="title">提现金币</div>
-      <input class="input" placeholder="请输入提现金币" name="cashGold" type="number">
+      <input class="input" placeholder="请输入提现金币" [(ngModel)]="para.amt" name="cashGold" type="number">
     </div>
     <div class="formIpt dangerIpt">
       <div class="title">支付密码</div>
-      <input class="input" placeholder="请输入支付密码" name="payPwd" type="password">
+      <input class="input" placeholder="请输入支付密码" [(ngModel)]="para.payPwd" name="payPwd" type="password">
     </div>
-    <div feedButton class="subBtn btn dangerBtn">提交</div>
+    <div feedButton class="subBtn btn dangerBtn" (click)="applyCash()">提交</div>
   </div>
 </div>

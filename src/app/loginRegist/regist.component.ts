@@ -58,14 +58,14 @@ export class RegistComponent{
       if(res){
         this.interVal = setInterval(()=>{
           this.timer--;
+          this.canGetVcode = false;
+          this.getCodeText = '重新获取'+this.timer;
           if(this.timer<0){
             clearInterval(this.interVal);
             this.timer=60;
             this.canGetVcode = true;
             this.getCodeText = '获取验证码';
           }
-          this.canGetVcode = false;
-          this.getCodeText = '重新获取'+this.timer;
         },1000);
         this.tips.msg('验证码发送成功');
         console.log(res);

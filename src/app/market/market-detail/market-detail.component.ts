@@ -3,6 +3,7 @@ import {Component,OnInit,OnDestroy} from '@angular/core';
 import {TipsService} from "../../service/tips.service";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {MarketService} from "./market.service";
+import {UserInfoService} from "../../service/user-info.service";
 
 @Component({
   selector:'market-detail',
@@ -13,7 +14,8 @@ export class MarketDetailtComponent implements OnInit,OnDestroy{
     private tips:TipsService,
     private mrkSer:MarketService,
     private route:ActivatedRoute,
-    private router:Router
+    private router:Router,
+    private uInfoSer:UserInfoService
   ){}
 
   //得到url参数 商品id值
@@ -67,6 +69,61 @@ export class MarketDetailtComponent implements OnInit,OnDestroy{
     { price:'--',cnt:'--'},
   ];
   isShowBuySale = true;//默认显示
+
+  /*限价买入卖出*/
+  //限价买入数据
+  buyPara:any = {
+    price:'',
+    cnt:'',
+    proId:'',
+    'type': '0'//委托类型 0:买 1:卖
+  };
+  buyAllPrice = (this.buyPara.price*this.buyPara.cnt).toFixed(5);//买入总计价格
+  myGold = ''|0;//可用金币
+  buyChr = (buyAllPrice*0.03).toFixed(5)|'无';//买入手续费
+
+  //获取玩家信息（给玩家可用金币赋值）
+  getUserMoney(){
+    this.mrkSer.getUserMoney()
+    .then((res:any)=>{
+      if(res){
+        this.myGold = (res.usableBalance).toFixed(intFormatFloat);
+      }
+    })
+  }
+
+  //现价卖出数据
+  salePara:any = {
+    price:'',
+    cnt:'',
+    proId:'',
+    'type': '1'//委托类型 0:买 1:卖
+  };
+  saleAllPrice = (this.salePara.price*this.salePara.cnt).toFixed(5);//卖出总计价格
+  myWood = ''|0;
+  saleChr = (buyAllPrice*0.05).toFixed(5)|'无';//买入手续费
+  //买入卖出
+  /**
+  * @type type->0买入 1卖出
+  * */
+  buySale(type:string){
+    if(type=='0'){
+      this.mrkSer.buySale(this.buyPara)
+      .then((res:any)=>{
+        if(res){
+
+        }
+      });
+    }else if(type=='1'){
+      this.mrkSer.buySale(this.salePara)
+      .then((res:any)=>{
+        if(res){
+
+        }
+      })
+    }
+  }
+
   //打开关闭买五卖五
   showBuySaleBox(){
     this.isShowBuySale = !this.isShowBuySale;
@@ -75,6 +132,9 @@ export class MarketDetailtComponent implements OnInit,OnDestroy{
   initBuySaleFive(eMap:any){
     if(!eMap) return;
     //卖五
+    if(eMap['sell0']){
+      this.salePara.price = (eMap['sell0'].price).toFixed(5)||0;
+    }
     for(let i = 0;i<5;i++){
       let item:any = eMap['sell' + i];
       if(item){
@@ -85,6 +145,9 @@ export class MarketDetailtComponent implements OnInit,OnDestroy{
       }
     }
     //买五
+    if(eMap['buy0']){
+      this.buyPara.price = (eMap['buy0'].price).toFixed(5)||0;
+    }
     for(let i = 0;i<5;i++){
       let item:any = eMap['buy' + i];
       if(item){
@@ -186,6 +249,7 @@ export class MarketDetailtComponent implements OnInit,OnDestroy{
   ngOnInit(){
     this.getProDetail();
     this.getEtuList(this.para);
+    this.getUserMoney();
     //this.tips.showLayer();
   }
   ngOnDestroy(){

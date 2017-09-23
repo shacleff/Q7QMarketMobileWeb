@@ -1,40 +1,39 @@
 <div class="rechargeRecordDetail cashDetail">
-  <Header
-    [title]="headerTitle"
-    (onVoted)="back($event)">
-    >
-  </Header>
+  <div class="header">
+    <i feedButton class="leftSwordIcon" (click)='hide()'></i>
+    <h3 class="headerTitle">{{topTitle}}</h3>
+  </div>
   <div class="rchRecBase mt80Rem">
     <div class="rchType tc">
       <img src="../../assets/images/nav_person_icon_withbg.png" alt="">
       &nbsp;金币提现
     </div>
     <p class="rchNum tc">
-      +1000
+      {{item.amt}}
     </p>
     <p class="rchSratus tc">
-      提现成功
+      {{item.statusText}}
     </p>
   </div>
   <div class="rchInfoTable">
     <table class="WrapB tableT">
       <tr>
         <td>手续费</td>
-        <td>-30.13</td>
+        <td>{{item.charge}}</td>
       </tr>
       <tr>
         <td>收款账户</td>
-        <td>6226362153553693</td>
+        <td>{{item.cardNo}}</td>
       </tr>
     </table>
     <table class="WrapB">
       <tr>
         <td>创建时间</td>
-        <td>2017-9-11 16:43:48</td>
+        <td>{{item.withdrawTime|date:'yyyy/M/d h:m:s'}}</td>
       </tr>
       <tr>
         <td>订单号</td>
-        <td>2017091021001004550293030660</td>
+        <td>{{item.orderNum}}</td>
       </tr>
     </table>
   </div>

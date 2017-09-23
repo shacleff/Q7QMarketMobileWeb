@@ -1824,6 +1824,9 @@ $dangerColor:#F18E00;//警告色
 }
 //提现记录
 .cashRecord{
+  &.hide{
+    display: none;
+  }
   .rchType{
     background:#ffcc67 url('../images/person_white.png') no-repeat center !important;
     background-size: rem(30) rem(34);
@@ -1932,6 +1935,7 @@ $dangerColor:#F18E00;//警告色
         font-size: rem(18);
         td{
           .cancelBtn{
+            display: none;
             width: rem(80);
             height: rem(42);
             background: $keyColor;
@@ -1940,6 +1944,15 @@ $dangerColor:#F18E00;//警告色
             text-align: center;
             margin: auto;
             border-radius: rem(6);
+            &.refuse{
+              background: $dangerColor;
+            }
+            &.cancel{
+              background: $upColor;
+            }
+            &.active{
+              display: inline-block;
+            }
           }
         }
         &.buy{
@@ -2031,6 +2044,9 @@ $dangerColor:#F18E00;//警告色
 }
 //指定交易订单
 .assignTradeOrder{
+  &.hide{
+    display: none;
+  }
   .changeTable{
     width: 100%;
     border-top: 1px solid #ececec;

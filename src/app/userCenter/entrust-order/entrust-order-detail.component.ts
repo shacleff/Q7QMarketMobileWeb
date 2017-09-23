@@ -20,8 +20,8 @@ export class EntrustOrderDetailComponent implements OnInit{
   @Output() onClose = new EventEmitter<any>();
 
   close(){//关闭
-    this.onClose.emit();
-  }
+  this.onClose.emit();
+}
 
   public headerTitle = '委托订单详情';
   back(arm:any){

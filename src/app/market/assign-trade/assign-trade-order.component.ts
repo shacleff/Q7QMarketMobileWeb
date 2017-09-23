@@ -17,6 +17,9 @@ export class AssignTradeOrderComponent implements OnInit{
   ){}
   hasunResolve = true;//是否有未处理订单
   showAllOrder = true;//默认显示全部订单
+  showHisDetail  = false;//历史订单详情
+  showUresDetail  = false;//待处理详情
+  showList = true;//显示列表
   detail:any = {
     proName:'1',//名称
     cnt:'25',//数量
@@ -25,7 +28,7 @@ export class AssignTradeOrderComponent implements OnInit{
     charge:'5',//手续费
     amt:'5',//索取金币
     createTime:'5',//交易时间
-    status:'5',//状态
+    status:'0',//状态 0->待处理
     statusText:'5',//状态文字
     id:'5',//id
   };
@@ -45,14 +48,14 @@ export class AssignTradeOrderComponent implements OnInit{
   private unresPageNum = 1;
   para = {
     'pageNum': 1,
-    'type': '1'
+    'type': '-1'
   };
   //得到指定交易订单列表'-1'->全部 0->待处理
   getList(type:any){
     //得到全部订单
-    if(type=='1'){
+    if(type=='-1'){
       this.para.pageNum = this.allPageNum;
-      this.para.type = '1';
+      this.para.type = '-1';
       this.asgTrdSer.getList(this.para)
       .then((res:any)=>{
         if(res){
@@ -100,9 +103,24 @@ export class AssignTradeOrderComponent implements OnInit{
         });
     }
   }
-
+  //显示详情
+  showDetail(item:any){
+    this.showList = false;
+    this.detail = item;
+    if(this.detail.status=='0'){//待处理订单
+      this.showUresDetail = true;
+    }else{//全部订单
+      this.showHisDetail = true;
+    }
+  }
+  closeDetail(){//关闭详情
+    this.showList = true;
+    this.showHisDetail = false;
+    this.showUresDetail = false;
+  }
   //切换显示订单类型
   changeOrder(bool){
+    this.showList = true;
     if(bool){
       this.showAllOrder = true;
     }else{

@@ -41,6 +41,9 @@ import {UserCenterService} from "../userCenter/user-center.service";
 import {EntrustOrderService} from "../userCenter/entrust-order/entrust-order.service";
 import {TradeRecordService} from "../userCenter/trade-record/trade-record.service";
 import {AssignTradeService} from "./assign-trade/assign-trade.service";
+import {CashService} from "../cash/cash.service";
+import {PromoteService} from "../promote/promote.service";
+import {AlterAccountService} from "../userCenter/alter-account/alter-account.service";
 
 @NgModule({
   declarations:[
@@ -80,13 +83,16 @@ import {AssignTradeService} from "./assign-trade/assign-trade.service";
     EchartsNg2Module,
   ],
   providers:[
-    RechargeService,
+    RechargeService,//充值
     QuotationService,//行情服务
     MarketService,//市场服务
     UserCenterService,//个人中心
     EntrustOrderService,//委托订单
     TradeRecordService,//交易明细
     AssignTradeService,//指定交易
+    CashService,//提现
+    PromoteService,//推广
+    AlterAccountService,//账号管理修改
   ]
 })
 export class MarketModule{

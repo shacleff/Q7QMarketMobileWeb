@@ -9,7 +9,7 @@ export class HttpService {
     private http:Http,
     private tip:TipsService
   ){}
-  private host = 'http://192.168.19.89:9080/market';
+  private host = '/market';
   private headers = new Headers({
     'Content-type':'application/json'
   });
