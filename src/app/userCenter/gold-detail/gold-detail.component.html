@@ -2,7 +2,7 @@
   <Header
     class="keyColor"
     [title]="headerTitle"
-    (onVoted)="back($event)">
+    (onVoted)="back()">
     >
   </Header>
   <div class="goldTotal mt80Rem">
@@ -23,6 +23,7 @@
   <h1 class="secTitle gold">
     金币明细
   </h1>
+  <weui-infiniteloader (loadmore)="onLoadMore($event)">
   <table class="listTable prtList detailList">
     <tr class="tableHeader prtListHeader">
       <td>ID</td>
@@ -53,4 +54,9 @@
       <td>2017/09/05</td>
     </tr>-->
   </table>
+    <div class="noCon" [ngClass]="{hide:isHasOdrList}">
+      没有任何订单
+    </div>
+    <div class="loadFinished" [ngClass]="{active:isLoaded}">加载完毕</div>
+  </weui-infiniteloader>
 </div>

@@ -62,7 +62,7 @@ $dangerColor:#F18E00;//警告色
   margin-top: rem(80);
 }
 .pb80Rem{
-  padding-bottom: rem(80);
+  padding-bottom: rem(120);
 }
 //内容区域
 .conWrap{
@@ -774,7 +774,8 @@ $dangerColor:#F18E00;//警告色
     .chart{
       height: rem(360);
       width: 100%;
-      background: $downBg;
+      //background: $downBg;
+      background: #fff;
     }
   }
 }
@@ -968,7 +969,7 @@ $dangerColor:#F18E00;//警告色
     .chart{
       height: rem(360);
       width: 100%;
-      background: $downBg;
+      background: #fff;
     }
   }
   .oprBtnWrap{
@@ -1472,7 +1473,7 @@ $dangerColor:#F18E00;//警告色
     box-sizing: border-box;
     border: 1px solid #4c726a;
     border-radius: rem(6);
-    img.ewCode{
+    img{
       display: block;
       width: rem(220);
       height: rem(220);
@@ -1678,6 +1679,10 @@ $dangerColor:#F18E00;//警告色
       }
     }
     .prtOpen{
+      display: none;
+      &.close{
+        display: none;
+      }
       &.open{
         display: flex;
       }
@@ -1913,10 +1918,11 @@ $dangerColor:#F18E00;//警告色
     }
   }
   .assginTradeTableWrap{
+    height: rem(300);
     background: #fff;
     padding-bottom: rem(120);
     width: 100%;
-    overflow: hidden;
+    overflow: auto;
     .assiginTable{
      width: 100%;
       text-align: center;
@@ -2208,6 +2214,17 @@ $dangerColor:#F18E00;//警告色
 .nameAuth{
   .upLoadPicBox{
     .picItem{
+      position: relative;
+      input{
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        display: block;
+        opacity: 0;
+        width: rem(450);
+        height: rem(286);
+      }
       width: rem(450);
       height: rem(286);
       margin: rem(36) auto;
@@ -2232,4 +2249,107 @@ $dangerColor:#F18E00;//警告色
   &.hide{
     display: none;
   }
+}
+//确认对话框
+.confirmDia{
+  width: rem(500);
+  #payPwd{
+    height: 40px;
+    line-height: 40px;
+    text-indent: 5px;
+    font-size: 16px;
+    border: none;
+    border-bottom:1px solid #777;
+    width: rem(400);
+    display: block;
+    margin: 0 auto;
+  }
+  height: 200px;
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  left: rem(73);
+  position: fixed;
+  z-index: 20;
+  .diaText{
+    width: rem(400);
+    height: 70px;
+    margin: 5px auto 0 auto;
+    font-size: 14px;
+    text-align: left;
+    line-height: 16px;
+    color: #666;
+    letter-spacing: 1px;
+  }
+  .btnWrap{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 36px;
+    overflow: hidden;
+    .opBtn{
+      letter-spacing: 2px;
+      width:50%;
+      height: 36px;
+      line-height:36px;
+      color: #fff;
+      text-align: center;
+      font-size: 16px;
+      overflow: hidden;
+      &.cancelBtn{
+        background: #aaa;
+      }
+      &.confimBtn{
+        background: $keyColor;
+      }
+    }
+  }
+  .conHeader{
+    height: 35px;
+    line-height: 4px;
+    background: #fbfbfb;
+    border-bottom: 1px solid #f5f5f5;
+    width: 100%;
+    position: relative;
+    .closeThis{
+      line-height: 35px;
+      position: absolute;
+      width: 35px;
+      height: 35px;
+      text-align: center;
+      font-size: 26px;
+      color: #fff;
+      text-shadow: 0 0 2px  rgba(0,0,0,0.4);
+      top:0;
+      right: 0;
+    }
+  }
+}
+.alertLayer{
+  &.layerCon{
+    z-index: 19;
+  }
+  &.alertLoading{
+    z-index: 30;
+    background: rgba(0,0,0,0);
+    .loading{
+      width: 100px;
+      height: 100px;
+      border-radius: 6px;
+      background:rgba(0,0,0,0.3) url(../images/loading.gif) no-repeat center;
+      background-size: 30px 30px;
+      margin: auto;
+    }
+  }
+}
+.loadFinished{
+  display: none;
+  &.active{
+    display: block;
+  }
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  color: #999;
 }

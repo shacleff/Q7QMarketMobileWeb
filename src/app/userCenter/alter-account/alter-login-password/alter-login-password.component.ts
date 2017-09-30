@@ -42,7 +42,7 @@ export class AlterLoginPasswordComponent implements OnInit{
     });
   }
   public headerTitle = '修改登录密码';
-  back(arm:any){
+  back(){
     window.history.go(-1);
   }
   ngOnInit(){

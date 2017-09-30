@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 
 import {RouterModule,Routes} from '@angular/router';
-
+import {AuthGuard} from "../service/auth-guard.service";
 import {QuotationComponent} from './quotation/quotation.component'
 import {MarketDetailtComponent} from './market-detail/market-detail.component'
 import {GoldRechargeComponent} from './recharge/gold-recharge.component'
@@ -32,19 +32,11 @@ import {EntrustOrderComponent} from "../userCenter/entrust-order/entrust-order.c
 import {EntrustOrderDetailComponent} from "../userCenter/entrust-order/entrust-order-detail.component";
 import {NameAuthComponent} from "../userCenter/name-auth/name-auth.component";
 
-//import {AuthGuard} from '../service/auth-guard.service'
-
 const marketRoutes:Routes=[
   {
     path:'',
     component:QuotationComponent,
-    //canActive:[AuthGuard]
-    //children:[
-    //  {
-    //    path:'marketDetail',
-    //    component:MarketDetailtComponent
-    //  }
-    //]
+    canActivate:[AuthGuard],
   },
   {
     path:'market/:id',
@@ -80,7 +72,8 @@ const marketRoutes:Routes=[
   },
   {
     path:'userCenter',
-    component:UserCenterComponent
+    component:UserCenterComponent,
+    canActivate:[AuthGuard],
   },
   {
     path:'alterMobileFirst',
@@ -150,10 +143,6 @@ const marketRoutes:Routes=[
     path:'entrustOrder',
     component:EntrustOrderComponent
   },
-  //{
-  //  path:'entrustOrder/:proName/:enType/:enTime/:enCnt/:trCnt/:trStatus/:enPrice',
-  //  component:EntrustOrderDetailComponent
-  //},
   {
     path:'nameAuth',
     component:NameAuthComponent

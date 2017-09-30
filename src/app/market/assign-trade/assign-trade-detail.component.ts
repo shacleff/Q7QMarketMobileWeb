@@ -17,7 +17,7 @@ export class AssignTradeDetailComponent implements OnInit{
     this.onClose.emit();
   }
   public topTitle = '指定交易详情';
-  back(arm:any){
+  back(){
     window.history.go(-1);
   }
   ngOnInit(){

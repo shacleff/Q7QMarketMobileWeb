@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {SharedModule} from '../shared/shared.module';
-
 import {EchartsNg2Module} from 'echarts-ng2';//echarts模块
 import {MarketRoutingModule} from './market.routing.module'
 

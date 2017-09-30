@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit,AfterViewChecked{
           console.log(res);
           let token = res.token_type+' '+res.access_token;
           localStorage.setItem('token',token);
+          this.authService.isLoggedIn = true;
           let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/market';
           this.router.navigate([redirect]);
         }

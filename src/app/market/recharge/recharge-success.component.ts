@@ -11,7 +11,7 @@ export class RechargeSuccessComponent implements OnInit{
     private tips:TipsService
   ){}
   public headerTitle = '充值结果';
-  back(arm:any){
+  back(){
     window.history.go(-1);
   }
   ngOnInit(){

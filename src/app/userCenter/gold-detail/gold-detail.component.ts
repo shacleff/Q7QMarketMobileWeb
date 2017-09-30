@@ -3,6 +3,7 @@ import {TipsService} from "../../service/tips.service";
 import { Title } from '@angular/platform-browser';
 import {CashService} from "../../cash/cash.service";
 import {UserInfoService} from "../../service/user-info.service";
+import { InfiniteLoaderComponent } from 'ngx-weui/infiniteloader';
 
 @Component({
   selector:'gold-detail',
@@ -44,11 +45,24 @@ export class GoldDetailComponent implements OnInit{
     //  tranTime:'',//时间
     //}
   ];
+  isHasOdrList = false;//默认没有委托订单、
+  isLoaded = false;//是否加载完毕
+  onLoadMore(comp:InfiniteLoaderComponent) {
+    this.para.pageNum++;
+    this.getGoldDetail();
+    comp.resolveLoading();
+  }
   //得到金币明细
   getGoldDetail(){
     this.ser.getGoldDetial(this.para)
     .then((res:any)=>{
       if(res){
+        if(res.record.length>0){
+          this.isHasOdrList = true;
+        }
+        if(res.record.length<=0){
+          this.isLoaded = true;
+        }
         let item = res.record;
         for(let i = 0;i<item.length;i++){
           let temp:any = {};
@@ -92,7 +106,7 @@ export class GoldDetailComponent implements OnInit{
     }
   }
   public headerTitle = '金币明细';
-  back(arm:any){
+  back(){
     window.history.go(-1);
   }
   ngOnInit(){

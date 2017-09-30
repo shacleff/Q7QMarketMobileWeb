@@ -30,7 +30,7 @@ import {RegistService} from "./regist.service";
   ],
   providers:[
     LoginService,
-    RegistService
+    RegistService,
   ]
 })
 

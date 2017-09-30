@@ -1,7 +1,7 @@
 <div class="promoteLink">
   <Header
     [title]="headerTitle"
-    (onVoted)="back($event)">
+    (onVoted)="back()">
     >
   </Header>
   <div class="grayBgBar mt80Rem"></div>
@@ -11,7 +11,7 @@
   </div>
   <div class="prtCodeCon">
     <div class="top">我的推广二维码</div>
-    <img class="ewCode" [src]="promoteCodeImg" src="../../assets/images/erw_code.png" alt="">
+    <div id="qrcode"></div>
     <div class="bot">{{promoteLink}}</div>
   </div>
   <div class="tipsArea bgGreen">

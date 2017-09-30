@@ -24,7 +24,7 @@ export class EntrustOrderDetailComponent implements OnInit{
 }
 
   public headerTitle = '委托订单详情';
-  back(arm:any){
+  back(){
     window.history.go(-1);
   }
   ngOnInit(){

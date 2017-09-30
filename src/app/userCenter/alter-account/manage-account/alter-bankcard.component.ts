@@ -80,7 +80,7 @@ export class AlterBankcardComponent implements OnInit{
     })
   }
   public headerTitle = '设置提现账户';
-  back(arm:any){
+  back(){
     window.history.go(-1);
   }
   //关闭弹出层

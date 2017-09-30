@@ -11,7 +11,7 @@ export class GoldRechargeComponent implements OnInit{
     private tips:TipsService
   ){}
   public headerTitle = '金币充值';
-  back(arm:any){
+  back(){
     window.history.go(-1);
   }
   ngOnInit(){

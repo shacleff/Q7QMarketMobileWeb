@@ -92,7 +92,7 @@ export class ResetPayPasswordComponent implements OnInit{
   }
 
   public headerTitle = '重置支付密码';
-  back(arm:any){
+  back(){
     window.history.go(-1);
   }
   ngOnInit(){

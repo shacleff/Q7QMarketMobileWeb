@@ -1,10 +1,14 @@
 <div class="rechargeRecord promoteAward TradeRecordList" [ngClass]="{hide:isShowDetail}">
   <Header
     [title]="headerTitle"
-    (onVoted)="back($event)">
+    (onVoted)="back()">
     >
   </Header>
   <div class="grayBgBar mt80Rem"></div>
+  <weui-infiniteloader (loadmore)="onLoadMore($event)">
+    <div class="noCon" [ngClass]="{hide:isHasOdrList}">
+      没有任何订单
+    </div>
   <ul class="rchRecList AwardList">
 
     <li feedButton class="rchRecItem AwardItem WrapB wx sale"
@@ -73,9 +77,11 @@
       </div>
     </li>-->
   </ul>
+    <div class="loadFinished" [ngClass]="{active:isLoaded}">加载完毕</div>
+  </weui-infiniteloader>
 </div>
 <div class="curOdrDetail" [ngClass]="{active:isShowDetail}">
   <entrust-order-detail [orderDetail] = "orderDetail"
-                        (onClose)="toList($event)"
+                        (onClose)="toList()"
   ></entrust-order-detail>
 </div>

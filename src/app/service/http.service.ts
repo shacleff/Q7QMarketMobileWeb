@@ -1,13 +1,17 @@
 //网络请求封装
 import { Injectable } from '@angular/core';
 import { Headers,Http ,RequestOptions,URLSearchParams} from "@angular/http";
+import {Router} from '@angular/router';
 import 'rxjs/add/operator/toPromise';
 import {TipsService} from "./tips.service";
+import {AuthService} from "./auth.service";
 @Injectable()
 export class HttpService {
   constructor(
     private http:Http,
-    private tip:TipsService
+    private tip:TipsService,
+    private router:Router,
+    private authService:AuthService
   ){}
   private host = '/market';
   private headers = new Headers({
@@ -15,6 +19,7 @@ export class HttpService {
   });
   //get请求
   public get(url:string,isAuth:any,datas:any){
+    this.tip.showLoading(1);
     let token = isAuth?localStorage.getItem('token'):null;
     let _header = new Headers({
       'Authorization':token
@@ -27,14 +32,27 @@ export class HttpService {
       if(!result.success){
         this.tip.msg(result.msg);
         console.log(result);
+        this.tip.showLoading(!1);
         return false;
       }else{
+        this.tip.showLoading(!1);
         return result.obj||true;
+      }
+    }).catch((err:any)=>{
+      this.tip.showLoading(!1);
+      let res = JSON.parse(err._body);
+      if(res.code&&res.code=='401'){
+        this.tip.showConDia('token过期请重新登陆',()=>{
+          this.authService.isLoggedIn = false;
+          this.authService.redirectUrl = this.router.url;
+          this.router.navigate(['login']);
+        },()=>{})
       }
     });
   }
   //post请求
   public post(url:string,isAuth:any,datas:any){
+    this.tip.showLoading(1);
     let token = isAuth?localStorage.getItem('token'):null;
     let header = new Headers({
       'Authorization':token
@@ -42,15 +60,33 @@ export class HttpService {
     return this.http.post(this.host+url,datas,{headers:header})
     .toPromise()
     .then((res:any)=> {
+      console.log(res);
+      if(res.code&&res.code=='401'){
+        this.tip.showConDia('token过期请重新登陆',()=>{
+          this.router.navigate(['login']);
+        },()=>{})
+      }
       let result = JSON.parse(res._body);
       if(!result.success){
         this.tip.msg(result.msg);
+        this.tip.showLoading(!1);
         console.log(result);
         return false;
       }else{
+        this.tip.showLoading(!1);
         return result.obj||true;
       }
-    });
+    }).catch((err:any)=>{
+        this.tip.showLoading(!1);
+        let res = JSON.parse(err._body);
+        if(res.code&&res.code=='401'){
+          this.tip.showConDia('token过期请重新登陆',()=>{
+            this.authService.isLoggedIn = false;
+            this.authService.redirectUrl = this.router.url;
+            this.router.navigate(['login']);
+          },()=>{})
+        }
+      });
   }
   //js对象字面量转化为url请求参数
   private toUrlPar(obj) {

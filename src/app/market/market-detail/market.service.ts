@@ -18,7 +18,10 @@ export class MarketService{
   getEtuList(options){
     return this.xhr.get(this.etuListUrl,1,options);
   }
-
+  //撤销当前订单
+  cancelCurOrder(options){
+    return this.xhr.get('/tran/cancelOrder',1,options);
+  }
   //限价买出卖出
   buySale(options){
     return this.xhr.post('/tran/entrustOrder',1,options);
@@ -30,6 +33,14 @@ export class MarketService{
   //获取玩家信息（给玩家可用金币赋值）
   getUserMoney(){
     return this.xhr.get('/user/getUser',1,null);
+  }
+  //得到k线图数据
+  getKlineDatas(options){
+    return this.xhr.get('/getCandleList',1,options);
+  }
+  //得到分时图数据
+  getFlineDatas(options){
+    return this.xhr.get('/getMinuteList',1,options);
   }
 }
 

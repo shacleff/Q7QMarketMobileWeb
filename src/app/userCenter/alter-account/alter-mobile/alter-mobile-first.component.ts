@@ -101,7 +101,7 @@ export class AlterMobileFirstComponent implements OnInit{
     });
   }
   public headerTitle = '修改手机号码';
-  back(arm:any){
+  back(){
     window.history.go(-1);
   }
 }

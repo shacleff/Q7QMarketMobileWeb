@@ -101,7 +101,7 @@ export class RegistComponent{
   }
 
   public headerTitile = '我的家园';
-  back(arm: any) {
+  back() {
     window.history.go(-1);
   }
 }

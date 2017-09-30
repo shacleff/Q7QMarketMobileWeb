@@ -2,7 +2,8 @@ import {Component,OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import {TipsService} from "../service/tips.service";
 import {CashService} from "./cash.service";
-
+import { InfiniteLoaderComponent } from 'ngx-weui/infiniteloader';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector:'cash-record',
@@ -12,7 +13,8 @@ export class CashRecordComponent implements OnInit{
   constructor(
     private tips:TipsService,
     private router:Router,
-    private cashSer:CashService
+    private cashSer:CashService,
+    private title:Title
   ){}
   //得到提现列表
   private para:any = {
@@ -49,10 +51,23 @@ export class CashRecordComponent implements OnInit{
   list:any = [
     this.detail
   ];
+  onLoadMore(comp:InfiniteLoaderComponent) {
+    this.para.pageNum++;
+    this.getCashList();
+    comp.resolveLoading();
+  }
+  isHasOdrList = false;//默认没有委托订单、
+  isLoaded = false;//是否加载完毕
   getCashList(){
     this.cashSer.getCashList(this.para)
     .then((res:any)=>{
       if(res){
+        if(res.records.length>0){
+          this.isHasOdrList = true;
+        }
+        if(res.records.length<=0){
+          this.isLoaded = true;
+        }
         let item = res.records;
         for(let i = 0;i<item.length;i++){
           var temp:any = {};
@@ -86,6 +101,7 @@ export class CashRecordComponent implements OnInit{
     this.router.navigate(['cashRecord',id])
   }
   ngOnInit(){
-
+    this.getCashList();
+    this.title.setTitle('提现记录')
   }
 }

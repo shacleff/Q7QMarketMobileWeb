@@ -3,6 +3,7 @@ import {TipsService} from "../../service/tips.service";
 import { Title } from '@angular/platform-browser';
 import {AssignTradeService} from "./assign-trade.service";
 import {UtilService} from "../../service/util.service";
+import { InfiniteLoaderComponent } from 'ngx-weui/infiniteloader';
 
 @Component({
   selector:'assign-trade-order',
@@ -50,8 +51,33 @@ export class AssignTradeOrderComponent implements OnInit{
     'pageNum': 1,
     'type': '-1'
   };
-  //得到指定交易订单列表'-1'->全部 0->待处理
-  getList(type:any){
+
+  isHasOdrList = false;//默认没有所有订单、
+  isLoaded = false;//是否加载完毕
+
+  isHasOdrListRes = false;//默认没有未处理订单、
+  isLoadedRes = false;//是否加载完毕
+
+  onLoadMore(comp:InfiniteLoaderComponent) {
+    this.allPageNum++;
+    this.getList('-1');
+    comp.resolveLoading();
+  }
+
+  onLoadMoreRes(comp:InfiniteLoaderComponent) {
+    this.unresPageNum++;
+    this.getList('0');
+    comp.resolveLoading();
+  }
+
+  //得到指定交易订单列表'-1'->全部 0->待处理 resolveOrder->在子组件处理完订单
+  getList(type:any,resolveOrder?){
+    if(resolveOrder){
+      this.allPageNum = 1;
+      this.unresPageNum = 1;
+      this.allList.splice(0,this.allList.length);
+      this.uresList.splice(0,this.uresList.length);
+    }
     //得到全部订单
     if(type=='-1'){
       this.para.pageNum = this.allPageNum;
@@ -59,6 +85,12 @@ export class AssignTradeOrderComponent implements OnInit{
       this.asgTrdSer.getList(this.para)
       .then((res:any)=>{
         if(res){
+          if(res.records.length>0){
+            this.isHasOdrList = true;
+          }
+          if(res.records.length<=0){
+            this.isLoaded = true;
+          }
           let item = res.records;
           for(let i = 0;i<item.length;i++){
             let temp:any = {};
@@ -84,6 +116,12 @@ export class AssignTradeOrderComponent implements OnInit{
       this.asgTrdSer.getList(this.para)
         .then((res:any)=>{
           if(res){
+            if(res.records.length>0){
+              this.isHasOdrListRes = true;
+            }
+            if(res.records.length<=0){
+              this.isLoadedRes = true;
+            }
             let item = res.records;
             for(let i = 0;i<item.length;i++){
               let temp:any = {};
@@ -103,6 +141,11 @@ export class AssignTradeOrderComponent implements OnInit{
         });
     }
   }
+  //订单处理完刷新订单列表
+  public resolved(){
+    this.getList(-1,1);
+    this.getList(0,1);
+  };
   //显示详情
   showDetail(item:any){
     this.showList = false;
@@ -129,10 +172,12 @@ export class AssignTradeOrderComponent implements OnInit{
   }
 
   public headerTitle = '指定交易订单';
-  back(arm:any){
+  back(){
     window.history.go(-1);
   }
   ngOnInit(){
+    this.getList(-1);
+    this.getList(0);
     this.title.setTitle('指定交易订单');
   }
 }

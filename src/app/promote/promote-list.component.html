@@ -1,7 +1,7 @@
 <div class="promoteList ">
   <Header
     [title]="headerTitle"
-    (onVoted)="back($event)">
+    (onVoted)="back()">
     >
   </Header>
   <div class="grayBgBar mt80Rem"></div>
@@ -17,6 +17,7 @@
   <h1 class="secTitle">
     推广列表
   </h1>
+  <weui-infiniteloader (loadmore)="onLoadMore($event)">
   <table class="listTable prtList">
     <tr class="tableHeader prtListHeader">
       <td>ID</td>
@@ -41,4 +42,9 @@
       <td>2017/09/05</td>
     </tr>-->
   </table>
+    <div class="noCon" [ngClass]="{hide:isHasOdrList}">
+      没有任何订单
+    </div>
+    <div class="loadFinished" [ngClass]="{active:isLoaded}">加载完毕</div>
+  </weui-infiniteloader>
 </div>

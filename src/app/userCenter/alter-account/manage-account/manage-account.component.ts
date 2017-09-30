@@ -34,7 +34,7 @@ export class ManageAccountComponent implements OnInit{
   }
 
   public headerTitle = '账户管理';
-  back(arm:any){
+  back(){
     window.history.go(-1);
   }
   ngOnInit(){

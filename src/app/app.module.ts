@@ -23,6 +23,7 @@ import {AuthService} from './service/auth.service'
 import {TipsService} from "./service/tips.service";
 import {UtilService} from "./service/util.service";
 import {UserInfoService} from "./service/user-info.service";
+import {AuthGuard} from "./service/auth-guard.service";
 
 //import {FeedButtonDirective} from './directive/feed-button.directive'
 
@@ -45,6 +46,7 @@ import {UserInfoService} from "./service/user-info.service";
       useClass:HashLocationStrategy
     },
     HttpService,
+    AuthGuard,
     AuthService,
     TipsService,
     UtilService,

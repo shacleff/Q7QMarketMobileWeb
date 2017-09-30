@@ -4,6 +4,7 @@ import {TipsService} from "../../service/tips.service";
 import { Title } from '@angular/platform-browser';
 import {EntrustOrderService} from "./entrust-order.service";
 import {UtilService} from "../../service/util.service";
+import { InfiniteLoaderComponent } from 'ngx-weui/infiniteloader';
 
 @Component({
   selector:'entrust-order',
@@ -18,7 +19,7 @@ export class EntrustOrderComponent implements OnInit{
     private util:UtilService
   ){}
   public headerTitle = '委托订单';
-  back(arm:any){
+  back(){
     window.history.go(-1);
   }
   toList(){
@@ -32,6 +33,8 @@ export class EntrustOrderComponent implements OnInit{
     "startDate": null,
     "type": null
   };
+  isHasOdrList = false;//默认没有委托订单、
+  isLoaded = false;//是否加载完毕
   //订单列表
   isHasList = false;
   isShowDetail = false;//是否显示详情
@@ -46,21 +49,32 @@ export class EntrustOrderComponent implements OnInit{
     enPrice:'12.0214',//委托价格
   };
   orderList:any = [
-    {
-      proName:'梧桐木',//商品名
-      enType:'0',//交易类型 0->买
-      enTime:'1505985683000',//交易时间
-      enCnt:'100',//委托量
-      trCnt:'50',//交易量
-      trStatus:'进行中',//交易状态 3->已结束
-      enPrice:'12.0214',//委托价格
-    }
+    // {
+    //   proName:'梧桐木',//商品名
+    //   enType:'0',//交易类型 0->买
+    //   enTime:'1505985683000',//交易时间
+    //   enCnt:'100',//委托量
+    //   trCnt:'50',//交易量
+    //   trStatus:'进行中',//交易状态 3->已结束
+    //   enPrice:'12.0214',//委托价格
+    // }
   ];
+  onLoadMore(comp:InfiniteLoaderComponent) {
+    this.para.pageNum++;
+    this.getEtuList(this.para);
+    comp.resolveLoading();
+  }
   //得到委托订单列表
   getEtuList(options:any){
     this.etuOdrSer.getEtuList(options)
     .then((res:any)=>{
       if(res){
+        if(res.records.length>0){
+          this.isHasOdrList = true;
+        }
+        if(res.records.length<=0){
+          this.isLoaded = true;
+        }
         var items = res.records;
         if(items.length>0){this.isHasList = true};
         for(let i = 0;i<items.length;i++){

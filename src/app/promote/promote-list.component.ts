@@ -2,7 +2,7 @@ import {Component,OnInit} from '@angular/core';
 import {TipsService} from "../service/tips.service";
 import { Title } from '@angular/platform-browser';
 import {PromoteService} from "./promote.service";
-
+import { InfiniteLoaderComponent } from 'ngx-weui/infiniteloader';
 
 @Component({
   selector:'promote-list',
@@ -24,14 +24,27 @@ export class PromoteListComponent implements OnInit{
       createTime:'',//注册时间
     }
   ];
+  isHasOdrList = false;//默认没有委托订单、
+  isLoaded = false;//是否加载完毕
   //para
   para = {
     pageNum: 1,
   };
+  onLoadMore(comp:InfiniteLoaderComponent) {
+    this.para.pageNum++;
+    this.getPromoteList();
+    comp.resolveLoading();
+  }
   getPromoteList(){
     this.prtSer.getPromoteList(this.para)
     .then((res:any)=>{
       if(res){
+        if(res.records.length>0){
+          this.isHasOdrList = true;
+        }
+        if(res.records.length<=0){
+          this.isLoaded = true;
+        }
         this.total = res.total||0;
         let item = res.records;
         for(let i = 0;i<item.length;i++){
@@ -46,7 +59,7 @@ export class PromoteListComponent implements OnInit{
   }
 
   public headerTitle = '推广列表';
-  back(arm:any){
+  back(){
     window.history.go(-1);
   }
   ngOnInit(){

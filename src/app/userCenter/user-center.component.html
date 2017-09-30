@@ -71,11 +71,14 @@
     <div feedButton routerLink="/goldDetail" class="reviseItem">
       金币明细
     </div>
-    <div feedButton class="reviseItem prtCenter open">
+    <div feedButton (click)="openProDrop()" class="reviseItem prtCenter open" [ngClass]="{
+      open:isClose,
+      close:!isClose
+    }">
       <i class="staIcon"></i>
       推广中心
     </div>
-    <div class="prtOpen open">
+    <div class="prtOpen open" [ngClass]="{open:isClose}">
       <div feedButton routerLink="/promoteLink" class="prtItem">
         <img src="../../assets/images/prt_link_icon.png" alt="">
         <p>推广链接</p>

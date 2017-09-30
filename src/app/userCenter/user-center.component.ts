@@ -30,6 +30,11 @@ export class UserCenterComponent implements OnInit{
       }
     })
   }
+  //打开关闭推广中心下拉
+  isClose = true;
+  openProDrop(){
+    this.isClose = !this.isClose;
+  }
   ngOnInit(){
     this.getUserInfo();
   }

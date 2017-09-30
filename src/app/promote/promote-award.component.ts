@@ -11,7 +11,7 @@ export class PromoteAwardComponent implements OnInit{
     private tips:TipsService
   ){}
   public headerTitle = '推广奖励';
-  back(arm:any){
+  back(){
     window.history.go(-1);
   }
   ngOnInit(){

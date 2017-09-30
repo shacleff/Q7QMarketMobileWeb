@@ -18,7 +18,7 @@ export class RechargeRecordDetailComponent implements OnInit{
     private service:RechargeService
   ){}
   public headerTitle = '充值记录详情';
-  back(arm:any){
+  back(){
     window.history.go(-1);
   }
   public recordDetail:any;

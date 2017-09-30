@@ -4,6 +4,7 @@ import {RouterModule,Routes} from '@angular/router';
 import {LoginComponent} from './login.componnet'
 import {RegistComponent} from './regist.component'
 
+
 const loginRegistRoutes:Routes = [
   {
     path:'login',

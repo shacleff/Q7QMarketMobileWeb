@@ -13,7 +13,7 @@ export class RechargeRecordComponent implements OnInit{
     private router:Router
   ){}
   public headerTitle = '充值记录';
-  back(arm:any){
+  back(){
     window.history.go(-1);
   }
   toDetail(id:string){

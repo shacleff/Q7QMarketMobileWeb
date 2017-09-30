@@ -3,7 +3,7 @@ import {Router} from '@angular/Router'
 import {TipsService} from "../../service/tips.service";
 import { Title } from '@angular/platform-browser';
 import {TradeRecordService} from "./trade-record.service";
-
+import { InfiniteLoaderComponent } from 'ngx-weui/infiniteloader';
 @Component({
   selector:'trade-record-list',
   templateUrl:'trade-record-list.component.html'
@@ -16,7 +16,7 @@ export class TradeRecordListComponent implements OnInit{
     private trdRcdSer:TradeRecordService
   ){}
   public headerTitle = '交易明细';
-  back(arm:any){
+  back(){
     window.history.go(-1);
   }
   isShowDetail = false;//默认不显示详情
@@ -25,22 +25,38 @@ export class TradeRecordListComponent implements OnInit{
   tradeDetail = {
 
   };
+  //查询参数
+  para = {
+    pageNum: 1,
+    proId: null,
+    type: null,
+    startDate: null,
+    endDate: null
+  };
   //交易明细列表
   tradeList = [
-    {
-      proName:'2',//产品名
-      enType:'3',//交易类型0->买
-      trPrice:'4',//成交价
-      trCnt:'5',//成交量
-      trAmt:'6',//成交额
-      trCharge:'7',//手续费
-      trTime:'8',//成交时间
-    }
+    // {
+    //   proName:'2',//产品名
+    //   enType:'3',//交易类型0->买
+    //   trPrice:'4',//成交价
+    //   trCnt:'5',//成交量
+    //   trAmt:'6',//成交额
+    //   trCharge:'7',//手续费
+    //   trTime:'8',//成交时间
+    // }
   ];
   getList(options:any){
     this.trdRcdSer.getList(options)
     .then((res:any)=>{
       if(res){
+
+        if(res.record.length>0){
+          this.isHasOdrList = true;
+        }
+        if(res.record.length<=0){
+          this.isLoaded = true;
+        }
+
         let item = res.record;
         if(item.length){
           this.isHasDatas = true;
@@ -58,6 +74,13 @@ export class TradeRecordListComponent implements OnInit{
         }
       }
     })
+  };
+  isHasOdrList = false;//默认没有委托订单、
+  isLoaded = false;//是否加载完毕
+  onLoadMore(comp:InfiniteLoaderComponent) {
+    this.para.pageNum++;
+    this.getList(this.para);
+    comp.resolveLoading();
   }
   //显示详情
   toDetail(tradeDetail){
@@ -69,6 +92,7 @@ export class TradeRecordListComponent implements OnInit{
     this.isShowDetail = false;
   }
   ngOnInit(){
+    this.getList(this.para);
     this.title.setTitle('交易明细');
   }
 }

@@ -1,4 +1,4 @@
-import {Component,OnInit} from '@angular/core';
+import {Component,OnInit,AfterViewInit} from '@angular/core';
 import {TipsService} from "../service/tips.service";
 import {UserInfoService} from "../service/user-info.service";
 import { Title } from '@angular/platform-browser';
@@ -8,15 +8,15 @@ import { Title } from '@angular/platform-browser';
   selector:'promote-link',
   templateUrl:'promote-link.component.html'
 })
-export class PromoteLinkComponent implements OnInit{
+export class PromoteLinkComponent implements OnInit,AfterViewInit{
   constructor(
     private title:Title,
     private tips:TipsService,
     private uInfoSer:UserInfoService
   ){}
 
-  promoteCode = '';
-  promoteLink = '';
+  promoteCode = '1000';
+  promoteLink = 'http://www.0001wan.com?id=1000';
   promoteCodeImg = '';
   //得到用户信息
   getUserInfo(){
@@ -30,13 +30,18 @@ export class PromoteLinkComponent implements OnInit{
       }
     })
   }
-
-
   public headerTitle = '推广链接';
-  back(arm:any){
+  back(){
     window.history.go(-1);
   }
   ngOnInit(){
     this.title.setTitle('推广链接');
+  }
+  ngAfterViewInit(){
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+      width : 100,
+      height : 100
+    });
+    qrcode.makeCode(this.promoteLink);
   }
 }

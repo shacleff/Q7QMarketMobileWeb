@@ -9,7 +9,7 @@ export class AssignTradeService{
   ){}
   //得到指定交易订单列表
   getList(options){
-    return this.xhr.post('/tran/specifyTranList',1,options);
+    return this.xhr.get('/tran/specifyTranList',1,options);
   }
 
   //得到玩家拥有木材数量
@@ -22,7 +22,7 @@ export class AssignTradeService{
   }
   //确定指定交易订单
   confirmAssignTrade(options){
-    return this.xhr.post('/tran/cancelSpecifyTran',1,options);
+    return this.xhr.post('/tran/confirmSpecifyTran',1,options);
   }
   //拒绝指定交易订单
   refuseAssignTrade(options){

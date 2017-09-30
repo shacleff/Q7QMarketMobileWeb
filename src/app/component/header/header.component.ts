@@ -16,7 +16,7 @@ import {Component, Input,EventEmitter,Output, ViewEncapsulation} from '@angular/
 export class HeaderComponent{
   @Input() title: string;
   @Output() onVoted = new EventEmitter<any>();
-  vote(arm: any) {
-    this.onVoted.emit(arm);
+  vote() {
+    this.onVoted.emit();
   }
 }
