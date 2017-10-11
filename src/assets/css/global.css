@@ -1319,11 +1319,48 @@
 
 .userCenter .accountRevise .reviseItem {
   position: relative;
-  height: 0.9375rem;
-  line-height: 0.9375rem;
+  height: 1.0625rem;
+  line-height: 1.0625rem;
   font-size: 0.375rem;
   color: #000;
-  text-indent: 0.3125rem; }
+  text-indent: 0.3125rem;
+  vertical-align: middle; }
+  .userCenter .accountRevise .reviseItem img {
+    width: 0.39063rem;
+    margin-right: 0.23438rem;
+    opacity: 0; }
+
+.userCenter .accountRevise.accountReviseTop .reviseItem:nth-child(1) {
+  background: url("../images/center_list_mobile.png") no-repeat 0.3125rem;
+  background-size: 0.39063rem auto; }
+
+.userCenter .accountRevise.accountReviseTop .reviseItem:nth-child(2) {
+  background: url("../images/center_list_pwd.png") no-repeat 0.3125rem;
+  background-size: 0.39063rem auto; }
+
+.userCenter .accountRevise.accountReviseTop .reviseItem:nth-child(3) {
+  background: url("../images/center_list_pay.png") no-repeat 0.3125rem;
+  background-size: 0.39063rem auto; }
+
+.userCenter .accountRevise.accountReviseTop .reviseItem:nth-child(4) {
+  background: url("../images/center_list_mgr.png") no-repeat 0.3125rem;
+  background-size: 0.39063rem auto; }
+
+.userCenter .accountRevise.accountReviseBot .reviseItem:nth-child(1) {
+  background: url("../images/center_list_rch.png") no-repeat 0.3125rem;
+  background-size: 0.39063rem auto; }
+
+.userCenter .accountRevise.accountReviseBot .reviseItem:nth-child(2) {
+  background: url("../images/center_list_cash.png") no-repeat 0.3125rem;
+  background-size: 0.39063rem auto; }
+
+.userCenter .accountRevise.accountReviseBot .reviseItem:nth-child(3) {
+  background: url("../images/center_list_money-detail.png") no-repeat 0.3125rem;
+  background-size: 0.39063rem auto; }
+
+.userCenter .accountRevise.accountReviseBot .reviseItem:nth-child(4) {
+  background: url("../images/center_list_prt.png") no-repeat 0.3125rem;
+  background-size: 0.39063rem auto; }
 
 .userCenter .goldArea .prtCenter:after {
   content: " ";

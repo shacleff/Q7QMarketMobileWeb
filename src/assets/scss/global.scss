@@ -1639,11 +1639,57 @@ $dangerColor:#F18E00;//警告色
     .reviseItem{
       position: relative;
       @extend .borderBot;
-      height: rem(60);
-      line-height: rem(60);
+      height: rem(68);
+      line-height: rem(68);
       font-size: rem(24);
       color: #000;
       text-indent: rem(20);
+      vertical-align: middle;
+      img{
+        width: rem(25);
+        margin-right: rem(15);
+        opacity: 0;
+      }
+    }
+    &.accountReviseTop{
+      .reviseItem{
+        &:nth-child(1){
+          background: url("../images/center_list_mobile.png") no-repeat rem(20);
+          background-size: rem(25) auto;
+        }
+        &:nth-child(2){
+          background: url("../images/center_list_pwd.png") no-repeat rem(20);
+          background-size: rem(25) auto;
+        }
+        &:nth-child(3){
+          background: url("../images/center_list_pay.png") no-repeat rem(20);
+          background-size: rem(25) auto;
+        }
+        &:nth-child(4){
+          background: url("../images/center_list_mgr.png") no-repeat rem(20);
+          background-size: rem(25) auto;
+        }
+      }
+    }
+    &.accountReviseBot{
+      .reviseItem{
+        &:nth-child(1){
+          background: url("../images/center_list_rch.png") no-repeat rem(20);
+          background-size: rem(25) auto;
+        }
+        &:nth-child(2){
+          background: url("../images/center_list_cash.png") no-repeat rem(20);
+          background-size: rem(25) auto;
+        }
+        &:nth-child(3){
+          background: url("../images/center_list_money-detail.png") no-repeat rem(20);
+          background-size: rem(25) auto;
+        }
+        &:nth-child(4){
+          background: url("../images/center_list_prt.png") no-repeat rem(20);
+          background-size: rem(25) auto;
+        }
+      }
     }
   }
   .goldArea{
