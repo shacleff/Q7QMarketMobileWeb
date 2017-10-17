@@ -32,5 +32,8 @@ export class AssignTradeService{
   cancelAssignTrade(options){
     return this.xhr.get('/tran/cancelSpecifyTran',1,options);
   }
-
+  //验证用户是否存在
+  checkUserExist(options){
+    return this.xhr.get('/user/getUserRealName',1,options)
+  }
 }

@@ -20,6 +20,9 @@ export class HttpService {
   //get请求
   public get(url:string,isAuth:any,datas:any){
     this.tip.showLoading(1);
+    if(url=="/getTranInfo"||url=="/getCandleList"||url=="/getMinuteList"){
+      this.tip.showLoading(!1);
+    }
     let token = isAuth?localStorage.getItem('token'):null;
     let _header = new Headers({
       'Authorization':token
@@ -53,6 +56,9 @@ export class HttpService {
   //post请求
   public post(url:string,isAuth:any,datas:any){
     this.tip.showLoading(1);
+    if(url=='/showOverallMarket'){
+      this.tip.showLoading(!1);
+    }
     let token = isAuth?localStorage.getItem('token'):null;
     let header = new Headers({
       'Authorization':token
@@ -60,7 +66,7 @@ export class HttpService {
     return this.http.post(this.host+url,datas,{headers:header})
     .toPromise()
     .then((res:any)=> {
-      console.log(res);
+      //console.log(res);
       if(res.code&&res.code=='401'){
         this.tip.showConDia('token过期请重新登陆',()=>{
           this.router.navigate(['login']);

@@ -92,6 +92,10 @@
         <p>推广奖励</p>
       </div>
     </div>
+    <div class="grayBgBar"></div>
+    <div feedButton class="reviseItem eixtLogin" (click)="exit()">
+      退出登录
+    </div>
   </div>
   <div class="footer">
     <a feedButton routerLink="/market" class="navItem">
@@ -100,7 +104,7 @@
       </div>
       <p>行情</p>
     </a>
-    <a feedButton routerLink="/market/1001" class="navItem">
+    <a feedButton (click)="toMarket()" class="navItem">
       <div class="navIcon">
 
       </div>

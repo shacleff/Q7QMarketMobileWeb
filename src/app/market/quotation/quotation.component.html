@@ -2,7 +2,53 @@
   <div class="header keyBgHeader">
     行情
   </div>
-  <table class="quotationTable mt80Rem">
+  <ul class="quotationList">
+    <li feedButton class="quotationItem" *ngFor="let item of proList;index as i" [ngClass]="{up:item.changePrice>=0,down:item.changePrice<0}" (click)="toDetail(item.proId)">
+      <div class="proBase fl">
+        <div class="baseTop">
+          <img class="proPic" [src]="item.imgUrl" alt="">
+          {{item.proName}}
+        </div>
+        <div class="quoText clip ani">{{item.nowPrice}}</div>
+      </div>
+      <div class="proDetail fr">
+        <div class="detailItem fl itemL">
+          <table class="itemTab">
+            <tr>
+              <td>今开</td>
+              <td class="clip ani">{{item.toOpenPrice}}</td>
+            </tr>
+            <tr>
+              <td>最高</td>
+              <td class="highest clip ani">{{item.heightPrice}}</td>
+            </tr>
+            <tr>
+              <td>最低</td>
+              <td class="lowest clip ani">{{item.lowPrice}}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="detailItem fr itemR">
+          <table class="itemTab">
+            <tr>
+              <td>涨跌幅</td>
+              <td class="range clip ani">{{item.changeRate}}%</td>
+            </tr>
+            <tr>
+              <td>涨跌额</td>
+              <td class="limit clip ani">{{item.changePrice}}</td>
+            </tr>
+            <tr>
+              <td>成交量</td>
+              <td class="clip ani">{{item.tranVolume}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <!--<table class="quotationTable mt80Rem">
     <tr class="tableTop">
       <td>名称</td>
       <td>现价</td>
@@ -13,9 +59,6 @@
       <td>最低</td>
       <td>成交量</td>
     </tr>
-
-
-
     <tr feedButton *ngFor="let item of proList;index as i" class="tableCon up" [ngClass]="{up:item.changePrice>=0,down:item.changePrice<0}" (click)="toDetail(item.proId)">
       <td>
         <img  [src]="item.imgUrl" alt="">
@@ -29,8 +72,8 @@
       <td class="down">{{item.lowPrice}}</td>
       <td>{{item.tranVolume}}</td>
     </tr>
-  </table>
-  <div class="ChartBox pb80Rem">
+  </table>-->
+  <!--<div class="ChartBox pb80Rem">
     <div class="WrapB">
       <div class="chartChange">
         <div feebButton (click)="changeToFLine()" class="chartBtn fLine" [ngClass]="{seled:chartType==2}">分时</div>
@@ -40,7 +83,7 @@
         <echarts-ng2 #myEcharts></echarts-ng2>
       </div>
     </div>
-  </div>
+  </div>-->
   <div class="footer">
     <a feedButton routerLink="/market" class="navItem active">
       <div class="navIcon">
@@ -48,7 +91,7 @@
       </div>
       <p>行情</p>
     </a>
-    <a feedButton routerLink="/market/1001" class="navItem">
+    <a feedButton (click)="toMarket()" class="navItem">
       <div class="navIcon">
 
       </div>

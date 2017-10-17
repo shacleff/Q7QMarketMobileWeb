@@ -1,23 +1,25 @@
 <div class="marketDetailBox">
   <div feedButton routerLink="/assignTrade" class="toAssignTrade">指定交易</div>
   <Header
-    [title]="headerTitle"
+    [title]=""
     (onVoted)="back()">
   >
   </Header>
-
+  <div feedButton class="changeProType" (click)="openAlertBox()">
+    {{headerTitle}}
+  </div>
   <div class="marketBaseInfo mt80Rem">
     <div class="conWrap">
       <div class="infoLeft fl">
         <div class="upDwonIndex" [ngClass]="{down:proDetail.changePrice<0}">
-          <div class="indexNum">{{proDetail.nowPrice}}</div>
+          <div class="indexNum clip" [ngClass]="{ani:isip}">{{proDetail.nowPrice}}</div>
           <div class="indexPic">
             &nbsp;
           </div>
         </div>
         <div class="detailInfo" [ngClass]="{down:proDetail.changePrice<0}">
-          <div class="infoDetail fl">{{proDetail.changePrice}}</div>
-          <div class="infoDetail fl">{{proDetail.changeRate}}</div>
+          <div class="infoDetail fl clip" [ngClass]="{ani:isip}">{{proDetail.changePrice}}</div>
+          <div class="infoDetail fl clip" [ngClass]="{ani:isip}">{{proDetail.changeRate}}</div>
         </div>
       </div>
       <div class="infoRight fr">
@@ -25,21 +27,21 @@
           <tr>
             <td>
               <p>今开</p>
-              <span>{{proDetail.toOpenPrice}}</span>
+              <span class="clip" style="display: inline-block" [ngClass]="{ani:isip}">{{proDetail.toOpenPrice}}</span>
             </td>
             <td>
               <p>成交</p>
-              <span>{{proDetail.tranVolume}}</span>
+              <span class="clip" style="display: inline-block" [ngClass]="{ani:isip}">{{proDetail.tranVolume}}</span>
             </td>
           </tr>
           <tr>
             <td>
               <p>最高</p>
-              <span class="mostUp">{{proDetail.heightPrice}}</span>
+              <span class="mostUp clip" style="display: inline-block" [ngClass]="{ani:isip}">{{proDetail.heightPrice}}</span>
             </td>
             <td>
               <p>最低</p>
-              <span class="mostDown">{{proDetail.lowPrice}}</span>
+              <span class="mostDown clip" style="display: inline-block" [ngClass]="{ani:isip}">{{proDetail.lowPrice}}</span>
             </td>
           </tr>
         </table>
@@ -59,8 +61,8 @@
         </tr>
         <tr class="tableCon" *ngFor="let item of saleFive;index as i" >
           <td class="keyColor">卖{{numArr[i]}}</td>
-          <td class="upColor">{{item.price}}</td>
-          <td>{{item.cnt}}</td>
+          <td class="upColor clip" [ngClass]="{ani:isip}">{{item.price}}</td>
+          <td class="clip" [ngClass]="{ani:isip}">{{item.cnt}}</td>
         </tr>
       </table>
       <table class="dgtTable fr">
@@ -71,8 +73,8 @@
         </tr>
         <tr class="tableCon" *ngFor="let item of buyFive;index as i" >
           <td class="upColor">买{{numArr[i]}}</td>
-          <td class="upColor">{{item.price}}</td>
-          <td>{{item.cnt}}</td>
+          <td class="upColor clip" [ngClass]="{ani:isip}">{{item.price}}</td>
+          <td class="clip" [ngClass]="{ani:isip}">{{item.cnt}}</td>
         </tr>
       </table>
     </div>
@@ -101,10 +103,10 @@
 
       </div>
       <div feedButton class="oprBtn buyBtn cl_w keyColorBg fl" (click)="showSaleBox(true)">
-        现价卖出
+        限价卖出
       </div>
       <div feedButton class="oprBtn saleBtn cl_w upColorBg fr" (click)="showBuyBox(true)">
-        现价购买
+        限价购买
       </div>
     </div>
   </div>
@@ -202,12 +204,12 @@
       <div class="alertCen alertCon">
         <div class="inputCtr radiu border withTitle">
           <i class="leftTitle">卖出价格</i>
-          <input type="number" class="input" [(ngModel)]="salePara.price" (input)="calcSalePrice()" name="salePrice"/>
+          <input type="number" class="input" [(ngModel)]="salePara.price" (keyup)="calcSalePrice()" name="salePrice"/>
           <i class="rightText lb">金币</i>
         </div>
         <div class="inputCtr radiu border withTitle">
           <i class="leftTitle">卖出数量</i>
-          <input type="number" class="input" [(ngModel)]="salePara.cnt" (input)="calcSalePrice()" name="saleCnt"/>
+          <input type="number" class="input" [(ngModel)]="salePara.cnt" (keyup)="calcSalePrice()" name="saleCnt"/>
           <i class="rightText lb">数量</i>
         </div>
         <div class="inputCtr radiu border withTitle">
@@ -396,4 +398,30 @@
     </div>
   </div>
 </div>
-
+<!--切换商品类型选择框-->
+<div vertical class="selBankBox selWoodBox changeProBox" [ngClass]="{active:isShowAlert}">
+  <div class="selBankWrap">
+    <div class="selBankList">
+      <div class="bankListItem" feedButton *ngFor="let item of proList;index as i" (click)="toChange(item.proId)">
+        <div class="bankPic fl">
+          <img [src]="item.imgUrl" alt="">
+        </div>
+        <div class="woodName fl">
+          &nbsp;{{item.proName}}&nbsp; ({{item.nowPrice}})
+        </div>
+      </div>
+      <!--<div class="bankListItem">
+        <div class="bankPic fl">
+          <img src="../../../assets/images/wood_little_icon.png" alt="">
+        </div>
+        <div class="woodName fl">
+          &nbsp;梧桐木&nbsp; (0.1251)
+        </div>
+        <div class="bankName fr">持有量 <span class="num">18000</span>个</div>
+      </div>-->
+    </div>
+  </div>
+  <div class="closeThis">
+    <img (click)="closeAlertBox()" feedButton class="closeBtn" src="../../../assets/images/close_sel_bankcard.png" alt="">
+  </div>
+</div>

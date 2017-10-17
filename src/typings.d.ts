@@ -12,5 +12,6 @@ declare var window:Window;
 declare var ergodicJson2:any;
 declare var QRCode:any;
 declare var Format:any;
+declare var escape:any;
 //declare var headers:any;
 //declare var RegExp:any;

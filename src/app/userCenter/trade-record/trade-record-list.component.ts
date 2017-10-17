@@ -21,6 +21,7 @@ export class TradeRecordListComponent implements OnInit{
   }
   isShowDetail = false;//默认不显示详情
   isHasDatas = false;//默认没有数据
+  allPages = 10;
   //交易明细详情
   tradeDetail = {
 
@@ -49,7 +50,7 @@ export class TradeRecordListComponent implements OnInit{
     this.trdRcdSer.getList(options)
     .then((res:any)=>{
       if(res){
-
+        this.allPages = res.pages;
         if(res.record.length>0){
           this.isHasOdrList = true;
         }
@@ -79,6 +80,10 @@ export class TradeRecordListComponent implements OnInit{
   isLoaded = false;//是否加载完毕
   onLoadMore(comp:InfiniteLoaderComponent) {
     this.para.pageNum++;
+    if(this.para.pageNum>this.allPages+1){
+      comp.resolveLoading();
+      return;
+    }
     this.getList(this.para);
     comp.resolveLoading();
   }

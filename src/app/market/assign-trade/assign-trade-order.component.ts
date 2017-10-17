@@ -20,6 +20,8 @@ export class AssignTradeOrderComponent implements OnInit{
   showAllOrder = true;//默认显示全部订单
   showHisDetail  = false;//历史订单详情
   showUresDetail  = false;//待处理详情
+  allPages = 10;//全部订单默认总页数
+  unResPages = 10;//待处理订单默认总页数
   showList = true;//显示列表
   detail:any = {
     proName:'1',//名称
@@ -35,11 +37,11 @@ export class AssignTradeOrderComponent implements OnInit{
   };
   //所有订单列表
   allList:any = [
-    this.detail
+    //this.detail
   ];
   //待处理订单列表
   uresList:any = [
-    this.detail
+    //this.detail
   ];
   //指定交易查询参数
   /*
@@ -60,12 +62,20 @@ export class AssignTradeOrderComponent implements OnInit{
 
   onLoadMore(comp:InfiniteLoaderComponent) {
     this.allPageNum++;
+    if(this.showAllOrder&&this.allPageNum>this.allPages+1){
+      comp.resolveLoading();
+      return;
+    }
     this.getList('-1');
     comp.resolveLoading();
   }
 
   onLoadMoreRes(comp:InfiniteLoaderComponent) {
     this.unresPageNum++;
+    if(!this.showAllOrder&&this.unresPageNum>this.unResPages+1){
+      comp.resolveLoading();
+      return;
+    }
     this.getList('0');
     comp.resolveLoading();
   }
@@ -85,6 +95,7 @@ export class AssignTradeOrderComponent implements OnInit{
       this.asgTrdSer.getList(this.para)
       .then((res:any)=>{
         if(res){
+          this.allPages = res.pages;
           if(res.records.length>0){
             this.isHasOdrList = true;
           }
@@ -115,6 +126,7 @@ export class AssignTradeOrderComponent implements OnInit{
       this.para.type = '0';
       this.asgTrdSer.getList(this.para)
         .then((res:any)=>{
+          this.unResPages = res.pages;
           if(res){
             if(res.records.length>0){
               this.isHasOdrListRes = true;

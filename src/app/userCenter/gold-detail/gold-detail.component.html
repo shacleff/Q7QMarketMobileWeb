@@ -26,11 +26,10 @@
   <weui-infiniteloader (loadmore)="onLoadMore($event)">
   <table class="listTable prtList detailList">
     <tr class="tableHeader prtListHeader">
-      <td>ID</td>
-      <td>用户名</td>
-      <td>注册时间</td>
+      <td>类型</td>
+      <td>金额</td>
+      <td>时间</td>
     </tr>
-
     <tr class="tableContent prtListContent"
       *ngFor = "let item of list"
       [ngClass]="{

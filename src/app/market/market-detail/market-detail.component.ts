@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Rx';
 import {Component,ViewChild,AfterViewInit,OnInit,OnDestroy} from '@angular/core';
 import {TipsService} from "../../service/tips.service";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-
+import {Title} from "@angular/platform-browser";
 import {UtilService} from "../../service/util.service";
 import {EChartOption,ECharts} from 'echarts-ng2'
 //import {KDatas} from '../../datas/k-line.datas';
@@ -13,6 +13,7 @@ import {ChangeChartTypeService} from '../../service/change-chart-type.service'
 import {MarketService} from "./market.service";
 import {UserInfoService} from "../../service/user-info.service";
 import { InfiniteLoaderComponent } from 'ngx-weui/infiniteloader';
+import {QuotationService} from "../quotation/quotation.service";
 
 @Component({
   selector:'market-detail',
@@ -26,15 +27,60 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
     private route:ActivatedRoute,
     private router:Router,
     private uInfoSer:UserInfoService,
-    private util:UtilService
+    private util:UtilService,
+    private title:Title,
+    private qotSer:QuotationService//行情服务
   ){}
-
+  //刷新数据执行动画参数
+  isip = true;
+  //定时刷新Interval
+  interVal:any = null;
+  //默认列表总页数为10
+  allPages:any = 10;
+  //切换商品后的重新加载
+  onLoad(){
+    this.changeToKLine();
+    this.getProDetail();
+    this.getUserItem();
+    this.para.pageNum=1;
+    this.etuOdrList.splice(0,this.etuOdrList.length);
+    this.getEtuList(1);
+  }
+  public pro_id;
   //得到url参数 商品id值
   getUrlPar(){
     let val:any = this.route.paramMap;
-    return val.destination.value.id;
+    this.pro_id = val.destination.value.id;
+    this.util.marketUrl = this.pro_id;
+    return this.pro_id;
   }
-
+  public isShowAlert = false;
+  closeAlertBox(){
+    this.tips.hideLayer();
+    this.isShowAlert = false;
+  }
+  openAlertBox(){
+    this.getProList();
+    this.tips.showLayer();
+    this.isShowAlert = true;
+  }
+  //获取商品行情列表
+  public proList:any;
+  getProList(){
+    this.qotSer.getProList()
+      .then((res:any)=>{
+        if(res){
+          this.proList = this.util.objToArray(res);
+        }
+      })
+  };
+  //切换商品
+  toChange(id:string){
+    this.pro_id = id;
+    this.util.marketUrl = this.pro_id;
+    this.closeAlertBox();
+    this.onLoad();
+  }
   public Ctype:ChangeChartTypeService = new ChangeChartTypeService();//图标配置
   public chartType:number = 1;//默认图表类型1->k线图
   //k线图模拟数据
@@ -46,7 +92,7 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
   public option:any = null;
   public changeToKLine(){//切换到k线图
 
-    this.mrkSer.getKlineDatas({proId:this.getUrlPar()})
+    this.mrkSer.getKlineDatas({proId:this.pro_id})
     .then((res:any)=>{
       if(res){
         let kDatas = this.util.splitData(res);
@@ -58,7 +104,7 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
   }
   public changeToFLine(){//切换到分时图
 
-    this.mrkSer.getFlineDatas({proId:this.getUrlPar()})
+    this.mrkSer.getFlineDatas({proId:this.pro_id})
     .then((res:any)=>{
       if(res){
         let fRawData = this.util.buildFLineDatas(res);
@@ -87,10 +133,12 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
   };
   //得到当前商品详情
   getProDetail(){
-    this.mrkSer.getProDetail({proId:this.getUrlPar()})
+    this.isip = false;
+    this.mrkSer.getProDetail({proId:this.pro_id})
     .then((res:any)=>{
+      this.isip = true;
       if(res){
-        this.headerTitle = res.proInfo.proName;
+        this.headerTitle = res.proInfo.proName+"▼";
         this.proDetail.nowPrice = res.quotationInfo.nowPrice.toFixed(5);
         this.proDetail.changePrice = res.quotationInfo.changePrice.toFixed(5);
         this.proDetail.changeRate = res.quotationInfo.changeRate.toFixed(2)+'%';
@@ -104,30 +152,30 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
   }
   /*买五卖五*/
   //买五数据
-  numArr = ['一','二','三','四','五'];
+  numArr = ['一','二','三'];
   buyFive = [
     { price:'--',cnt:'--'},
     { price:'--',cnt:'--'},
     { price:'--',cnt:'--'},
-    { price:'--',cnt:'--'},
-    { price:'--',cnt:'--'},
+    //{ price:'--',cnt:'--'},
+    //{ price:'--',cnt:'--'},
   ];
   //卖五数据
   saleFive = [
     { price:'--',cnt:'--'},
     { price:'--',cnt:'--'},
     { price:'--',cnt:'--'},
-    { price:'--',cnt:'--'},
-    { price:'--',cnt:'--'},
+    //{ price:'--',cnt:'--'},
+    //{ price:'--',cnt:'--'},
   ];
   isShowBuySale = true;//默认显示
 
   /*限价买入卖出*/
   //限价买入数据
   buyPara:any = {
-    price:'',
-    cnt:'',
-    proId:'',
+    price:null,
+    cnt:null,
+    proId:this.pro_id,
     'type': '0'//委托类型 0:买 1:卖
   };
   buyAllPrice:any = (this.buyPara.price*this.buyPara.cnt).toFixed(5);//买入总计价格
@@ -136,6 +184,9 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
   //计算买入总价和手续费
   calcBuyPrice(){
     this.buyAllPrice = (this.buyPara.price*this.buyPara.cnt).toFixed(5);
+    //if(this.buyAllPrice>this.myGold){
+    //
+    //}
     this.buyChr = (this.buyAllPrice*0.03).toFixed(5);//买入手续费;
   }
   //获取玩家信息（给玩家可用金币赋值）
@@ -150,25 +201,32 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
 
   //现价卖出数据
   salePara:any = {
-    price:'',
-    cnt:'',
-    proId:'',
+    price:null,
+    cnt:null,
+    proId:this.pro_id,
     'type': '1'//委托类型 0:买 1:卖
   };
   saleAllPrice:any = (this.salePara.price*this.salePara.cnt).toFixed(5);//卖出总计价格
   myWood:any = '';
   saleChr:any = (this.saleAllPrice*0.05).toFixed(5);//买入手续费
-  //计算买入总价和手续费
+  //计算卖出总价和手续费
   calcSalePrice(){
+    let cnt = this.salePara.cnt>this.myWood?this.myWood:this.salePara.cnt;
+    console.log(cnt,this.salePara.cnt,this.myWood);
+    if(cnt>this.myWood){
+      cnt=this.myWood;
+    }
+    this.salePara.cnt = cnt;
     this.saleAllPrice = (this.salePara.price*this.salePara.cnt).toFixed(5);
+    //console.log(price);
     this.saleChr = (this.saleAllPrice*0.03).toFixed(5);//买入手续费;
   }
   //得到玩家木材数量
   getUserItem(){
-    this.mrkSer.getUserItem({proId:this.getUrlPar()})
+    this.mrkSer.getUserItem({proId:this.pro_id})
     .then((res:any)=>{
       if(res){
-        this.myWood = res.cnt;
+        this.myWood = res.cnt|0;
       }
     })
   }
@@ -185,12 +243,17 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
       }else if(!this.buyPara.cnt){
         this.tips.msg('请填写数量');
         return;
+      }else if(parseFloat(this.buyAllPrice)>parseFloat(this.myGold)){
+        this.tips.msg('可用金额不足！');
+        return;
       }
-      this.tips.showConDia('确认委托此订单吗？</br>价格:'+this.buyPara.price+'</br>数量:'+this.buyPara.price+'</br>金币：'+this.buyAllPrice,()=>{
+      this.tips.showConDia('确认委托此订单吗？</br>价格:'+this.buyPara.price+'</br>数量:'+this.buyPara.cnt+'</br>金币：'+this.buyAllPrice,()=>{
+        this.buyPara.proId = this.pro_id;
         this.mrkSer.buySale(this.buyPara)
           .then((res:any)=>{
             if(res){
               this.tips.msg('委托成功');
+              this.getEtuList(1);
               this.showBuyBox(!1);
               this.showSaleBox(!1);
             }
@@ -207,11 +270,13 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
         this.tips.msg('请填写数量');
         return;
       }
-      this.tips.showConDia('确认委托此订单吗？</br>价格:'+this.salePara.price+'</br>数量:'+this.salePara.price+'</br>金币:'+this.saleAllPrice,()=>{
+      this.tips.showConDia('确认委托此订单吗？</br>价格:'+this.salePara.price+'</br>数量:'+this.salePara.cnt+'</br>金币:'+this.saleAllPrice,()=>{
+        this.salePara.proId = this.pro_id;
         this.mrkSer.buySale(this.salePara)
           .then((res:any)=>{
             if(res){
               this.tips.msg('委托成功');
+              this.getEtuList(1);
               this.showBuyBox(!1);
               this.showSaleBox(!1);
             }
@@ -277,6 +342,7 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
     //this.tips.showConDia('确认购买吃上牌吗?',()=>{},()=>{})
     if(bool){
       this.clearInput();
+      this.buyPara.price = this.buyPara.price||this.proDetail.nowPrice;
       this.tips.showLayer();
       this.isShowBuyBox = true;
     }else{
@@ -288,6 +354,7 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
   showSaleBox(bool){
     if(bool){
       this.clearInput();
+      this.salePara.price = this.salePara.price||this.proDetail.nowPrice;
       this.tips.showLayer();
       this.isShowSaleBox = true;
     }else{
@@ -299,7 +366,7 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
   /*委托订单*/
   //委托订单查询参数
   private para = {
-    'proId': this.getUrlPar(),
+    'proId': this.pro_id,
     'pageNum': 1,
     'type': 'CUR'
   };
@@ -319,18 +386,17 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
   ];
   onLoadMore(comp:InfiniteLoaderComponent) {
     this.para.pageNum++;
+    if(this.para.pageNum>this.allPages+1){
+      comp.resolveLoading();
+      return;
+    }
     this.getEtuList();
     comp.resolveLoading();
-    //Observable.timer(1500).subscribe(() => {
-    //  //if (this.items.length >= 50) {
-    //  //  comp.setFinished();
-    //  //  return;
-    //  //}
-    //  comp.resolveLoading();
-    //});
   }
   //得到当前委托订单列表
   getEtuList(pageNum?){
+    this.para.proId = this.pro_id;
+    //console.log(this.pro_id,'-----------------------');
     if(pageNum){
       this.etuOdrList.splice(0,this.etuOdrList.length);
       this.para.pageNum = 1;
@@ -341,6 +407,7 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
     this.mrkSer.getEtuList(this.para)
     .then((res:any)=>{
       if(res){
+        this.allPages = res.pages;
         if(res.records.length>0){
           this.isHasOdrList = true;
         }
@@ -391,16 +458,31 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
   back(){
     window.history.go(-1);
   }
+  //定时刷新数据
+  freshDatas(){
+    this.interVal = setInterval(()=>{
+      this.getProDetail();
+      if(this.chartType==1){
+        this.changeToKLine();
+      }else{
+        this.changeToFLine();
+      }
+    },10*1000)
+  }
   ngOnInit(){
+    this.getUrlPar();
     this.getProDetail();
     this.getEtuList();
     this.getUserMoney();
     this.getUserItem();
+    this.title.setTitle('市场');
+    this.freshDatas();
   }
   ngOnDestroy(){
     this.showOdrBox(false);
     this.showOdrBox(false);
     this.showSaleBox(false);
+    clearInterval(this.interVal);
   }
   ngAfterViewInit(){
     this.changeToKLine();

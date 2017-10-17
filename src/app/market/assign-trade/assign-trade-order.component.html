@@ -19,8 +19,8 @@
        [ngClass]="{active:!showAllOrder}"
        (click)="changeOrder(false)"
     >
-      <span  [ngClass]="{unResolve:hasunResolve}">
-        待处理(103)
+      <span  [ngClass]="{unResolve:uresList.length>0}">
+        待处理({{uresList.length}})
       </span>
     </div>
   </div>
@@ -42,7 +42,7 @@
         </div>
         <div class="payStr">
           <div class="rchTypeText">
-            {{item.tuName}}&nbsp;138****5154
+            {{item.tuName}}&nbsp;
           </div>
           <div class="rchTime">
             {{item.createTime|date:"yyyy/M/d h:m:s"}}
@@ -108,7 +108,7 @@
         </div>
         <div class="payStr">
           <div class="rchTypeText">
-            {{item.tuName}}&nbsp;138****5154
+            {{item.tuName}}&nbsp;
           </div>
           <div class="rchTime">
             {{item.createTime|date:"yyyy/M/d h:m:s"}}

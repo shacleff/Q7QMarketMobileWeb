@@ -14,36 +14,36 @@
     快捷支付
   </h3>
   <div class="quickPayBox">
-    <div class="payItem active">￥50.00</div>
-    <div class="payItem">￥200.00</div>
-    <div class="payItem">￥1000.00</div>
+    <div class="payItem" [ngClass]="{active:datas.number==50&&payType==1}" (click)="selRchNum(50)">￥50.00</div>
+    <div class="payItem" [ngClass]="{active:datas.number==200&&payType==1}" (click)="selRchNum(200)">￥200.00</div>
+    <div class="payItem" [ngClass]="{active:datas.number==1000&&payType==1}" (click)="selRchNum(1000)">￥1000.00</div>
   </div>
   <div class="grayBgBar"></div>
   <h3 class="quickPayTitle rchNum">
     充值金额
   </h3>
   <div class="WrapB rchIpt">
-    <input class="rchNum" placeholder="请输入充值金额" type="number" name="rchNum">
+    <input class="rchNum" placeholder="请输入充值金额" [(ngModel)]="iptNum" (focus)="iptFocus()" (blur)="iptBlur()" type="number" name="rchNum">
   </div>
   <h3 class="quickPayTitle noBg">
     第三方支付
   </h3>
   <div class="thirdPay WrapB">
-    <div class="thirdItem active">
+    <div class="thirdItem" (click)="selPayType('1')" [ngClass]="{active:datas.type=='1'}">
       <img src="../../../assets/images/wx_pay_icon.png" alt="">
       微&nbsp;&nbsp;信
     </div>
-    <div class="thirdItem">
+    <div class="thirdItem" (click)="selPayType('2')" [ngClass]="{active:datas.type=='2'}">
       <img src="../../../assets/images/ali_pay_icon.png" alt="">
       支付宝
     </div>
-    <div class="thirdItem">
+    <div class="thirdItem" (click)="selPayType('3')" [ngClass]="{active:datas.type=='3'}">
       <img src="../../../assets/images/bank_pay_icon.png" alt="">
       银&nbsp;&nbsp;联
     </div>
   </div>
   <div class="WrapB">
-    <div feedButton class="btn next">
+    <div feedButton class="btn next" (click)="subRch()">
       下一步
     </div>
   </div>

@@ -14,15 +14,16 @@ export class PromoteListComponent implements OnInit{
     private tips:TipsService,
     private prtSer:PromoteService
   ){}
+  allPages = 10;
   //总人数
   total:any;
   //推广列表
   list:any = [
-    {
-      id:'',//id
-      realName:'',//真实姓名
-      createTime:'',//注册时间
-    }
+    //{
+    //  id:'',//id
+    //  realName:'',//真实姓名
+    //  createTime:'',//注册时间
+    //}
   ];
   isHasOdrList = false;//默认没有委托订单、
   isLoaded = false;//是否加载完毕
@@ -32,6 +33,10 @@ export class PromoteListComponent implements OnInit{
   };
   onLoadMore(comp:InfiniteLoaderComponent) {
     this.para.pageNum++;
+    if(this.para.pageNum>this.allPages+1){
+      comp.resolveLoading();
+      return;
+    }
     this.getPromoteList();
     comp.resolveLoading();
   }
@@ -39,6 +44,7 @@ export class PromoteListComponent implements OnInit{
     this.prtSer.getPromoteList(this.para)
     .then((res:any)=>{
       if(res){
+        this.allPages = res.pages;
         if(res.records.length>0){
           this.isHasOdrList = true;
         }

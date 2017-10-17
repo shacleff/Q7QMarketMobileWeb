@@ -8,7 +8,7 @@ export class UtilService{
   };
   public regExp(){//正则表达式
       const regexp = {
-          mobileNum : /^1(3|4|5|7|8)\d{9}$/,//手机号
+          mobileNum : /^(13[0-9]|15[012356789]|17[013678]|18[0-9]|14[57])[0-9]{8}$/,//手机号
           IDCard: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,//身份证
           checkCode: /^\d$/,//验证码
           name:new RegExp("^([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z0-9])*$"),//姓名
@@ -151,4 +151,6 @@ export class UtilService{
     return minuteChart;
   }
   /*分时图数据处理end*/
+  //记录当前市场的木材类型
+  public marketUrl:any = '2001';
 }

@@ -3,6 +3,8 @@ import {TipsService} from "../../service/tips.service";
 import { Title } from '@angular/platform-browser';
 import {AssignTradeService} from "./assign-trade.service";
 import { InfiniteLoaderComponent } from 'ngx-weui/infiniteloader';
+import {UtilService} from "../../service/util.service";
+import {Router} from '@angular/router';
 
 @Component({
   selector:'assign-trade',
@@ -12,9 +14,16 @@ export class AssignTradeComponent implements OnInit,OnDestroy{
   constructor(
     private tips:TipsService,
     private title:Title,
-    private asgTrdSer:AssignTradeService
+    private asgTrdSer:AssignTradeService,
+    private utl:UtilService,
+    private router:Router
   ){}
   isHasWood = false;//默认没有木材
+  selWoodCnt = 0;//默认当前选中的木材的数量为零
+  isExistUser = true;//默认用户名存在
+  isExistUsers = false;//默认用户名不存在
+  inputPlayer = null;
+  allPages:any = 10;//默认列表总页数为10
   //拥有木材列表
   public wooList:any=[
     //{
@@ -39,16 +48,69 @@ export class AssignTradeComponent implements OnInit,OnDestroy{
           temp.id = res[i].id;
           temp.cnt = res[i].cnt;
           temp.marketPrice = res[i].marketPrice.toFixed(5);
+          temp.img = this.getPicbyPid(res[i].pId);
           this.wooList.push(temp);
         }
       }
     });
   }
+  //根据pId得到商品图片
+  getPicbyPid(pId){
+    for(let i = 0;i<this.picList.length;i++){
+      if(this.picList[i].pId==pId){
+        return this.picList[i].img;
+      }
+    }
+  }
   //选择木材
-  selWood(id:string,name:string){
+  selWood(id:string,name:string,cnt){
     this.para.itemId = id;
+    console.log(id);
     this.para.pName = name;
+    this.selWoodCnt = cnt;
     this.closeAlertBox();
+  }
+  //判断输入数量是否大于用于数量
+  calcIpyNum(){
+    if(this.para.cnt>this.selWoodCnt){
+      this.para.cnt=this.selWoodCnt;
+    }
+  }
+  //验证接受对象是否存在
+  resetReceiveIput(){
+    this.isExistUser = true;
+    this.isExistUsers = false;
+  }
+  checkIsHasReceive(){
+    if(!this.inputPlayer){
+      return;
+    }
+    if(!this.utl.regExp().mobileNum.test(this.inputPlayer.replace(/\([^\)]*\)/g ,''))){
+      this.tips.msg('用户名不存在');
+      let tmp = this.inputPlayer.replace(/\([^\)]*\)/g ,'');
+      console.log(tmp);
+      tmp = tmp;
+      this.inputPlayer = tmp+"(用户不存在)";
+      this.isExistUser = false;
+      this.isExistUsers = false;
+      return;
+    }else{
+      let tmps = this.inputPlayer.replace(/\([^\)]*\)/g ,'');
+      this.asgTrdSer.checkUserExist({'mobile':tmps})
+      .then((res:any)=>{
+        if(res){
+          this.para.receMobile = tmps;
+          this.inputPlayer = tmps+"("+res+")"
+          this.isExistUser = true;
+          this.isExistUsers = true;
+        }else{
+          this.para.receMobile = tmps;
+          this.inputPlayer = tmps+"(用户不存在)"
+          this.isExistUser = false;
+          this.isExistUsers = false;
+        }
+      });
+    }
   }
   //提交数据
   para = {
@@ -106,7 +168,7 @@ export class AssignTradeComponent implements OnInit,OnDestroy{
   };
   //指定交易未完成列表
   public orderList:any = [
-    this.detail
+    //this.detail
   ];
   getOrderPara = {
     pageNum:1,
@@ -123,6 +185,7 @@ export class AssignTradeComponent implements OnInit,OnDestroy{
     this.asgTrdSer.getList(this.getOrderPara)
     .then((res:any)=>{
       if(res){
+        this.allPages = res.pages;
         if(res.records.length>0){
           this.isHasOdrList = true;
         }
@@ -147,6 +210,10 @@ export class AssignTradeComponent implements OnInit,OnDestroy{
   }
   onLoadMore(comp:InfiniteLoaderComponent){
     this.getOrderPara.pageNum++;
+    if(this.getOrderPara.pageNum>this.allPages+1){
+      comp.resolveLoading();
+      return;
+    }
     this.getOrderList();
     comp.resolveLoading();
   }
@@ -197,9 +264,48 @@ export class AssignTradeComponent implements OnInit,OnDestroy{
   public isShowAlert:boolean = false;
   public isShowDetail:boolean = false;
 
+  picList = [
+    {
+      pId:1001,
+      img:'../../../assets/images/wood_1.png',
+    },
+    {
+      pId:2001,
+      img:'../../../assets/images/wood_1.png',
+    },
+    {
+      pId:1002,
+      img:'../../../assets/images/wood_2.png',
+    },
+    {
+      pId:1003,
+      img:'../../../assets/images/wood_3.png',
+    },
+    {
+      pId:1004,
+      img:'../../../assets/images/wood_4.png',
+    },
+    {
+      pId:1005,
+      img:'../../../assets/images/wood_5.png',
+    },
+    {
+      pId:1006,
+      img:'../../../assets/images/wood_6.png',
+    },
+    {
+      pId:4001,
+      img:'../../../assets/images/green.png',
+    },
+  ];
+
   public headerTitle = '指定交易';
   back(){
     window.history.go(-1);
+  }
+  //底部切换去市场
+  toMarket(){
+    this.router.navigate(['market',this.utl.marketUrl]);
   }
   //打开选择订单详情
   public openDetailBox(detail:any){

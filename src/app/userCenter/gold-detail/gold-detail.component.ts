@@ -16,6 +16,7 @@ export class GoldDetailComponent implements OnInit{
     private ser:CashService,
     private uInfoSer:UserInfoService
   ){}
+  allPages = 10;
   //得到用户信息-金币汇总数据
   public goldInfo:any = {
 
@@ -49,6 +50,10 @@ export class GoldDetailComponent implements OnInit{
   isLoaded = false;//是否加载完毕
   onLoadMore(comp:InfiniteLoaderComponent) {
     this.para.pageNum++;
+    if(this.para.pageNum>this.allPages+1){
+      comp.resolveLoading();
+      return;
+    }
     this.getGoldDetail();
     comp.resolveLoading();
   }
@@ -57,6 +62,7 @@ export class GoldDetailComponent implements OnInit{
     this.ser.getGoldDetial(this.para)
     .then((res:any)=>{
       if(res){
+        this.allPages = res.totalPages;
         if(res.record.length>0){
           this.isHasOdrList = true;
         }

@@ -17,16 +17,16 @@
   <form class="assginForm WrapB">
     <div class="formIpt keyIpt small">
       <div class="title">赠送木材</div>
-      <input class="input" type="text" disabled [(ngModel)]="para.pName" name="woodType" placeholder="请选择">
+      <input class="input sendWood" type="text" disabled [(ngModel)]="para.pName" name="woodType" placeholder="请选择">
       <i feedButton (click)="openAlertBox()" class="selAdon">选择▼</i>
     </div>
     <div class="formIpt keyIpt small">
       <div class="title">接收对象</div>
-      <input class="input" type="number" [(ngModel)]="para.receMobile" name="receivePlayer" placeholder="接收对象">
+      <input class="input receiverUser" autocomplete="off" [ngClass]="{error:!isExistUser,ok:isExistUsers}" type="text" [(ngModel)]="inputPlayer" name="receivePlayer" (keyup)="resetReceiveIput()" (blur)="checkIsHasReceive()" placeholder="接收对象">
     </div>
     <div class="formIpt keyIpt small">
       <div class="title">赠送数量</div>
-      <input class="input" [(ngModel)]="para.cnt" type="number" name="giveNum" placeholder="请输入赠送数量">
+      <input class="input" [(ngModel)]="para.cnt" type="number" name="giveNum" placeholder="请输入赠送数量" (keyup)="calcIpyNum()">
     </div>
     <div class="formIpt keyIpt small">
       <div class="title">索取金币</div>
@@ -148,7 +148,7 @@
       </div>
       <p>行情</p>
     </a>
-    <a feedButton routerLink="/market/1001" class="navItem active">
+    <a feedButton (click)="toMarket()" class="navItem">
       <div class="navIcon">
 
       </div>
@@ -168,9 +168,9 @@
         <div class="noCon" [ngClass]="{hide:isHasWood}">
           您还没有任何木材
         </div>
-        <div class="bankListItem" *ngFor="let item of wooList" (click)="selWood(item.id,item.pName)">
+        <div class="bankListItem" *ngFor="let item of wooList" (click)="selWood(item.pId,item.pName,item.cnt)">
           <div class="bankPic fl">
-            <img src="../../../assets/images/wood_little_icon.png" alt="">
+            <img src="../../../assets/images/wood_little_icon.png" [src]="item.img" alt="">
           </div>
           <div class="woodName fl">
             &nbsp;{{item.pName}}&nbsp; ({{item.marketPrice}})

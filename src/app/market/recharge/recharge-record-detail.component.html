@@ -1,40 +1,44 @@
 <div class="rechargeRecordDetail">
-  <Header
-    [title]="headerTitle"
-    (onVoted)="back()">
-    >
-  </Header>
+  <!--<Header-->
+    <!--[title]="headerTitle"-->
+    <!--(onVoted)="back()">-->
+    <!--&gt;-->
+  <!--</Header>-->
+  <div class="header">
+    <i feedButton class="leftSwordIcon" (click)='close()'></i>
+    <h3 class="headerTitle">充值记录详情</h3>
+  </div>
   <div class="rchRecBase mt80Rem">
     <div class="rchType tc">
       <img src="../../../assets/images/rch_recorde_list_wx.png" alt="">
-      &nbsp;微信支付
+      &nbsp;{{listDetail.rchType=="1"?"微信支付":"支付宝支付"}}
     </div>
     <p class="rchNum tc">
-      +1000
+      +{{listDetail.rchNum}}
     </p>
     <p class="rchSratus tc">
-      充值成功
+      {{listDetail.status=="1"?"充值成功":"充值失败"}}
     </p>
   </div>
   <div class="rchInfoTable">
     <table class="WrapB tableT">
       <tr>
         <td>付款方式</td>
-        <td>微信快捷支付</td>
+        <td>{{listDetail.rchType=="1"?"微信支付":"支付宝支付"}}</td>
       </tr>
       <tr>
         <td>商品说明</td>
-        <td>游戏道具充值</td>
+        <td>{{listDetail.proDesc}}</td>
       </tr>
     </table>
     <table class="WrapB">
       <tr>
         <td>创建时间</td>
-        <td>2017-9-11 16:43:48</td>
+        <td>{{listDetail.time}}</td>
       </tr>
       <tr>
         <td>订单号</td>
-        <td>2017091021001004550293030660</td>
+        <td>{{listDetail.orderNum}}</td>
       </tr>
     </table>
   </div>

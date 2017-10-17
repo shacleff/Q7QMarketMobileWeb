@@ -4,7 +4,29 @@
 @function rem($n) {
   @return ($n/64)+rem;
 }
-
+//flip动画
+@keyframes iFlipy{
+  0%{
+    -webkit-transform: rotateX(0deg); -ms-transform: rotateX(0deg); -o-transform: rotateX(0deg); transform: rotateX(0deg);
+  }
+  100%{
+    -webkit-transform: rotateX(360deg); -ms-transform: rotateX(360deg); -o-transform: rotateX(360deg); transform: rotateX(360deg);
+  }
+}
+@-webkit-keyframes iFlipy{
+  0%{
+    -webkit-transform: rotateX(0deg); -ms-transform: rotateX(0deg); -o-transform: rotateX(0deg); transform: rotateX(0deg);
+  }
+  100%{
+    -webkit-transform: rotateX(360deg); -ms-transform: rotateX(360deg); -o-transform: rotateX(360deg); transform: rotateX(360deg);
+  }
+}
+//定时刷星动画
+.clip{
+  &.ani{
+    animation: iFlipy .8s ease-in-out forwards;
+  }
+}
 //公共变量
 $keyColor:#01ddb6;//主色调
 $whiteColor:#fff;//白色
@@ -712,6 +734,86 @@ $dangerColor:#F18E00;//警告色
 }
 //行情页面
 .quotationBox{
+  .quotationList{
+    width: 100%;
+    overflow: hidden;
+    padding-top: rem(86);
+    padding-bottom: rem(106);
+    background: #fff;
+    li{
+      &.up{
+        .range,.limit,.quoText{
+          color: #ec0000;
+        }
+      }
+      &.down{
+        .range,.limit,.quoText{
+          color: #01ddb6;
+        }
+      }
+      width: 100%;
+      overflow: hidden;
+      height: rem(180);
+      .proBase{
+        height: rem(180);
+        width: rem(180);
+        background: #cef9f1;
+        .baseTop{
+          margin-top: rem(30);
+          width: 100%;
+          overflow: hidden;
+          height: rem(60);
+          text-align: center;
+          line-height: rem(56);
+          font-size: rem(24);
+          color: #000;
+          .proPic{
+            width: rem(60);
+            margin-top: rem(-12);
+          }
+        }
+        .quoText{
+          text-align: center;
+          height: rem(56);
+          line-height: rem(56);
+          font-size: rem(30);
+        }
+      }
+      .proDetail{
+        height: rem(180);
+        width: rem(460);
+        background: #e5fcf8;
+        overflow: hidden;
+        .detailItem{
+          width: 46%;
+          height: rem(180);
+          table{
+            margin-top: rem(30);
+            width: 100%;
+            height: rem(126);
+            tr td{
+              text-align: center;
+              font-size: rem(20);
+              &.highest{
+                color: #ec0000;
+              }
+              &.lowest{
+                color: #01ddb6;
+              }
+            }
+          }
+        }
+      }
+      &:nth-child(even){
+        .proBase{
+          background: #f2fdfb;
+        }
+        .proDetail{
+          background: #ffffff;
+        }
+      }
+    }
+  }
   background: #f5f5f5;
   .quotationTable{
     width: 100%;
@@ -780,6 +882,19 @@ $dangerColor:#F18E00;//警告色
   }
 }
 .marketDetailBox{
+  .changeProType{
+    position: fixed;
+    top: 0;
+    text-align: center;
+    width: 50%;
+    left: 25%;
+    height: rem(80);
+    line-height: rem(80);
+    font-size: rem(32);
+    color: #000;
+    z-index: 9;
+    letter-spacing: 2px;
+  }
   .toAssignTrade{
     position: fixed;
     top:rem(20);
@@ -858,12 +973,12 @@ $dangerColor:#F18E00;//警告色
     }
     .infoRight{
       text-align: center;
-      width: rem(164);
+      width: rem(194);
       height: rem(114);
       table{
         font-size: rem(18);
         color: #444;
-        width: rem(164);
+        width: rem(194);
         height: rem(114);
         .mostUp{
           color: $upColor;
@@ -884,7 +999,7 @@ $dangerColor:#F18E00;//警告色
     }
     position: relative;
     width: 100%;
-    height: rem(186);
+    height: rem(136);
     background: #f5f5f5;
     overflow: visible;
     .dgtOpenBtn{
@@ -903,7 +1018,7 @@ $dangerColor:#F18E00;//警告色
     }
     .tableBox{
       color: #444;
-      height: rem(186);
+      height: rem(136);
       font-size: rem(18);
       overflow: auto;
       table{
@@ -1286,6 +1401,9 @@ $dangerColor:#F18E00;//警告色
 }
 //充值记录页面
 .rechargeRecord{
+  &.hide{
+    display: none
+  }
   .rchRecList{
     background: #fff;
     width: 100%;
@@ -1650,6 +1768,16 @@ $dangerColor:#F18E00;//警告色
         margin-right: rem(15);
         opacity: 0;
       }
+      &.eixtLogin{
+        color: #852929;
+        text-align: center;
+        background: #F8F8F8;
+        border: none;
+        letter-spacing: 2px;
+        &:after{
+          display: none;
+        }
+      }
     }
     &.accountReviseTop{
       .reviseItem{
@@ -1961,6 +2089,17 @@ $dangerColor:#F18E00;//警告色
     .assignSubBtn{
       margin-top: rem(20);
       margin-bottom: rem(26);
+    }
+    .receiverUser{
+      &.error{
+        color: red;
+      }
+      &.ok{
+        color: green;
+      }
+    }
+    .sendWood{
+      color: #000 !important;
     }
   }
   .assginTradeTableWrap{

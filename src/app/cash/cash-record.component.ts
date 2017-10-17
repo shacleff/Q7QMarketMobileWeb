@@ -16,6 +16,7 @@ export class CashRecordComponent implements OnInit{
     private cashSer:CashService,
     private title:Title
   ){}
+  allPages = 10;
   //得到提现列表
   private para:any = {
     pageNum: 1
@@ -39,20 +40,24 @@ export class CashRecordComponent implements OnInit{
   }
   //详情
   detail:any={
-    amt:'',//提现金币数量
-    charge:'',//手续费
-    withdrawTime:'',//时间
-    cardNo:'',//收款账户
-    orderNum:'222',//订单号
-    status:'',//状态
-    statusText:'',//状态文字
+    //amt:'',//提现金币数量
+    //charge:'',//手续费
+    //withdrawTime:'',//时间
+    //cardNo:'',//收款账户
+    //orderNum:'222',//订单号
+    //status:'',//状态
+    //statusText:'',//状态文字
   };
   //列表
   list:any = [
-    this.detail
+    //this.detail
   ];
   onLoadMore(comp:InfiniteLoaderComponent) {
     this.para.pageNum++;
+    if(this.para.pageNum>this.allPages+1){
+      comp.resolveLoading();
+      return;
+    }
     this.getCashList();
     comp.resolveLoading();
   }
@@ -62,6 +67,7 @@ export class CashRecordComponent implements OnInit{
     this.cashSer.getCashList(this.para)
     .then((res:any)=>{
       if(res){
+        this.allPages = res.pages;
         if(res.records.length>0){
           this.isHasOdrList = true;
         }
@@ -71,13 +77,13 @@ export class CashRecordComponent implements OnInit{
         let item = res.records;
         for(let i = 0;i<item.length;i++){
           var temp:any = {};
-          temp.amt = temp[i].amt;
-          temp.charge = temp[i].charge;
-          temp.withdrawTime = temp[i].withdrawTime;
-          temp.cardNo = temp[i].cardNo;
+          temp.amt = item[i].amt;
+          temp.charge = item[i].charge;
+          temp.withdrawTime = item[i].withdrawTime;
+          temp.cardNo = item[i].cardNo;
           temp.orderNum = '7875';
-          temp.status = temp[i].status;
-          temp.statusText = this.showStatus(temp[i].status);
+          temp.status = item[i].status;
+          temp.statusText = this.showStatus(item[i].status);
           this.list.push(temp);
         }
       }

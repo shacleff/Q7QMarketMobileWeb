@@ -37,6 +37,33 @@
   z-index: 10; }
 
 /*遮罩层*/
+@keyframes iFlipy {
+  0% {
+    -webkit-transform: rotateX(0deg);
+    -ms-transform: rotateX(0deg);
+    -o-transform: rotateX(0deg);
+    transform: rotateX(0deg); }
+  100% {
+    -webkit-transform: rotateX(360deg);
+    -ms-transform: rotateX(360deg);
+    -o-transform: rotateX(360deg);
+    transform: rotateX(360deg); } }
+
+@-webkit-keyframes iFlipy {
+  0% {
+    -webkit-transform: rotateX(0deg);
+    -ms-transform: rotateX(0deg);
+    -o-transform: rotateX(0deg);
+    transform: rotateX(0deg); }
+  100% {
+    -webkit-transform: rotateX(360deg);
+    -ms-transform: rotateX(360deg);
+    -o-transform: rotateX(360deg);
+    transform: rotateX(360deg); } }
+
+.clip.ani {
+  animation: iFlipy .8s ease-in-out forwards; }
+
 /*共用类*/
 .w100 {
   width: 100%; }
@@ -608,6 +635,64 @@
 
 .quotationBox {
   background: #f5f5f5; }
+  .quotationBox .quotationList {
+    width: 100%;
+    overflow: hidden;
+    padding-top: 1.34375rem;
+    padding-bottom: 1.65625rem;
+    background: #fff; }
+    .quotationBox .quotationList li {
+      width: 100%;
+      overflow: hidden;
+      height: 2.8125rem; }
+      .quotationBox .quotationList li.up .range, .quotationBox .quotationList li.up .limit, .quotationBox .quotationList li.up .quoText {
+        color: #ec0000; }
+      .quotationBox .quotationList li.down .range, .quotationBox .quotationList li.down .limit, .quotationBox .quotationList li.down .quoText {
+        color: #01ddb6; }
+      .quotationBox .quotationList li .proBase {
+        height: 2.8125rem;
+        width: 2.8125rem;
+        background: #cef9f1; }
+        .quotationBox .quotationList li .proBase .baseTop {
+          margin-top: 0.46875rem;
+          width: 100%;
+          overflow: hidden;
+          height: 0.9375rem;
+          text-align: center;
+          line-height: 0.875rem;
+          font-size: 0.375rem;
+          color: #000; }
+          .quotationBox .quotationList li .proBase .baseTop .proPic {
+            width: 0.9375rem;
+            margin-top: -0.1875rem; }
+        .quotationBox .quotationList li .proBase .quoText {
+          text-align: center;
+          height: 0.875rem;
+          line-height: 0.875rem;
+          font-size: 0.46875rem; }
+      .quotationBox .quotationList li .proDetail {
+        height: 2.8125rem;
+        width: 7.1875rem;
+        background: #e5fcf8;
+        overflow: hidden; }
+        .quotationBox .quotationList li .proDetail .detailItem {
+          width: 46%;
+          height: 2.8125rem; }
+          .quotationBox .quotationList li .proDetail .detailItem table {
+            margin-top: 0.46875rem;
+            width: 100%;
+            height: 1.96875rem; }
+            .quotationBox .quotationList li .proDetail .detailItem table tr td {
+              text-align: center;
+              font-size: 0.3125rem; }
+              .quotationBox .quotationList li .proDetail .detailItem table tr td.highest {
+                color: #ec0000; }
+              .quotationBox .quotationList li .proDetail .detailItem table tr td.lowest {
+                color: #01ddb6; }
+      .quotationBox .quotationList li:nth-child(even) .proBase {
+        background: #f2fdfb; }
+      .quotationBox .quotationList li:nth-child(even) .proDetail {
+        background: #ffffff; }
   .quotationBox .quotationTable {
     width: 100%; }
     .quotationBox .quotationTable tr {
@@ -655,6 +740,19 @@
       height: 5.625rem;
       width: 100%;
       background: #fff; }
+
+.marketDetailBox .changeProType {
+  position: fixed;
+  top: 0;
+  text-align: center;
+  width: 50%;
+  left: 25%;
+  height: 1.25rem;
+  line-height: 1.25rem;
+  font-size: 0.5rem;
+  color: #000;
+  z-index: 9;
+  letter-spacing: 2px; }
 
 .marketDetailBox .toAssignTrade {
   position: fixed;
@@ -721,12 +819,12 @@
         color: #01ddb6; }
   .marketDetailBox .marketBaseInfo .infoRight {
     text-align: center;
-    width: 2.5625rem;
+    width: 3.03125rem;
     height: 1.78125rem; }
     .marketDetailBox .marketBaseInfo .infoRight table {
       font-size: 0.28125rem;
       color: #444;
-      width: 2.5625rem;
+      width: 3.03125rem;
       height: 1.78125rem; }
       .marketDetailBox .marketBaseInfo .infoRight table .mostUp {
         color: #dd0125; }
@@ -737,7 +835,7 @@
   transition: all linear 300ms;
   position: relative;
   width: 100%;
-  height: 2.90625rem;
+  height: 2.125rem;
   background: #f5f5f5;
   overflow: visible; }
   .marketDetailBox .dgtTableWrap.close {
@@ -758,7 +856,7 @@
       transform: rotate(180deg); }
   .marketDetailBox .dgtTableWrap .tableBox {
     color: #444;
-    height: 2.90625rem;
+    height: 2.125rem;
     font-size: 0.28125rem;
     overflow: auto; }
     .marketDetailBox .dgtTableWrap .tableBox table {
@@ -1053,6 +1151,9 @@
       text-align: right;
       color: #000; }
 
+.rechargeRecord.hide {
+  display: none; }
+
 .rechargeRecord .rchRecList {
   background: #fff;
   width: 100%; }
@@ -1329,6 +1430,14 @@
     width: 0.39063rem;
     margin-right: 0.23438rem;
     opacity: 0; }
+  .userCenter .accountRevise .reviseItem.eixtLogin {
+    color: #852929;
+    text-align: center;
+    background: #F8F8F8;
+    border: none;
+    letter-spacing: 2px; }
+    .userCenter .accountRevise .reviseItem.eixtLogin:after {
+      display: none; }
 
 .userCenter .accountRevise.accountReviseTop .reviseItem:nth-child(1) {
   background: url("../images/center_list_mobile.png") no-repeat 0.3125rem;
@@ -1555,6 +1664,12 @@
   .assignTrade .assginForm .assignSubBtn {
     margin-top: 0.3125rem;
     margin-bottom: 0.40625rem; }
+  .assignTrade .assginForm .receiverUser.error {
+    color: red; }
+  .assignTrade .assginForm .receiverUser.ok {
+    color: green; }
+  .assignTrade .assginForm .sendWood {
+    color: #000 !important; }
 
 .assignTrade .assginTradeTableWrap {
   height: 4.6875rem;

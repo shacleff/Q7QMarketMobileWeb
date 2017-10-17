@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit,AfterViewChecked{
     this.tips.msg(msg);
   }
   public loginData = {
-    account:"13855418476",
+    account:"13612345678",
     password:"123456"
   };
   public logIn(){

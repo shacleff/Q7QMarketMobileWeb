@@ -35,6 +35,7 @@ export class EntrustOrderComponent implements OnInit{
   };
   isHasOdrList = false;//默认没有委托订单、
   isLoaded = false;//是否加载完毕
+  allPages:any = 10;//默认列表总页数为10
   //订单列表
   isHasList = false;
   isShowDetail = false;//是否显示详情
@@ -61,6 +62,10 @@ export class EntrustOrderComponent implements OnInit{
   ];
   onLoadMore(comp:InfiniteLoaderComponent) {
     this.para.pageNum++;
+    if(this.para.pageNum>this.allPages+1){
+      comp.resolveLoading();
+      return;
+    }
     this.getEtuList(this.para);
     comp.resolveLoading();
   }
@@ -69,6 +74,7 @@ export class EntrustOrderComponent implements OnInit{
     this.etuOdrSer.getEtuList(options)
     .then((res:any)=>{
       if(res){
+        this.allPages = res.pages;
         if(res.records.length>0){
           this.isHasOdrList = true;
         }
@@ -79,13 +85,13 @@ export class EntrustOrderComponent implements OnInit{
         if(items.length>0){this.isHasList = true};
         for(let i = 0;i<items.length;i++){
           let temp:any = {};
-          temp.proName = items.proName;
-          temp.enType = items.enType;
-          temp.enTime = items.enTime;
-          temp.enCnt = items.enCnt;
-          temp.trCnt = items.trCnt;
-          temp.trStatus = this.util.toSts(items.trStatus);
-          temp.enPrice = items.enPrice.toFixed(5);
+          temp.proName = items[i].proName;
+          temp.enType = items[i].enType;
+          temp.enTime = items[i].enTime;
+          temp.enCnt = items[i].enCnt;
+          temp.trCnt = items[i].trCnt;
+          temp.trStatus = this.util.toSts(items[i].trStatus);
+          temp.enPrice = (items[i].enPrice).toFixed(5);
           this.orderList.push(temp);
         }
       }
