@@ -1,31 +1,59 @@
-import {Component} from '@angular/core'
+import {Component,OnInit} from '@angular/core'
 import {RegistService} from "./regist.service";
 import {TipsService} from "../service/tips.service";
 import {UtilService} from "../service/util.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector:'regist-el',
   templateUrl:'./regist.component.html'
 })
 
-export class RegistComponent{
+export class RegistComponent implements OnInit{
   constructor(
     private tips:TipsService,
     private util:UtilService,
-    private regSer:RegistService
+    private regSer:RegistService,
+    private title:Title
   ){}
+  ngOnInit(){
+    this.hideClause();
+    this.getCaptcha();
+    this.title.setTitle('注册');
+    //this.tips.showLayer();
+  }
+  //图形验证码
+  codeUrl:any;
+  public getCaptcha() {
+    let captchaCode = this.util.createUUID();
+    this.reg.captchaCode = captchaCode;
+    this.codeUrl = '/market/captcha-image' + '?ck=' + captchaCode + '&' + new Date().getTime();
+  }
 
   private timer = 60;//60s后重新获取
   canGetVcode = true;//是否可以的到验证码
   private interVal = null;//定时器
 
+  //是否同意条款
+  public isAgreenClause = false;
+  //是否显示条款
+  public isShowClause = false;
+
   public registSuccess = false;//未注册成功
 
   public getCodeText = '获取验证码';
 
+  showClasue(){
+    this.tips.showLayer();
+    this.isShowClause = true;
+  }
+  hideClause(){
+    this.tips.hideLayer();
+    this.isShowClause = false;
+  }
   public reg = {
-    "captchaCode": " ",
-    "captchaValue": " ",
+    "captchaCode": " ",//图形验证码后缀uuid
+    "captchaValue": " ",//图形验证码
     "cardId": "",//身份证号码
     "channel": "",//渠道
     "code": "",//验证码
@@ -82,14 +110,16 @@ export class RegistComponent{
 
     if(!this.reg.cardId){this.tips.msg('请输入身份证号'); return};
     if(!this.util.regExp().name.test(this.reg.cardId)){this.tips.msg('请输入正确身份证号'); return};
-
+    if(!this.reg.captchaValue){this.tips.msg('请输入图形验证码');return;};
     if(!this.reg.code){this.tips.msg('请输入短信验证码'); return};
 
     if(!this.reg.password){this.tips.msg('请输入密码'); return};
     if(this.reg.password.length>18||this.reg.password.length<6){this.tips.msg('请输入6-18位密码'); return};
 
     if(!(this.reg.password==this.passwordAgain)){this.tips.msg('两次密码不一致'); return};
-
+    if(!this.isAgreenClause){
+      this.tips.msg('请同意绿色家园服务条款'); return
+    }
     this.regSer.regist(this.reg)
     .then((res:any)=>{
       if(res){
@@ -100,7 +130,7 @@ export class RegistComponent{
     });
   }
 
-  public headerTitile = '我的家园';
+  public headerTitile = '用户注册';
   back() {
     window.history.go(-1);
   }

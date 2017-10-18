@@ -3,7 +3,7 @@ import {Router} from '@angular/router'
 
 import {LoginService} from './login.service'
 import {AuthService} from '../service/auth.service'
-
+import {Title} from "@angular/platform-browser";
 import {TipsService} from "../service/tips.service";
 import {UtilService} from "../service/util.service";
 @Component({
@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit,AfterViewChecked{
       private toLogin:LoginService,
       private tips:TipsService,
       private util:UtilService,
-      public authService:AuthService
+      public authService:AuthService,
+      private title:Title
   ){
 
   };
@@ -68,6 +69,7 @@ export class LoginComponent implements OnInit,AfterViewChecked{
     }
   }
   ngOnInit(){
+    this.title.setTitle('登录');
   }
   ngAfterViewChecked(){
     //$("#ff").hide();

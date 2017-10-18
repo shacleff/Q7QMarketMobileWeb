@@ -13,36 +13,36 @@
       </div>
       <div class="proDetail fr">
         <div class="detailItem fl itemL">
-          <table class="itemTab">
-            <tr>
-              <td>今开</td>
-              <td class="clip ani">{{item.toOpenPrice}}</td>
-            </tr>
-            <tr>
-              <td>最高</td>
-              <td class="highest clip ani">{{item.heightPrice}}</td>
-            </tr>
-            <tr>
-              <td>最低</td>
-              <td class="lowest clip ani">{{item.lowPrice}}</td>
-            </tr>
-          </table>
+          <dl class="itemTab">
+            <div class="dt">
+              <dd class="nth">今开</dd>
+              <dd class="clip ani">{{item.toOpenPrice}}</dd>
+            </div>
+            <div class="dt">
+              <dd class="nth">最高</dd>
+              <dd class="highest clip ani">{{item.heightPrice}}</dd>
+            </div>
+            <div class="dt">
+              <dd class="nth">最低</dd>
+              <dd class="lowest clip ani">{{item.lowPrice}}</dd>
+            </div>
+          </dl>
         </div>
         <div class="detailItem fr itemR">
-          <table class="itemTab">
-            <tr>
-              <td>涨跌幅</td>
-              <td class="range clip ani">{{item.changeRate}}%</td>
-            </tr>
-            <tr>
-              <td>涨跌额</td>
-              <td class="limit clip ani">{{item.changePrice}}</td>
-            </tr>
-            <tr>
-              <td>成交量</td>
-              <td class="clip ani">{{item.tranVolume}}</td>
-            </tr>
-          </table>
+          <dl class="itemTab">
+            <div class="dt">
+              <dd>涨跌幅</dd>
+              <dd class="range clip ani">{{item.changeRate}}%</dd>
+            </div>
+            <div class="dt">
+              <dd>涨跌额</dd>
+              <dd class="limit clip ani">{{item.changePrice}}</dd>
+            </div>
+            <div class="dt">
+              <dd>成交量</dd>
+              <dd class="clip ani">{{item.tranVolume}}</dd>
+            </div>
+          </dl>
         </div>
       </div>
     </li>

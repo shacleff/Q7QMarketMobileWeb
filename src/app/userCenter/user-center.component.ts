@@ -3,7 +3,7 @@ import {TipsService} from "../service/tips.service";
 import {UserCenterService} from "./user-center.service";
 import {Router} from '@angular/router';
 import {UtilService} from "../service/util.service";
-
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector:'user-center',
@@ -14,7 +14,8 @@ export class UserCenterComponent implements OnInit{
     private tips:TipsService,
     private uctSer:UserCenterService,
     private router:Router,
-    private util:UtilService
+    private util:UtilService,
+    private title:Title
   ){}
 
   //玩家信息
@@ -52,5 +53,6 @@ export class UserCenterComponent implements OnInit{
   }
   ngOnInit(){
     this.getUserInfo();
+    this.title.setTitle('个人中心');
   }
 }

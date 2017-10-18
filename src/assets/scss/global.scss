@@ -27,6 +27,10 @@
     animation: iFlipy .8s ease-in-out forwards;
   }
 }
+//输入框placeholder颜色
+::-webkit-input-placeholder { /* WebKit browsers */
+  color: #aaa;
+}
 //公共变量
 $keyColor:#01ddb6;//主色调
 $whiteColor:#fff;//白色
@@ -571,9 +575,65 @@ $dangerColor:#F18E00;//警告色
 }
 /*页面*/
 //注册页
+.readcClauseBox{
+  &.hide{
+    display: none;
+  }
+  position: fixed;
+  z-index: 11;
+  height: rem(640);
+  width:80%;
+  left: 10%;
+  border-radius: rem(8);
+  overflow: hidden;
+  background: #fff;
+  .clauseHeader{
+    position: relative;
+    height: rem(60);
+    line-height: rem(60);
+    background: $keyColor;
+    color: #fff;
+    text-align: center;
+    font-size: rem(26);
+    .close{
+      display: block;
+      height: rem(60);
+      width: rem(60);
+      position: absolute;
+      top:0;
+      font-size: rem(36);
+      right: 0;
+    }
+  }
+  .clauseBoxCon{
+    height: rem(480);
+    padding: rem(20) rem(20);
+    font-size: rem(22);
+    color: #777;
+    text-align: left;
+    text-indent: rem(40);
+    line-height: rem(30);
+    letter-spacing: 1px;
+    overflow: scroll;
+  }
+  .okClose{
+    width: 100%;
+    height: rem(60);
+    line-height: rem(60);
+    text-align: center;
+    color: #fff;
+    background: #01ddb6;
+    font-size: rem(24);
+    letter-spacing: 2px;
+  }
+}
 .registBox{
   &.hide{
     display: none;
+  }
+  .cluaseCheck{
+    vertical-align: middle;
+    margin-bottom: 2px;
   }
   .regBanner{
     margin-top: rem(80);
@@ -583,6 +643,18 @@ $dangerColor:#F18E00;//警告色
     background-size: 100% 100%;
   }
   .regForm{
+    //服务条款
+    .clause{
+      text-align: left;
+      height: rem(60);
+      line-height: rem(60);
+      font-size: rem(22);
+      color: #999;
+      margin-top: rem(0);
+      i{
+        color: $keyColor;
+      }
+    }
     .getMsgCode{
       .getVerCode{
         position: absolute;
@@ -604,6 +676,9 @@ $dangerColor:#F18E00;//警告色
     background: #f7f7f7;
     width: 100%;
     .inputCtr{
+      .getCapCode{
+
+      }
       .leftIcon{
         &.reg_mobile{
           background: url(../images/regist_mobile.png) no-repeat left;
@@ -621,6 +696,10 @@ $dangerColor:#F18E00;//警告色
           background: url(../images/regist_vercode.png) no-repeat left;
           background-size: 50%;
         }
+        &.reg_capcode{
+          background: url(../images/regist_msgcode.png) no-repeat left;
+          background-size: 50%;
+        }
         &.reg_pwd{
           background: url(../images/regist_pwd.png) no-repeat left;
           background-size: 50%;
@@ -636,7 +715,7 @@ $dangerColor:#F18E00;//警告色
       }
     }
     .regBtn{
-      margin-top: rem(106);
+      margin-top: rem(36);
     }
   }
 }
@@ -785,14 +864,33 @@ $dangerColor:#F18E00;//警告色
         background: #e5fcf8;
         overflow: hidden;
         .detailItem{
-          width: 46%;
+          &.itemL{
+            margin-left: 4%;
+          }
+          width: 48%;
           height: rem(180);
-          table{
+          dl{
+            .dt{
+              overflow: hidden;
+              dd{
+                &:nth-child(1){
+                  width: 40%;
+                  &.nth{
+                    text-indent: rem(20);
+                  }
+                }
+                &:nth-child(2){
+                  width: 60%;
+                }
+              }
+            }
             margin-top: rem(30);
             width: 100%;
             height: rem(126);
-            tr td{
-              text-align: center;
+            .dt dd{
+              line-height: rem(41);
+              float: left;
+              text-align: left;
               font-size: rem(20);
               &.highest{
                 color: #ec0000;
@@ -1564,6 +1662,10 @@ $dangerColor:#F18E00;//警告色
 }
 //推广链接
 .promoteLink{
+  .promoteLinkText{
+    text-align: center;
+    margin-bottom: rem(56);
+  }
   .prtCodeText{
     width: 100%;
     height: rem(196);
@@ -1586,8 +1688,8 @@ $dangerColor:#F18E00;//警告色
   }
   .prtCodeCon{
     width: rem(300);
-    height: rem(350);
-    margin: rem(36) auto rem(66) auto;
+    height: rem(310);
+    margin: rem(36) auto rem(10) auto;
     box-sizing: border-box;
     border: 1px solid #4c726a;
     border-radius: rem(6);
