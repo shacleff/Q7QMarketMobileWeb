@@ -1,5 +1,5 @@
 import {Component,OnInit} from '@angular/core';
-import {Router} from '@angular/Router'
+import {Router} from '@angular/router'
 import {TipsService} from "../../service/tips.service";
 import { Title } from '@angular/platform-browser';
 import {TradeRecordService} from "./trade-record.service";

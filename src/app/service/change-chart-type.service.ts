@@ -93,7 +93,7 @@ export class ChangeChartTypeService{
         right: '0%',
         bottom: '0%',
         top: '0%',
-        height: '45%'
+        height: '249px'
       }],
       series: [
         {
@@ -200,7 +200,7 @@ export class ChangeChartTypeService{
         right: '0%',
         bottom: '0%',
         top: '0%',
-        height: '45%'
+        height: '249px'
       }],
       animation: true,
       series: [

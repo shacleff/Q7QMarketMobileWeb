@@ -3,6 +3,7 @@ import {RegistService} from "./regist.service";
 import {TipsService} from "../service/tips.service";
 import {UtilService} from "../service/util.service";
 import {Title} from "@angular/platform-browser";
+import {Router} from "@angular/router";
 
 @Component({
   selector:'regist-el',
@@ -14,9 +15,11 @@ export class RegistComponent implements OnInit{
     private tips:TipsService,
     private util:UtilService,
     private regSer:RegistService,
-    private title:Title
+    private title:Title,
+    private router:Router
   ){}
   ngOnInit(){
+    this.getUrlCheckOrigin();
     this.hideClause();
     this.getCaptcha();
     this.title.setTitle('注册');
@@ -24,6 +27,14 @@ export class RegistComponent implements OnInit{
   }
   //图形验证码
   codeUrl:any;
+  //是否是从web平台的游戏端跳转过来的-默认false
+  isFormWebGame = false;
+  //通过url判断是否是从web平台游戏端跳转过来的
+  private getUrlCheckOrigin(){
+    let origin = this.router.url.split("=")[1];
+    // console.log(origin);
+    this.isFormWebGame = origin=="web"?true:false;
+  }
   public getCaptcha() {
     let captchaCode = this.util.createUUID();
     this.reg.captchaCode = captchaCode;
@@ -125,7 +136,14 @@ export class RegistComponent implements OnInit{
       if(res){
         console.log(res);
         this.tips.msg('注册成功');
-        this.registSuccess = true;//注册成功
+        //如果是从web游戏跳转过来返回游戏
+        if(this.isFormWebGame){
+          setTimeout(()=>{
+            window.history.back();
+          },1000);
+        }else{
+          this.registSuccess = true;//注册成功
+        }
       }
     });
   }

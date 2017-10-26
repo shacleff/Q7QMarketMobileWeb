@@ -26,8 +26,8 @@ export class LoginComponent implements OnInit,AfterViewChecked{
     this.tips.msg(msg);
   }
   public loginData = {
-    account:"13612345678",
-    password:"123456"
+    account:"",
+    password:""
   };
   public logIn(){
     if(!this.util.regExp().mobileNum.test(this.loginData.account)){
@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit,AfterViewChecked{
       this.showTips('密码长度为6-18位');
       return;
     }else{
-
       this.toLogin.logIn(
         {
           "clientId": "098f6bcd4621d373cade4e832627b4f6",
@@ -52,7 +51,7 @@ export class LoginComponent implements OnInit,AfterViewChecked{
         if(res){
           this.showTips('登录成功');
           console.log(res);
-          let token = res.token_type+' '+res.access_token;
+          let token = res.tokenType+' '+res.accessToken;
           localStorage.setItem('token',token);
           this.authService.isLoggedIn = true;
           let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/market';

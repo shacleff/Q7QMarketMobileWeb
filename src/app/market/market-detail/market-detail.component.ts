@@ -31,6 +31,8 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
     private title:Title,
     private qotSer:QuotationService//行情服务
   ){}
+  //图标的高度
+  private chartHeight;
   //刷新数据执行动画参数
   isip = true;
   //定时刷新Interval
@@ -97,6 +99,7 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
       if(res){
         let kDatas = this.util.splitData(res);
         this.option = this.Ctype.kOption(kDatas.categoryData,kDatas.values);
+        this.option.grid[0].height = this.chartHeight;
         this.chartType = 1;
         this.initChart();
       }
@@ -109,6 +112,7 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
       if(res){
         let fRawData = this.util.buildFLineDatas(res);
         this.option = this.Ctype.fOption(fRawData.date,fRawData.data,this.echarts);
+        this.option.grid[0].height = this.chartHeight;
         this.chartType = 2;
         this.initChart();
       }
@@ -463,9 +467,9 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
     this.interVal = setInterval(()=>{
       this.getProDetail();
       if(this.chartType==1){
-        this.changeToKLine();
+        // this.changeToKLine();//不定时更新图标
       }else{
-        this.changeToFLine();
+        // this.changeToFLine();//不定时更新图标
       }
     },10*1000)
   }
@@ -484,7 +488,21 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
     this.showSaleBox(false);
     clearInterval(this.interVal);
   }
+  //设置图表容器高度
+  setChartHeight(){
+    let winH = $(window).height();
+    let baseH = $(".marketBaseInfo").height();
+    let headH = $(".header").height();
+    let open3H = $(".dgtTableWrap").height();
+    let chartTH = $(".chartChange").height();
+    let oprBtnWrapH = $(".oprBtnWrap").height();
+    let footerH = $(".footer").height();
+    let cH = winH-(baseH+headH+open3H+chartTH+oprBtnWrapH+footerH)-60;
+    this.chartHeight = cH;
+    $(".chart").height(cH);
+  }
   ngAfterViewInit(){
+    this.setChartHeight();
     this.changeToKLine();
   }
 }
