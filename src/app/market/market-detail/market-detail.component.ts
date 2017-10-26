@@ -33,6 +33,8 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
   ){}
   //图标的高度
   private chartHeight;
+  //变化的搞得
+  private changeHeight;
   //刷新数据执行动画参数
   isip = true;
   //定时刷新Interval
@@ -294,6 +296,13 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
   //打开关闭买五卖五
   showBuySaleBox(){
     this.isShowBuySale = !this.isShowBuySale;
+    if(this.isShowBuySale){
+      this.chartHeight-=this.changeHeight;
+    }else{
+      this.chartHeight+=this.changeHeight;
+    }
+    this.option.grid[0].height = this.chartHeight;
+    this.initChart();
   }
   //初始化买五卖五
   initBuySaleFive(eMap:any){
@@ -494,6 +503,7 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
     let baseH = $(".marketBaseInfo").height();
     let headH = $(".header").height();
     let open3H = $(".dgtTableWrap").height();
+    this.changeHeight = open3H;
     let chartTH = $(".chartChange").height();
     let oprBtnWrapH = $(".oprBtnWrap").height();
     let footerH = $(".footer").height();
