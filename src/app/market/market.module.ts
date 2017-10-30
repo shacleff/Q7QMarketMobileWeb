@@ -43,6 +43,7 @@ import {AssignTradeService} from "./assign-trade/assign-trade.service";
 import {CashService} from "../cash/cash.service";
 import {PromoteService} from "../promote/promote.service";
 import {AlterAccountService} from "../userCenter/alter-account/alter-account.service";
+import {SkipPageComponent} from "../component/skipPage/skip-page.component";
 
 @NgModule({
   declarations:[
@@ -75,6 +76,7 @@ import {AlterAccountService} from "../userCenter/alter-account/alter-account.ser
     EntrustOrderComponent,
     EntrustOrderDetailComponent,
     NameAuthComponent,
+    SkipPageComponent
   ],
   imports:[
     SharedModule,

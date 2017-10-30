@@ -31,6 +31,7 @@ import {TradeRecordDetailComponent} from "../userCenter/trade-record/trade-recor
 import {EntrustOrderComponent} from "../userCenter/entrust-order/entrust-order.component";
 import {EntrustOrderDetailComponent} from "../userCenter/entrust-order/entrust-order-detail.component";
 import {NameAuthComponent} from "../userCenter/name-auth/name-auth.component";
+import {SkipPageComponent} from "../component/skipPage/skip-page.component";
 
 const marketRoutes:Routes=[
   {
@@ -146,6 +147,10 @@ const marketRoutes:Routes=[
   {
     path:'nameAuth',
     component:NameAuthComponent
+  },
+  {
+    path:'skipPage',
+    component:SkipPageComponent
   }
 ];
 

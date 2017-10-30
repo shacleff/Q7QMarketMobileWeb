@@ -1,13 +1,13 @@
 //切换图标类型脚本
-export class ChangeChartTypeService{
+export class ChangeChartTypeService {
 
   //标准时间格式转换成日期
-  public tra(str2){
-    let str:any = str2.substring(0, 24);
+  public tra(str2) {
+    let str: any = str2.substring(0, 24);
     var d = new Date(str);
-    var a:any = [d.getFullYear(), d.getMonth() + 1, d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds()];
-    for(var i = 0, len = a.length; i < len; i ++) {
-      if(a[i] < 10) {
+    var a: any = [d.getFullYear(), d.getMonth() + 1, d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds()];
+    for (var i = 0, len = a.length; i < len; i++) {
+      if (a[i] < 10) {
         a[i] = '0' + a[i];
       }
     }
@@ -15,17 +15,26 @@ export class ChangeChartTypeService{
     return str.split(' ')[0];
   }
 
-  public fOption(date,data,_echarts){//分时图配置
+  public calculateMA(dayCount, data) {
+    var result = [];
+    for (var i = 0, len = data.length; i < len; i++) {
+      if (i < dayCount) {
+        result.push('-');
+        continue;
+      }
+      var sum = 0;
+      for (var j = 0; j < dayCount; j++) {
+        sum += data[i - j][1];
+      }
+      result.push(sum / dayCount);
+    }
+    return result;
+  }
+
+  public fOption(date, data, _echarts) {//分时图配置
     var self = this;
-    return{
-      background:'#fffff',
-      //tooltip: {
-      //  show:false,
-      //  trigger: 'axis',
-      //  position: function (pt) {
-      //    return [pt[0], '10%'];
-      //  }
-      //},
+    return {
+      background: '#fffff',
       tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -33,13 +42,12 @@ export class ChangeChartTypeService{
         }
         ,
         backgroundColor: 'rgba(245, 245, 245, 0.8)',
-        borderWidth: 1,
         borderColor: '#ccc',
         textStyle: {
           color: '#000'
         },
         formatter: function (params, ticket, callback) {
-          var str = self.tra((new Date()).toString())+ "<br>";
+          var str = self.tra((new Date()).toString()) + "<br>";
           var val = "";
           var nowPrice = "";
           var avgPrice = "";
@@ -64,47 +72,65 @@ export class ChangeChartTypeService{
         type: 'category',
         boundaryGap: false,
         data: date,
-        splitLine:{//分割线
-          show:true,
-          lineStyle:{
+        splitLine: {//分割线
+          show: true,
+          lineStyle: {
             color: ['#f4f4f4'],
             width: 1,
             type: 'solid'
           }
         },
-        axisLine: { lineStyle: { color: '#bbb' } },
+        axisLine: {
+          lineStyle: {color: '#bbb'}
+        },
       },
       yAxis: {
-        show:true,
+        show: true,
         type: 'value',
+        scale: true,
         boundaryGap: [0, '100%'],
-        splitLine:{//分割线
-          show:true,
-          lineStyle:{
+        splitLine: {//分割线
+          show: true,
+          lineStyle: {
             color: ['#f4f4f4'],
             width: 1,
             type: 'solid'
           }
         },
-        axisLine: { lineStyle: { color: '#bbb' } },
+        axisLine: {
+          lineStyle: {color: '#bbb'}
+        },
+        axisLabel: {
+          margin: -38,
+        }
       },
       grid: [{
-        left: '8%',
+        left: '0%',
         right: '0%',
         bottom: '0%',
-        top: '0%',
+        top: '-2%',
         height: '249px'
       }],
       series: [
         {
-          name:'模拟数据',
-          type:'line',
-          smooth:true,
+          name: '模拟数据',
+          type: 'line',
+          smooth: true,
           symbol: 'none',
           sampling: 'average',
           itemStyle: {
             normal: {
-              color: 'rgb(255, 70, 131)'
+              color: 'rgb(125,179,220)',
+            }
+          },
+          lineStyle: {
+            normal: {
+              width: 1
+            }
+          },
+          areaStyle: {
+            normal: {
+              color: '#B2D6F2',
             }
           },
           data: data
@@ -113,11 +139,12 @@ export class ChangeChartTypeService{
     }
   }
 
-  public kOption(dates,data){//k线图配置
-    return{
+  public kOption(dates, data) {//k线图配置
+    var self = this;
+    return {
       backgroundColor: '#ffffff',//图表背景色
       tooltip: {
-        show:true,
+        show: true,
         trigger: 'axis',
         formatter: function (params, ticket, callback) {
           var str = '';
@@ -145,61 +172,53 @@ export class ChangeChartTypeService{
         axisPointer: {
           animation: false,
           type: 'cross',
-          lineStyle: {
-            color: '#376df4',
-            width: 2,
-            opacity: 1
-          }
         }
       },
       xAxis: {
         type: 'category',
         data: dates,
         scale: true,
-        axisTick:{
-          inside:true,
-        },
-        axisLabel:{
-          //margin:-38,
-        },
-        splitLine:{//分割线
-          show:true,
-          lineStyle:{
+        splitLine: {//分割线
+          show: true,
+          lineStyle: {
             color: ['#f4f4f4'],
             width: 1,
             type: 'solid'
           }
         },
-        axisLine: { lineStyle: { color: '#bbb' } },
-        textStyle:{
-          fontSize:10
+        textStyle: {
+          fontSize: 10
         }
       },
       yAxis: {
-        show:true,
+        show: true,
         scale: true,
-        axisLine: { lineStyle: { color: '#bbb' } },
-        axisTick:{
-          inside:true,
+        axisTick: {
+          inside: true,
         },
-        splitLine:{//分割线
-            show:true,
-          lineStyle:{
+        splitLine: {//分割线
+          show: true,
+          lineStyle: {
             color: ['#f4f4f4'],
             width: 1,
             type: 'solid'
           }
         },
-        axisLabel:{
+        axisLabel: {
           //rotate:30,
-          //margin:-38,
+          margin: -38,
         },
       },
+      dataZoom: [{
+        type: 'inside',
+        startValue: dates.length - 30,
+        endValue: dates.length,
+      }],
       grid: [{
-        left: '10%',
+        left: '0%',
         right: '0%',
         bottom: '0%',
-        top: '0%',
+        top: '2%',
         height: '249px'
       }],
       animation: true,
@@ -217,6 +236,42 @@ export class ChangeChartTypeService{
             }
           }
         },
+        /*{
+          name: 'MA5',
+          type: 'line',
+          data: self.calculateMA(5,dates),
+          smooth: true,
+          lineStyle: {
+            normal: {opacity: 0.5}
+          }
+        },
+        {
+          name: 'MA10',
+          type: 'line',
+          data: self.calculateMA(10,dates),
+          smooth: true,
+          lineStyle: {
+            normal: {opacity: 0.5}
+          }
+        },
+        {
+          name: 'MA20',
+          type: 'line',
+          data: self.calculateMA(20,dates),
+          smooth: true,
+          lineStyle: {
+            normal: {opacity: 0.5}
+          }
+        },
+        {
+          name: 'MA30',
+          type: 'line',
+          data: self.calculateMA(30,dates),
+          smooth: true,
+          lineStyle: {
+            normal: {opacity: 0.5}
+          }
+        }*/
       ]
     }
   }

@@ -29,11 +29,13 @@ export class RegistComponent implements OnInit{
   codeUrl:any;
   //是否是从web平台的游戏端跳转过来的-默认false
   isFormWebGame = false;
+  isFormNativeGame = false;
   //通过url判断是否是从web平台游戏端跳转过来的
   private getUrlCheckOrigin(){
     let origin = this.router.url.split("=")[1];
     // console.log(origin);
     this.isFormWebGame = origin=="web"?true:false;
+    this.isFormNativeGame = origin=="native"?true:false;
   }
   public getCaptcha() {
     let captchaCode = this.util.createUUID();
@@ -141,6 +143,8 @@ export class RegistComponent implements OnInit{
           setTimeout(()=>{
             window.history.back();
           },1000);
+        }else if(this.isFormNativeGame){
+          this.tips.msg('注册成功,请返回游戏登录');
         }else{
           this.registSuccess = true;//注册成功
         }
