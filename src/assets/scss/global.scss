@@ -1,6 +1,10 @@
 //@import "./reset";
 @import "./component";
 //rem转换
+//*{
+//  max-width: 600px !important;
+//  margin:0 auto;
+//}
 @function rem($n) {
   @return ($n/64)+rem;
 }
@@ -1912,10 +1916,14 @@ $dangerColor:#F18E00;//警告色
           background-size: rem(25) auto;
         }
         &:nth-child(3){
-          background: url("../images/center_list_money-detail.png") no-repeat rem(20);
+          background: url("../images/my_goods_icon.png") no-repeat rem(20);
           background-size: rem(25) auto;
         }
         &:nth-child(4){
+          background: url("../images/center_list_money-detail.png") no-repeat rem(20);
+          background-size: rem(25) auto;
+        }
+        &:nth-child(5){
           background: url("../images/center_list_prt.png") no-repeat rem(20);
           background-size: rem(25) auto;
         }
@@ -2033,6 +2041,10 @@ $dangerColor:#F18E00;//警告色
   }
   .alterAccountBtn{
     margin-top: rem(100);
+    border: none;
+    &.disable{
+      background: #cccccc !important;
+    }
   }
   .formIpt{
     margin-top: rem(20);
@@ -2499,6 +2511,27 @@ $dangerColor:#F18E00;//警告色
 }
 //完善实名认证
 .nameAuth{
+  .tipsMsg{
+    .conWrap{
+      p{
+        margin-top: rem(30);
+        font-size: rem(24);
+        line-height: 30px;
+        color: #999;
+        letter-spacing: 1px;
+      }
+    }
+    display: none;
+    &.active{
+      display: block;
+    }
+  }
+  .authC1,.authC2{
+    display: none;
+    &.active{
+      display: block;
+    }
+  }
   .upLoadPicBox{
     .picItem{
       position: relative;
@@ -2524,6 +2557,21 @@ $dangerColor:#F18E00;//警告色
   .picUpBtn{
     margin:rem(30) auto;
     width: rem(450);
+  }
+  .authC1{
+    .registBox{
+      margin-top: 10px;
+    }
+    .tipsArea.bot{
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
+    .conWrap{
+      .regBtn{
+        margin-top: 30px;
+      }
+    }
   }
 }
 .curOdrDetail,.childCom{
@@ -2639,4 +2687,67 @@ $dangerColor:#F18E00;//警告色
   text-align: center;
   line-height: 30px;
   color: #999;
+}
+//返回游戏悬浮按钮
+.backGame{
+  z-index: 99;
+  position: fixed;
+  top: 10%;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  background: rgba(1, 221, 182, 0.42);
+  font-size: 12px;
+  line-height: 40px;
+  font-weight: lighter;
+  border-radius: 20px;
+  //border-top-left-radius: 20px;
+  //border-bottom-left-radius: 20px;
+  border: 1px solid #eee;
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.09);
+  color: #880319;
+  text-shadow: 0.5px 0.5px #35e6c7;
+  text-align: center;
+}
+/*物品展示页面*/
+.myGoodsList{
+  width: rem(598);
+  margin: rem(106) auto auto auto;
+  .goodItem{
+    box-shadow: 0 0 8px 2px rgba(0,0,0,0.05);
+    width: 100%;
+    height:rem(144);
+    border-radius: 3px;
+    background: #fff;
+    margin-bottom: rem(20);
+    overflow: hidden;
+    .itemImg{
+      display: block;
+      width: rem(107);
+      height: rem(82);
+      margin-top: rem(25);
+      margin-left: rem(20);
+    }
+    .itemRight{
+      height:rem(82);
+      width: rem(450);
+      margin-left: rem(20);
+      .itemName{
+        font-size:rem(24);
+        color: #000;
+        line-height: rem(30);
+        margin-top: rem(30);
+      }
+      .itemInfo{
+        width:rem(364);
+        overflow: hidden;
+        margin-top: rem(26);
+        font-size: rem(18);
+        color: #000;
+        .itemPri{
+          color: #dd6301;
+        }
+      }
+    }
+  }
 }

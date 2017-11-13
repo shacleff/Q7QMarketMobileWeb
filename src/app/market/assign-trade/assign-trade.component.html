@@ -1,3 +1,4 @@
+<script src="../../cash/gold-cash.component.ts"></script>
 <div class="assignTrade">
   <Header
     [title]="headerTitle"
@@ -168,7 +169,7 @@
         <div class="noCon" [ngClass]="{hide:isHasWood}">
           您还没有任何木材
         </div>
-        <div class="bankListItem" *ngFor="let item of wooList" (click)="selWood(item.pId,item.pName,item.cnt)">
+        <div class="bankListItem" *ngFor="let item of wooList" (click)="selWood(item.id,item.pName,item.cnt)">
           <div class="bankPic fl">
             <img src="../../../assets/images/wood_little_icon.png" [src]="item.img" alt="">
           </div>

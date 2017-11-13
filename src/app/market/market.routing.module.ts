@@ -32,6 +32,7 @@ import {EntrustOrderComponent} from "../userCenter/entrust-order/entrust-order.c
 import {EntrustOrderDetailComponent} from "../userCenter/entrust-order/entrust-order-detail.component";
 import {NameAuthComponent} from "../userCenter/name-auth/name-auth.component";
 import {SkipPageComponent} from "../component/skipPage/skip-page.component";
+import {MyGoodsComponent} from "../userCenter/my-goods/my-goods.component";
 
 const marketRoutes:Routes=[
   {
@@ -151,6 +152,10 @@ const marketRoutes:Routes=[
   {
     path:'skipPage',
     component:SkipPageComponent
+  },
+  {
+    path:'myGoods',
+    component:MyGoodsComponent
   }
 ];
 

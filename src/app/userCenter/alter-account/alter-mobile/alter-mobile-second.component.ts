@@ -87,12 +87,16 @@ export class AlterMobileSecondComponent implements OnInit{
       this.tips.msg('请输入短信验证码');
       return;
     }
-
     this.altActSer.bindMobile(this.para)
     .then((res:any)=>{
       if(res){
+        this.para.mobile = '';
         this.tips.msg('绑定手机号码成功');
-        this.router.navigate(['UserCenter']);
+        this.tips.showConDia('绑定手机号码成功,点击确定返回个人中心？',()=>{
+          this.router.navigate(['userCenter']);
+        },()=>{
+
+        });
       }
     })
   }

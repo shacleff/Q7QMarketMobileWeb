@@ -49,8 +49,13 @@ export class LoginComponent implements OnInit,AfterViewChecked{
         }
       ).then((res:any) => {
         if(res){
+          let that = this;
+          //保存用户名和密码，在页面刷新后可继续更新token
+          localStorage.setItem('act',that.loginData.account);
+          localStorage.setItem('pwd',that.loginData.password);
           this.showTips('登录成功');
-          console.log(res);
+          //定时更新token
+          this.toLogin.updateToken();
           let token = res.tokenType+' '+res.accessToken;
           localStorage.setItem('token',token);
           this.authService.isLoggedIn = true;

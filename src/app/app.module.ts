@@ -24,13 +24,14 @@ import {TipsService} from "./service/tips.service";
 import {UtilService} from "./service/util.service";
 import {UserInfoService} from "./service/user-info.service";
 import {AuthGuard} from "./service/auth-guard.service";
+import { BackGameComponent } from './component/backGame/back-game.component'
 
 //import {FeedButtonDirective} from './directive/feed-button.directive'
 
 @NgModule({
   declarations: [//组件申明
     //FeedButtonDirective,
-    AppComponent,
+    AppComponent, BackGameComponent,
   ],
   imports: [//用到的模块
     CoreModule,

@@ -1547,10 +1547,14 @@
   background-size: 0.39063rem auto; }
 
 .userCenter .accountRevise.accountReviseBot .reviseItem:nth-child(3) {
-  background: url("../images/center_list_money-detail.png") no-repeat 0.3125rem;
+  background: url("../images/my_goods_icon.png") no-repeat 0.3125rem;
   background-size: 0.39063rem auto; }
 
 .userCenter .accountRevise.accountReviseBot .reviseItem:nth-child(4) {
+  background: url("../images/center_list_money-detail.png") no-repeat 0.3125rem;
+  background-size: 0.39063rem auto; }
+
+.userCenter .accountRevise.accountReviseBot .reviseItem:nth-child(5) {
   background: url("../images/center_list_prt.png") no-repeat 0.3125rem;
   background-size: 0.39063rem auto; }
 
@@ -1631,7 +1635,10 @@
   position: static; }
 
 .manageAccount .alterAccountBtn {
-  margin-top: 1.5625rem; }
+  margin-top: 1.5625rem;
+  border: none; }
+  .manageAccount .alterAccountBtn.disable {
+    background: #cccccc !important; }
 
 .manageAccount .formIpt {
   margin-top: 0.3125rem; }
@@ -1967,6 +1974,22 @@
   .TradeRecordList .AwardList .rchRecItem .awardRight {
     margin-right: 0.46875rem; }
 
+.nameAuth .tipsMsg {
+  display: none; }
+  .nameAuth .tipsMsg .conWrap p {
+    margin-top: 0.46875rem;
+    font-size: 0.375rem;
+    line-height: 30px;
+    color: #999;
+    letter-spacing: 1px; }
+  .nameAuth .tipsMsg.active {
+    display: block; }
+
+.nameAuth .authC1, .nameAuth .authC2 {
+  display: none; }
+  .nameAuth .authC1.active, .nameAuth .authC2.active {
+    display: block; }
+
 .nameAuth .upLoadPicBox .picItem {
   position: relative;
   width: 7.03125rem;
@@ -1988,6 +2011,17 @@
 .nameAuth .picUpBtn {
   margin: 0.46875rem auto;
   width: 7.03125rem; }
+
+.nameAuth .authC1 .registBox {
+  margin-top: 10px; }
+
+.nameAuth .authC1 .tipsArea.bot {
+  position: fixed;
+  bottom: 0;
+  left: 0; }
+
+.nameAuth .authC1 .conWrap .regBtn {
+  margin-top: 30px; }
 
 .curOdrDetail, .childCom {
   display: none; }
@@ -2086,3 +2120,57 @@
   color: #999; }
   .loadFinished.active {
     display: block; }
+
+.backGame {
+  z-index: 99;
+  position: fixed;
+  top: 10%;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  background: rgba(1, 221, 182, 0.42);
+  font-size: 12px;
+  line-height: 40px;
+  font-weight: lighter;
+  border-radius: 20px;
+  border: 1px solid #eee;
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.09);
+  color: #880319;
+  text-shadow: 0.5px 0.5px #35e6c7;
+  text-align: center; }
+
+/*物品展示页面*/
+.myGoodsList {
+  width: 9.34375rem;
+  margin: 1.65625rem auto auto auto; }
+  .myGoodsList .goodItem {
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    height: 2.25rem;
+    border-radius: 3px;
+    background: #fff;
+    margin-bottom: 0.3125rem;
+    overflow: hidden; }
+    .myGoodsList .goodItem .itemImg {
+      display: block;
+      width: 1.67188rem;
+      height: 1.28125rem;
+      margin-top: 0.39063rem;
+      margin-left: 0.3125rem; }
+    .myGoodsList .goodItem .itemRight {
+      height: 1.28125rem;
+      width: 7.03125rem;
+      margin-left: 0.3125rem; }
+      .myGoodsList .goodItem .itemRight .itemName {
+        font-size: 0.375rem;
+        color: #000;
+        line-height: 0.46875rem;
+        margin-top: 0.46875rem; }
+      .myGoodsList .goodItem .itemRight .itemInfo {
+        width: 5.6875rem;
+        overflow: hidden;
+        margin-top: 0.40625rem;
+        font-size: 0.28125rem;
+        color: #000; }
+        .myGoodsList .goodItem .itemRight .itemInfo .itemPri {
+          color: #dd6301; }

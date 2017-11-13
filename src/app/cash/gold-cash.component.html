@@ -1,3 +1,5 @@
+<script src="../directive/feed-button.directive.ts"></script>
+<script src="../market/market-detail/market-detail.component.ts"></script>
 <div class="goldCash">
   <Header
     [title]="headerTitle"
@@ -15,11 +17,11 @@
   <div class="alterMobileForm WrapB">
     <div class="formIpt dangerIpt">
       <div class="title">可用金币</div>
-      <input class="input" disabled value="1550.8211" name="useableGold" type="text">
+      <input class="input" disabled [(ngModel)]="useableGold" name="useableGold" type="text">
     </div>
     <div class="formIpt dangerIpt">
       <div class="title">提现账户</div>
-      <input class="input" disabled value="中国邮政储蓄银行-张三-4521" name="cashBank" type="text">
+      <input class="input" disabled value="中国邮政储蓄银行-张三-4521" [(ngModel)]="cashAccount" name="cashBank" type="text">
     </div>
     <div class="formIpt dangerIpt">
       <div class="title">提现金币</div>

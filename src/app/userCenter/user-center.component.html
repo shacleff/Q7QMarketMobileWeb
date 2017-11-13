@@ -1,10 +1,11 @@
+<script src="alter-account/manage-account/alter-bankcard.component.ts"></script>
 <div class="userCenter">
   <div class="ucHeader">
     <div feedButton routerLink="/nameAuth" class="toVerify tc">
       完善实名认证
     </div>
     <div class="baseInfo WrapB">
-      <img class="userPic" [src]="userInfo.headerUrl||'../../assets/images/award_list_user_img.png'" alt="">
+      <img id="userPic" class="userPic" [src]="userInfo.headerUrl||'../../assets/images/default_user_pic.png'" alt="">
       <div class="playerInfo">
         <div class="infoTop">
           <span class="userName">{{userInfo.realName}}</span>
@@ -56,7 +57,7 @@
     <div feedButton routerLink="/resetPayPassword" class="reviseItem">
       <img src="../../assets/images/center_list_mobile.png" alt="">重置支付密码
     </div>
-    <div feedButton routerLink="/manageAccount" class="reviseItem">
+    <div feedButton routerLink="/alterBankcard" class="reviseItem">
       <img src="../../assets/images/center_list_mobile.png" alt="">管理账户
     </div>
   </div>
@@ -67,6 +68,9 @@
     </div>
     <div feedButton routerLink="/cashRecord" class="reviseItem">
       <img src="../../assets/images/center_list_mobile.png" alt="">提现记录
+    </div>
+    <div feedButton routerLink="/myGoods" class="reviseItem">
+      <img src="../../assets/images/center_list_mobile.png" alt="">我的物品
     </div>
     <div feedButton routerLink="/goldDetail" class="reviseItem">
       <img src="../../assets/images/center_list_mobile.png" alt="">金币明细

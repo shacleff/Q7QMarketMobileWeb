@@ -44,8 +44,8 @@ export class AlterMobileFirstComponent implements OnInit{
 
   //解绑手机参数
   para = {
-    "captchaCode": " ",//uuid
-    "captchaValue": " ",//图形验证码
+    "captchaCode": "",//uuid
+    "captchaValue": "",//图形验证码
     "code": "",//短信验证码
     "mobile": "",//原手机号
     "uuid": ""//uuid

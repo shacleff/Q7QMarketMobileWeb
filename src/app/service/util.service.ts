@@ -65,6 +65,23 @@ export class UtilService{
       return v.toString(16);
     });
   }
+  //得到上传文件中的文件
+  public getFilenameSuffix(filename:any){
+    let pos = filename.lastIndexOf('.')
+    let suffix = '';
+    if (pos != -1) {
+      suffix = filename.substring(pos)
+    }
+    return suffix;
+  }
+  // get_filename_suffix: function (filename) {
+  //   pos = filename.lastIndexOf('.')
+  //   suffix = ''
+  //   if (pos != -1) {
+  //     suffix = filename.substring(pos)
+  //   }
+  //   return suffix;
+  // }
   //创建k线图数据
   public splitData(rawData) {
     var categoryData = [];

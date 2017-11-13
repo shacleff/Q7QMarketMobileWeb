@@ -44,6 +44,7 @@ import {CashService} from "../cash/cash.service";
 import {PromoteService} from "../promote/promote.service";
 import {AlterAccountService} from "../userCenter/alter-account/alter-account.service";
 import {SkipPageComponent} from "../component/skipPage/skip-page.component";
+import {MyGoodsComponent} from "../userCenter/my-goods/my-goods.component";
 
 @NgModule({
   declarations:[
@@ -76,7 +77,8 @@ import {SkipPageComponent} from "../component/skipPage/skip-page.component";
     EntrustOrderComponent,
     EntrustOrderDetailComponent,
     NameAuthComponent,
-    SkipPageComponent
+    SkipPageComponent,
+    MyGoodsComponent
   ],
   imports:[
     SharedModule,

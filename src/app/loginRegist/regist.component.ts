@@ -1,4 +1,4 @@
-import {Component,OnInit} from '@angular/core'
+import {Component,OnInit,AfterViewInit} from '@angular/core'
 import {RegistService} from "./regist.service";
 import {TipsService} from "../service/tips.service";
 import {UtilService} from "../service/util.service";
@@ -67,7 +67,7 @@ export class RegistComponent implements OnInit{
   public reg = {
     "captchaCode": " ",//图形验证码后缀uuid
     "captchaValue": " ",//图形验证码
-    "cardId": "",//身份证号码
+    // "cardId": "",//身份证号码
     "channel": "",//渠道
     "code": "",//验证码
     "field1": "",//预留
@@ -76,7 +76,7 @@ export class RegistComponent implements OnInit{
     "field4": "",//预留
     "field5": "",//预留
     "mobile": "",//手机号码
-    "name": "",//真实姓名
+    // "name": "",//真实姓名
     "password": "",//密码
     "superiorId": 0//推荐码
   };
@@ -118,11 +118,12 @@ export class RegistComponent implements OnInit{
     if(!this.reg.mobile){this.tips.msg('请输入手机号'); return};
     if(!this.util.regExp().mobileNum.test(this.reg.mobile)){this.tips.msg('手机号码有误'); return};
 
-    if(!this.reg.name){this.tips.msg('请输入姓名'); return};
-    if(!this.util.regExp().name.test(this.reg.name)){this.tips.msg('姓名格式有误'); return};
+    // if(!this.reg.name){this.tips.msg('请输入姓名'); return};
+    // if(!this.util.regExp().name.test(this.reg.name)){this.tips.msg('姓名格式有误'); return};
+    //
+    // if(!this.reg.cardId){this.tips.msg('请输入身份证号'); return};
+    // if(!this.util.regExp().name.test(this.reg.cardId)){this.tips.msg('请输入正确身份证号'); return};
 
-    if(!this.reg.cardId){this.tips.msg('请输入身份证号'); return};
-    if(!this.util.regExp().name.test(this.reg.cardId)){this.tips.msg('请输入正确身份证号'); return};
     if(!this.reg.captchaValue){this.tips.msg('请输入图形验证码');return;};
     if(!this.reg.code){this.tips.msg('请输入短信验证码'); return};
 
@@ -155,5 +156,8 @@ export class RegistComponent implements OnInit{
   public headerTitile = '用户注册';
   back() {
     window.history.go(-1);
+  }
+  ngAfterViewInit(){
+    $(".registBox").height($(window).height()-40).css('background','#f7f7f7');
   }
 }

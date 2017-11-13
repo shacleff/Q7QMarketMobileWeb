@@ -1,3 +1,5 @@
+<script src="../../../loginRegist/login.service.ts"></script>
+<script src="../../../app.component.ts"></script>
 <div class="manageAccount">
   <Header
     [title]="headerTitle"
@@ -12,7 +14,7 @@
     <p>2.请仔细确认您的帐号是否填写正确。</p>
     <p>3.收款账户不能重复绑定，且一周只能修改一次。</p>
   </div>
-  <div class="alterMobileForm WrapB">
+  <form  #heroForm="ngForm" class="alterMobileForm WrapB">
     <div class="formIpt">
       <div class="title">开户姓名</div>
       <input class="input" disabled [(ngModel)]="uInfo.realName" name="realName" type="text">
@@ -26,17 +28,17 @@
     </div>
     <div class="formIpt">
       <div class="title">收款账号</div>
-      <input class="input" [(ngModel)]="uInfo.cardNo" name="bankNum" type="number">
+      <input autocomplete="off" class="input" (keyup)="checkFormDirty()" [(ngModel)]="uInfo.cardNo" name="bankNum" type="text">
     </div>
-    <div feedButton class="alterAccountBtn btn" (click)="setCashAccount()">提交</div>
-  </div>
+    <button  feedButton class="alterAccountBtn btn disable" (click)="setCashAccount()" [ngClass]="{disable:!isCanSub}">提交</button>
+  </form>
   <div vertical class="selBankBox" [ngClass]="{active:isShowAlert}">
     <div class="selBankWrap">
       <div class="selBankList">
 
         <div feedButton class="bankListItem" *ngFor="let item of bankList" (click)="selBank(item.bankName)">
           <div class="bankPic fl">
-            <img src="../../../../assets/images/bank_type_logo.png" alt="">
+            <img [src]="item.logo" alt="">
           </div>
           <div class="bankName fr">{{item.bankName}}</div>
         </div>

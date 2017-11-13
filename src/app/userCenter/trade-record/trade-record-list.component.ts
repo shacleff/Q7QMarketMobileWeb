@@ -64,13 +64,13 @@ export class TradeRecordListComponent implements OnInit{
         }
         for(let i = 0;i<item.length;i++){
           var temp:any = {};
-          temp.proName = item.proName;
-          temp.enType = item.enType;
-          temp.trPrice = item.trPrice.toFixed(5);
-          temp.trCnt = item.trCnt;
-          temp.trAmt = item.trAmt;
-          temp.trCharge = item.trCharge;
-          temp.trTime = item.trTime;
+          temp.proName = item[i].proName;
+          temp.enType = item[i].enType;
+          temp.trPrice = item[i].trPrice.toFixed(5);
+          temp.trCnt = item[i].trCnt;
+          temp.trAmt = item[i].trAmt;
+          temp.trCharge = item[i].trCharge;
+          temp.trTime = item[i].trTime;
           this.tradeList.push(temp);
         }
       }

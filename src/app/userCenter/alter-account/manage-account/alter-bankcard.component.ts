@@ -17,31 +17,38 @@ export class AlterBankcardComponent implements OnInit{
   ){}
 
   public isShowAlert:boolean = false;
-
+  //数据是否可以提交
+  public isCanSub = false;
   //银行列表
   public bankList = [
-    {bankName:'中国银行'},
-    {bankName:'工商银行'},
-    {bankName:'建设银行'},
-    {bankName:'农业银行'},
-    {bankName:'交通银行'},
-    {bankName:'招商银行'},
-    {bankName:'中信银行'},
-    {bankName:'光大银行'},
-    {bankName:'浦发银行'},
-    {bankName:'兴业银行'},
-    {bankName:'民生银行'},
-    {bankName:'平安银行'},
-    {bankName:'广发银行'},
-    {bankName:'恒丰银行'},
-    {bankName:'渤海银行'},
-    {bankName:'浙商银行'},
+    {bankName:'中国工商银行',logo:'../../../../assets/images/bank_type_logo_1.png'},
+    {bankName:'中国农业银行',logo:'../../../../assets/images/bank_type_logo_2.png'},
+    {bankName:'中国银行',logo:'../../../../assets/images/bank_type_logo_3.png'},
+    {bankName:'中国建设银行',logo:'../../../../assets/images/bank_type_logo_4.png'},
+    {bankName:'交通银行',logo:'../../../../assets/images/bank_type_logo_5.png'},
+    {bankName:'招商银行',logo:'../../../../assets/images/bank_type_logo_6.png'},
+    {bankName:'广发银行',logo:'../../../../assets/images/bank_type_logo_7.png'},
+    {bankName:'光大银行',logo:'../../../../assets/images/bank_type_logo_8.png'},
+    {bankName:'中国邮政储蓄银行',logo:'../../../../assets/images/bank_type_logo_9.png'},
+    {bankName:'上海浦东发展银行',logo:'../../../../assets/images/bank_type_logo_10.png'},
+    {bankName:'华夏银行',logo:'../../../../assets/images/bank_type_logo_11.png'},
+    {bankName:'中国民生银行',logo:'../../../../assets/images/bank_type_logo_12.png'},
+    {bankName:'平安银行',logo:'../../../../assets/images/bank_type_logo_13.png'},
+    {bankName:'中信银行',logo:'../../../../assets/images/bank_type_logo_14.png'},
+    {bankName:'兴业银行',logo:'../../../../assets/images/bank_type_logo_15.png'},
   ];
   selBank(bank:string){
     this.uInfo.bankName = bank;
     this.closeAlertBox();
+    this.checkFormDirty();
   }
   public uInfo:any = {
+    realName:'',
+    cardNo:'',
+    bankName:''
+  };
+  //从后台得到的初始信息 用来对比是否更改了信息
+  public oriUInfo:any = {
     realName:'',
     cardNo:'',
     bankName:''
@@ -55,11 +62,28 @@ export class AlterBankcardComponent implements OnInit{
           this.uInfo.realName = info.realName;
           this.uInfo.cardNo = info.cardNo;
           this.uInfo.bankName = info.bankName;
+
+          this.oriUInfo.realName = info.realName;
+          this.oriUInfo.cardNo = info.cardNo;
+          this.oriUInfo.bankName = info.bankName;
         }
       })
   }
+  //验证是否修改了表单
+  checkFormDirty(){
+    if(this.oriUInfo.realName==this.uInfo.realName&&this.oriUInfo.cardNo==this.uInfo.cardNo&&this.oriUInfo.bankName==this.uInfo.bankName){
+      this.isCanSub = false;
+    }else{
+      this.isCanSub = true;
+    }
+  }
   //设置提现账户
   setCashAccount(){
+    this.checkFormDirty();
+    if(!this.isCanSub){
+      this.tips.msg('你未进行任何更改');
+      return;
+    }
     if(!this.uInfo.realName){
       this.tips.msg('请填写真实姓名');
       return;
@@ -75,7 +99,11 @@ export class AlterBankcardComponent implements OnInit{
     this.altActSer.setCashAccount(this.uInfo)
     .then((res:any)=>{
       if(res){
+        this.tips.msg('绑定成功');
+        this.isCanSub = false;
         this.getUserInof();
+      }else{
+        this.isCanSub = false;
       }
     })
   }

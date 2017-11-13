@@ -1,5 +1,6 @@
 import {Component,OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {LoginService} from "../../loginRegist/login.service";
 @Component({
   selector:'Skip-Page',
   template:`
@@ -11,10 +12,16 @@ import {Router} from '@angular/router';
 
 export class SkipPageComponent implements OnInit{
   constructor(
-    private router:Router
+    private router:Router,
+    private updateTokenSer:LoginService
   ){}
   ngOnInit(){
-      this.getTokenRelocation();
+    //如果从游戏端跳转进入市场页面则会进入这个页面，在这里设置sessionStorage,并同时设置全局变量
+    // isComeGame 为true用来显示界面上的返回游戏悬浮小按钮
+    sessionStorage.setItem("game","game");
+    this.updateTokenSer.isComeGame = true;
+    //设置token并跳转到指定页面
+    this.getTokenRelocation();
   }
   //得到url参数
   getQueryString(name) {
@@ -47,6 +54,8 @@ export class SkipPageComponent implements OnInit{
       this.router.navigate(["userCenter"]);
     }else if(link=="market"){//进入交易市场行情页面
       this.router.navigate(['market']);
+    }else if(link=='goldRecharge'){//进入充值页面
+      this.router.navigate(["goldRecharge"]);
     }
   }
 }

@@ -1,3 +1,6 @@
+<script src="../service/util.service.ts"></script>
+<script src="../userCenter/user-center.service.ts"></script>
+<script src="regist.component.ts"></script>
 <div class="registBox" [ngClass]="{hide:registSuccess}">
   <Header
     [title]="headerTitile"
@@ -12,14 +15,15 @@
         <i class="leftIcon reg_mobile"></i>
         <input class="input right" autocomplete="off" [(ngModel)]="reg.mobile" name="mobile" placeholder="请输入手机号码" type="text">
       </div>
-      <div class="inputCtr borderBot">
-        <i class="leftIcon reg_name"></i>
-        <input class="input right" name="realName" [(ngModel)]="reg.name" placeholder="请输入您的真实姓名" type="text">
-      </div>
-      <div class="inputCtr borderBot">
-        <i class="leftIcon reg_idcard"></i>
-        <input class="input right" name="idCard" [(ngModel)]="reg.cardId" placeholder="请输入您的身份证号码" type="text">
-      </div>
+
+      <!--<div class="inputCtr borderBot">-->
+        <!--<i class="leftIcon reg_name"></i>-->
+        <!--<input class="input right" name="realName" [(ngModel)]="reg.name" placeholder="请输入您的真实姓名" type="text">-->
+      <!--</div>-->
+      <!--<div class="inputCtr borderBot">-->
+        <!--<i class="leftIcon reg_idcard"></i>-->
+        <!--<input class="input right" name="idCard" [(ngModel)]="reg.cardId" placeholder="请输入您的身份证号码" type="text">-->
+      <!--</div>-->
 
       <div class="inputCtr borderBot getVerCode">
         <i class="leftIcon reg_capcode"></i>

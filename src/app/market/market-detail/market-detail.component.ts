@@ -149,7 +149,7 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
         this.proDetail.changePrice = res.quotationInfo.changePrice.toFixed(5);
         this.proDetail.changeRate = res.quotationInfo.changeRate.toFixed(2)+'%';
         this.proDetail.toOpenPrice = res.quotationInfo.toOpenPrice.toFixed(5);
-        this.proDetail.tranVolume = res.quotationInfo.tranVolume.toFixed(5);
+        this.proDetail.tranVolume = res.quotationInfo.tranVolume.toFixed(0);
         this.proDetail.heightPrice = res.quotationInfo.heightPrice.toFixed(5);
         this.proDetail.lowPrice = res.quotationInfo.lowPrice.toFixed(5);
         this.initBuySaleFive(res.eMap);
@@ -311,8 +311,8 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
     if(eMap['sell0']){
       this.salePara.price = (eMap['sell0'].price).toFixed(5)||0;
     }
-    for(let i = 0;i<5;i++){
-      let item:any = eMap['sell' + i];
+    for(let i = 0;i<3;i++){
+      let item:any = eMap['sell' + (i+1)];
       if(item){
         let price:any = item.price == null ? '--' : item.price;
         this.saleFive[i].price = price.toFixed(5);
@@ -324,8 +324,8 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
     if(eMap['buy0']){
       this.buyPara.price = (eMap['buy0'].price).toFixed(5)||0;
     }
-    for(let i = 0;i<5;i++){
-      let item:any = eMap['buy' + i];
+    for(let i = 0;i<3;i++){
+      let item:any = eMap['buy' + (i+1)];
       if(item){
         let price:any = item.price == null ? '--' : item.price;
         this.buyFive[i].price = price.toFixed(5);
@@ -458,13 +458,14 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
   isShowOdrBox = false;//隐藏委托订单
   showOdrBox(bool){//关闭显示委托订单
     if(bool){
+      //每次打开委托订单重新获取最新信息
+      this.getEtuList();
       this.tips.showLayer();
       this.isShowOdrBox = true;
     }else{
       this.tips.hideLayer();
       this.isShowOdrBox = false;
     }
-
   }
 
   public headerTitle = '';
@@ -485,7 +486,7 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
   ngOnInit(){
     this.getUrlPar();
     this.getProDetail();
-    this.getEtuList();
+    // this.getEtuList();
     this.getUserMoney();
     this.getUserItem();
     this.title.setTitle('市场');
