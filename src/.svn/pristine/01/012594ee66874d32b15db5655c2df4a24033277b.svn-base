@@ -1,0 +1,266 @@
+<script src="../../userCenter/name-auth/name-auth.component.ts"></script>
+<script src="../../cash/gold-cash.component.ts"></script>
+<div class="assignTrade">
+  <Header
+    [title]="headerTitle"
+    (onVoted)="back()">
+    >
+  </Header>
+  <div class="tipsArea bgGreen mt80Rem">
+    <p>温馨提示：</p>
+    <p><span class="keyColor">1.索取金币：接收方确认收货时支付给赠送方的金币。</span>索取金币需为大于零的整数，
+      不填为零。</p>
+    <p>2. 接收对象可以是对方的ID或者手机号码。</p>
+    <p>3. 赠送木材的数量必须是10的整倍。</p>
+    <p>4. 接收方将支付赠送木材总额(按当前价格计算)10%的手续费。</p>
+    <p class="keyColor">5. 在接收方确认接收之前，赠送方可自行撤销本次赠送。</p>
+    <p>6. 赠送方和获赠方，必须4级实名才能赠送和接收。</p>
+  </div>
+  <form class="assginForm WrapB">
+    <div class="formIpt keyIpt small">
+      <div class="title">赠送木材</div>
+      <input class="input sendWood" type="text" disabled [(ngModel)]="para.pName" name="woodType" placeholder="请选择">
+      <i feedButton (click)="openAlertBox()" class="selAdon">选择▼</i>
+    </div>
+    <div class="formIpt keyIpt small">
+      <div class="title">接收对象</div>
+      <input class="input receiverUser" autocomplete="off" [ngClass]="{error:!isExistUser,ok:isExistUsers}" type="text" [(ngModel)]="inputPlayer" name="receivePlayer" (keyup)="resetReceiveIput()" (blur)="checkIsHasReceive()" placeholder="接收对象">
+    </div>
+    <div class="formIpt keyIpt small">
+      <div class="title">赠送数量</div>
+      <input class="input" [(ngModel)]="para.cnt" type="number" name="giveNum" placeholder="请输入赠送数量" (keyup)="calcIpyNum()">
+    </div>
+    <div class="formIpt keyIpt small">
+      <div class="title">索取金币</div>
+      <input class="input" type="number" [(ngModel)]="para.amt" name="getGold" placeholder="请输入索取金币数量">
+    </div>
+    <div class="formIpt keyIpt small">
+      <div class="title">支付密码</div>
+      <input class="input" type="password" [(ngModel)]="para.payPwd" name="payPwd" placeholder="请输入支付密码">
+    </div>
+    <div feedButton class="assignSubBtn btn small keyBtn" (click)="specifyTran()">
+      提交
+    </div>
+  </form>
+  <div class="grayBgBar"></div>
+  <div class="assginTradeTableWrap">
+    <weui-infiniteloader (loadmore)="onLoadMore($event)">
+    <table class="assiginTable">
+      <tr class="tableTop">
+        <td>名称</td>
+        <td>交易对象</td>
+        <td>数量</td>
+        <td>金币</td>
+        <td>操作</td>
+      </tr>
+      <tr class="tableCon buy" *ngFor="let item of orderList" (click)="openDetailBox(item)"
+        [ngClass]="{
+          buy:item.tradeDirection=='0',
+          sale:item.tradeDirection!='0'
+        }"
+      >
+        <td>
+          {{item.proName}} <span class="type">({{item.tradeDirection=='0'?'买':'卖'}})</span>
+        </td>
+        <td>
+          {{item.tradeDirection=='0'?item.suName:item.tuName}}
+        </td>
+        <td class="type">
+          {{item.cnt}}
+        </td>
+        <td class="type">
+          {{item.amt}}
+        </td>
+        <td>
+          <div feedButton class="cancelBtn" [ngClass]="{active:item.tradeDirection=='0'}"
+             (click)="confirmAssignTrade($event,item.id,item.cnt,item.amt,item.proName)"
+          >
+            确定
+          </div>
+          <div feedButton class="cancelBtn refuse"
+            [ngClass]="{
+              active:item.tradeDirection=='0'
+            }"
+            (click)="refuseAssignTrade($event,item.id)"
+          >
+            拒绝
+          </div>
+          <div feedButton class="cancelBtn cancel"
+            [ngClass]="{
+              active:item.tradeDirection!='0'
+            }"
+            (click)="cancelAssignTrade($event,item.id)"
+          >
+            撤销
+          </div>
+        </td>
+      </tr>
+    </table>
+      <div class="noCon" [ngClass]="{hide:isHasOdrList}">
+        没有任何订单
+      </div>
+      <div class="loadFinished" [ngClass]="{active:isLoaded}">加载完毕</div>
+      <!--<tr class="tableCon buy">-->
+        <!--<td>-->
+          <!--梧桐木 <span class="type">(买)</span>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--138****5456-->
+        <!--</td>-->
+        <!--<td class="type">-->
+          <!--1000-->
+        <!--</td>-->
+        <!--<td class="type">-->
+          <!--100-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<div feedButton class="cancelBtn">-->
+            <!--撤销-->
+          <!--</div>-->
+          <!--<div feedButton class="cancelBtn">-->
+            <!--撤销-->
+          <!--</div>-->
+        <!--</td>-->
+      <!--</tr>-->
+      <!--<tr class="tableCon sale">-->
+        <!--<td>-->
+          <!--梧桐木 <span class="type">(卖)</span>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--138****5456-->
+        <!--</td>-->
+        <!--<td class="type">-->
+          <!--1000-->
+        <!--</td>-->
+        <!--<td class="type">-->
+          <!--100-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<div feedButton class="cancelBtn">-->
+            <!--撤销-->
+          <!--</div>-->
+        <!--</td>-->
+      <!--</tr>-->
+    </weui-infiniteloader>
+  </div>
+  <!--<div class="footer">
+    <a feedButton routerLink="/market" class="navItem">
+      <div class="navIcon">
+
+      </div>
+      <p>行情</p>
+    </a>
+    <a feedButton (click)="toMarket()" class="navItem">
+      <div class="navIcon">
+
+      </div>
+      <p>市场</p>
+    </a>
+    <a feedButton routerLink="/userCenter" class="navItem">
+      <div class="navIcon">
+
+      </div>
+      <p>个人</p>
+    </a>
+  </div>-->
+  <!--指定交易木材选择框-->
+  <div vertical class="selBankBox selWoodBox" [ngClass]="{active:isShowAlert}">
+    <div class="selBankWrap">
+      <div class="selBankList">
+        <div class="noCon" [ngClass]="{hide:isHasWood}">
+          您还没有任何木材
+        </div>
+        <div class="bankListItem" *ngFor="let item of wooList" (click)="selWood(item.id,item.pName,item.cnt)">
+          <div class="bankPic fl">
+            <img src="../../../assets/images/wood_little_icon.png" [src]="item.img" alt="">
+          </div>
+          <div class="woodName fl">
+            &nbsp;{{item.pName}}&nbsp; ({{item.marketPrice}})
+          </div>
+          <div class="bankName fr">持有量 <span class="num">{{item.cnt}}</span>个</div>
+        </div>
+        <!--<div class="bankListItem">
+          <div class="bankPic fl">
+            <img src="../../../assets/images/wood_little_icon.png" alt="">
+          </div>
+          <div class="woodName fl">
+            &nbsp;梧桐木&nbsp; (0.1251)
+          </div>
+          <div class="bankName fr">持有量 <span class="num">18000</span>个</div>
+        </div>-->
+      </div>
+    </div>
+    <div class="closeThis">
+      <img (click)="closeAlertBox()" feedButton class="closeBtn" src="../../../assets/images/close_sel_bankcard.png" alt="">
+    </div>
+  </div>
+  <!--指定交易订单详情-->
+  <div vertical class="assignTradeDetail" [ngClass]="{active:isShowDetail}">
+    <div class="detailTop">
+      指定交易详情
+      <i feedButton class="closeIcon" (click)="closeDetailBox()">
+
+      </i>
+    </div>
+    <table class="detailTable">
+      <tr>
+        <td>
+          名称： &nbsp;
+          <img class="woodPic" src="../../../assets/images/wood_little_icon.png" alt="">
+          &nbsp;<span class="woodName">{{detail.proName}}</span>
+        </td>
+        <td>
+          数量：&nbsp;
+          <span class="woodName">{{detail.cnt}}</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          索取金币：&nbsp;
+          <span class="redFont">
+            {{detail.amt}}
+          </span>
+        </td>
+        <td>
+          手续费：&nbsp;
+          <span class="redFont">
+            {{detail.charge}}
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          赠送人：&nbsp;
+          <span class="woodName">
+            {{detail.suName}}
+          </span>
+        </td>
+        <td>
+          买卖方向：&nbsp;
+          <span class="redFont">
+            {{detail.tradeDirection=='0'?'买':'卖'}}
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          接收人：&nbsp;
+          <span class="woodName">
+            {{detail.tuName}}
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          赠送时间：&nbsp;
+          <span class="woodName">
+            {{detail.createTime|date:"yyyy/M/d HH:mm:ss"}}
+          </span>
+        </td>
+      </tr>
+    </table>
+    <div class="detailBot">
+      <div feedButton class="btn keyBtn" (click)="closeDetailBox()">确定</div>
+    </div>
+  </div>
+</div>

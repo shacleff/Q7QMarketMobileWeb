@@ -1,0 +1,34 @@
+<div class="rechargeSuccessBox">
+  <Header class="keyColor"
+    [title]="headerTitle"
+    (onVoted)="back()">
+    >
+  </Header>
+  <div class="rchSusPic">
+  </div>
+  <div class="payInfoWrap">
+    <table class="payInfo WrapB">
+      <tr>
+        <td>
+          银行卡
+        </td>
+        <td>
+          中国银行&nbsp;尾号4567
+        </td>
+      </tr>
+      <tr>
+        <td>
+          充值金额
+        </td>
+        <td>
+          ￥1000.00
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="WrapB">
+    <div feedButton class="btn radiu keyBtn mt80Rem">
+      完成
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="promoteList goldDetail">
+  <Header
+    class="keyColor"
+    [title]="headerTitle"
+    (onVoted)="back()">
+    >
+  </Header>
+  <ul class="myGoodsList">
+    <div class="noCon" [ngClass]="{hide:isHasWood}">
+      您还没有任何木材
+    </div>
+    <li class="goodItem" *ngFor="let item of wooList">
+      <img src="../../../assets/images/wood_1.png" [src]="item.img" class="itemImg fl" alt="">
+      <div class="itemRight fl">
+        <p class="itemName">
+          {{item.pName}}
+        </p>
+        <div class="itemInfo w100">
+          <span class="itemAmt fl tl">拥有数量: {{item.cnt}}</span>
+          <span class="itemPri fr tr">价值: {{item.marketValue}}</span>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

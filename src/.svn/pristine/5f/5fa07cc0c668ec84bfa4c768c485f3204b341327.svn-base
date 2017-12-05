@@ -1,0 +1,57 @@
+<script src="../../../loginRegist/login.service.ts"></script>
+<script src="../../../app.component.ts"></script>
+<div class="manageAccount">
+  <Header
+    [title]="headerTitle"
+    (onVoted)="back()">
+    >
+  </Header>
+  <div class="grayBgBar mt80Rem"></div>
+  <div class="tipsArea bgGreen">
+    <p>您已绑定提现账户 </p>
+    <p>温馨提示：</p>
+    <p>1.绑定的收款账户开户人需与实名认证姓名一致！</p>
+    <p>2.请仔细确认您的帐号是否填写正确。</p>
+    <p>3.收款账户不能重复绑定，且一周只能修改一次。</p>
+  </div>
+  <form  #heroForm="ngForm" class="alterMobileForm WrapB">
+    <div class="formIpt">
+      <div class="title">开户姓名</div>
+      <input class="input" disabled [(ngModel)]="uInfo.realName" name="realName" type="text">
+    </div>
+    <div class="formIpt selBank">
+      <div class="title">收款银行</div>
+      <input class="input" disabled  [(ngModel)]="uInfo.bankName" name="cashBank" type="text">
+      <div feedButton (click)="openAlertBox()" class="selCashBank selAdon">
+        选择▼
+      </div>
+    </div>
+    <div class="formIpt">
+      <div class="title">收款账号</div>
+      <input autocomplete="off" class="input" (keyup)="checkFormDirty()" [(ngModel)]="uInfo.cardNo" name="bankNum" type="text">
+    </div>
+    <button  feedButton class="alterAccountBtn btn disable" (click)="setCashAccount()" [ngClass]="{disable:!isCanSub}">提交</button>
+  </form>
+  <div vertical class="selBankBox" [ngClass]="{active:isShowAlert}">
+    <div class="selBankWrap">
+      <div class="selBankList">
+
+        <div feedButton class="bankListItem" *ngFor="let item of bankList" (click)="selBank(item.bankName)">
+          <div class="bankPic fl">
+            <img [src]="item.logo" alt="">
+          </div>
+          <div class="bankName fr">{{item.bankName}}</div>
+        </div>
+        <!--<div class="bankListItem">
+          <div class="bankPic fl">
+            <img src="../../../../assets/images/bank_type_logo.png" alt="">
+          </div>
+          <div class="bankName fr">中国银行</div>
+        </div>-->
+      </div>
+    </div>
+    <div class="closeThis">
+      <img (click)="closeAlertBox()" feedButton class="closeBtn" src="../../../../assets/images/close_sel_bankcard.png" alt="">
+    </div>
+  </div>
+</div>

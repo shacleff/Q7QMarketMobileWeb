@@ -34,6 +34,7 @@
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
     "angular2-qrcode": "^2.0.1",
+    "babel-polyfill": "^6.26.0",
     "codelyzer": "~3.0.1",
     "echarts": "^3.7.1",
     "echarts-ng2": "^1.4.1",
