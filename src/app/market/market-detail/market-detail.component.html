@@ -93,7 +93,11 @@
           <span>涨跌 <i class="upColor">+0.0132</i></span>
         </div>
         <div feedButton class="chartBtn fLine" (click)="changeToFLine()" [ngClass]="{seled:chartType==2}">分时</div>
-        <div feedButton class="chartBtn kLine seled" (click)="changeToKLine()" [ngClass]="{seled:chartType==1}">k线</div>
+        <div feedButton class="chartBtn kLine seled" (click)="changeToKLine('K15')" [ngClass]="{seled:kType=='K15'&&chartType==1}">15分</div>
+        <div feedButton class="chartBtn kLine seled" (click)="changeToKLine('K1H')" [ngClass]="{seled:kType=='K1H'&&chartType==1}">1时</div>
+        <div feedButton class="chartBtn kLine seled" (click)="changeToKLine('K4H')" [ngClass]="{seled:kType=='K4H'&&chartType==1}">4时</div>
+        <div feedButton class="chartBtn kLine seled" (click)="changeToKLine('KD')" [ngClass]="{seled:kType=='KD'&&chartType==1}">日K</div>
+        <div feedButton class="chartBtn kLine seled" (click)="changeToKLine('KW')" [ngClass]="{seled:kType=='KW'&&chartType==1}">周K</div>
       </div>
       <div class="chart">
         <echarts-ng2 #myEcharts></echarts-ng2>

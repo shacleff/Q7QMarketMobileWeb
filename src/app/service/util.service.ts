@@ -115,7 +115,7 @@ export class UtilService{
       d.push(rawData[i].changePrice) //涨跌额
       d.push(rawData[i].changeRate + '%') //涨跌幅
       d.push(rawData[i].tranVolume)//成交量
-      categoryData.push(this.fomat(rawData[i].tranDate));
+      categoryData.push(this.fomat(rawData[i].klTime));
       values.push(d);
       volumes1.push(rawData[i].tranVolume);
       if (rawData[i].changePrice <= 0) {
@@ -140,7 +140,10 @@ export class UtilService{
     };
   }
   //短日期字符转时间
-  public fomat(str) {
+  public fomat(str:any) {
+    if(!str) return;
+    console.log(str,'str');
+    str = str+'';
     return str.substr(0, 4) + "/" + str.substr(4, 2) + "/" + str.substr(6);
   }
   //标准时间格式转换成日期

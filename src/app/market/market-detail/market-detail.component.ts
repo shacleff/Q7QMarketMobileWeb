@@ -31,6 +31,8 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
     private title:Title,
     private qotSer:QuotationService//行情服务
   ){}
+  //默认k线累心
+  public kType:string = 'K15';
   //图标的高度
   private chartHeight;
   //变化的搞得
@@ -43,7 +45,7 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
   allPages:any = 10;
   //切换商品后的重新加载
   onLoad(){
-    this.changeToKLine();
+    this.changeToKLine(this.kType);
     this.getProDetail();
     this.getUserItem();
     this.para.pageNum=1;
@@ -99,13 +101,14 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
   public koption:EChartOption = {};//k线图options
   public foption:EChartOption = {};//f图option
 
-
-  public changeToKLine(){//切换到k线图
+  public changeToKLine(kType:string){//切换到k线图
+    this.kType = kType;
     clearInterval(this.kLineInterval);
     clearInterval(this.fLineInterval);
-    this.mrkSer.getKlineDatas({proId:this.pro_id})
+    this.mrkSer.getKlineDatas({proId:this.pro_id,kType:this.kType})
     .then((res:any)=>{
       if(res){
+        // console.log(res,'kk');
         let kDatas = this.util.splitData(res);
         this.koption = this.Ctype.kOption(kDatas.categoryData,kDatas.values);
         this.koption.grid[0].height = this.chartHeight;
@@ -119,6 +122,7 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
   }
   //设置k线图图表
   setKlineChart(res){
+    // console.log(res,'kup');
     let data = this.util.splitData(res).values;
     this.echarts.setOption(
       {
@@ -142,7 +146,7 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
   };
   //更新k线图 res 列表数据
   public updateKLine(res){
-    this.mrkSer.getKlineUpdate({proId:this.pro_id})
+    this.mrkSer.getKlineUpdate({proId:this.pro_id,kType:this.kType})
       .then((resT:any)=>{
         if(resT){
           if(res.length) {
@@ -694,6 +698,6 @@ export class MarketDetailtComponent implements OnInit,OnDestroy,AfterViewInit{
     this.resetAlertBoxStyle();
 
     this.setChartHeight();
-    this.changeToKLine();
+    this.changeToKLine(this.kType);
   }
 }
