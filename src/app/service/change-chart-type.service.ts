@@ -81,7 +81,7 @@ export class ChangeChartTypeService {
           }
         },
         axisLine: {
-          lineStyle: {color: '#bbb'}
+          lineStyle: {color: '#000'}
         },
       },
       yAxis: {
@@ -98,7 +98,7 @@ export class ChangeChartTypeService {
           }
         },
         axisLine: {
-          lineStyle: {color: '#bbb'}
+          lineStyle: {color: '#000'}
         },
         axisLabel: {
           margin: -38,
@@ -108,7 +108,7 @@ export class ChangeChartTypeService {
         left: '0%',
         right: '0%',
         bottom: '0%',
-        top: '-2%',
+        top: '0%',
         height: '249px'
       }],
       series: [
@@ -218,7 +218,7 @@ export class ChangeChartTypeService {
         left: '0%',
         right: '0%',
         bottom: '0%',
-        top: '2%',
+        top: '0%',
         height: '249px'
       }],
       animation: true,

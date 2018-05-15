@@ -142,7 +142,7 @@ export class UtilService{
   //短日期字符转时间
   public fomat(str:any) {
     if(!str) return;
-    console.log(str,'str');
+    // console.log(str,'str');
     str = str+'';
     return str.substr(0, 4) + "/" + str.substr(4, 2) + "/" + str.substr(6);
   }
